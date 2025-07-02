@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, request, session, flash
+from flask import Blueprint, render_template, redirect, url_for, flash
 from src.nutri_app.forms.auth_forms import CadastroForm, LoginForm
 from src.nutri_app.database import engine
 from src.nutri_app.utils.hash import gerar_hash, verificar_senha
@@ -16,9 +16,9 @@ def cadastro():
         email = forms.email.data
         senha_hash = gerar_hash(forms.senha1.data)
         
-        with engine.connect() as coon:
+        with engine.connect() as conn:
             query = text("INSERT INTO usuarios (usuario, email, senha) VALUES (:usuario, :email, :senha)")
-            coon.execute(query, {"usuario": usuario, "email": email, "senha": senha_hash})   
+            conn.execute(query, {"usuario": usuario, "email": email, "senha": senha_hash})   
             flash("Cadastro realizado com sucesso!", category="success")
             return redirect(url_for('auth.refeicoes'))
     if forms.errors != {}:
@@ -33,9 +33,9 @@ def login():
         usuario = forms.usuario.data
         senha = forms.senha.data
         
-        with engine.connect() as coon:
+        with engine.connect() as conn:
             query = (text("SELECT * FROM usuarios WHERE usuario = :usuario"))
-            result = coon.execute(query, {"usuario": usuario}).fetchone()
+            result = conn.execute(query, {"usuario": usuario}).fetchone()
             
         if result:
             if verificar_senha(result.senha, senha):
