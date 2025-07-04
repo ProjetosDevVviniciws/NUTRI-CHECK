@@ -23,7 +23,7 @@ def cadastrar_produto():
             query = text("""
                 INSERT INTO produtos (nome, codigo_barras, porcao, calorias, proteinas, carboidratos, gorduras)
                 VALUES (:nome, :codigo_barras, :porcao, :calorias, :proteinas, :carboidratos, :gorduras)
-                """)
+            """)
             conn.execute(query, {
                 "nome": nome,
                 "codigo_barras": codigo_barras,
@@ -38,5 +38,6 @@ def cadastrar_produto():
     if forms.errors != {}:
         for err in forms.errors.values(): 
             flash(f"Erro ao cadastrar produto: {err}", category="danger")
-            return render_template("produtos.html", form=forms)
+        
+    return render_template("produtos.html", form=forms)
        
