@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, flash
-from src.nutri_app.forms import RefeicaoForm
+from src.nutri_app.forms.refeicoes_forms import RefeicaoForm
 from src.nutri_app.database import engine
 from sqlalchemy import text
 from flask_login import login_required
