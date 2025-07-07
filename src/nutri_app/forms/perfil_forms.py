@@ -1,8 +1,17 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, DecimalField, IntegerField, PasswordField, SubmitField
+from wtforms import StringField, DecimalField, IntegerField, PasswordField, SubmitField, SelectField
 from wtforms.validators import DataRequired, Length, NumberRange, Optional
 
 class PerfilForm(FlaskForm):
+    
+    sexo = SelectField(
+        label="Sexo",
+        choices=[
+            ('masculino', 'Masculino'),
+            ('feminimo', 'Femimino')
+        ]
+    )
+    
     nome = StringField(
         label="Nome",
         validators=[
