@@ -3,7 +3,8 @@ from src.nutri_app.forms.perfil_forms import PerfilForm
 from src.nutri_app.database import engine
 from sqlalchemy import text
 from flask_login import login_required, current_user
-import numpy as np
+from src.nutri_app.utils.macros import calcular_tmb_macros
+from datetime import date
 
 perfil_bp = Blueprint('perfil', __name__)
 
@@ -24,6 +25,7 @@ def perfil_usuario():
             forms.altura.data = usuario.altura
             forms.peso.data = usuario.peso
             forms.idade.data = usuario.idade
+            forms.sexo.data = usuario.sexo
         else:
             flash("Usuário não encontrado!", category="danger")
             return redirect(url_for('perfil.perfil_usuario'))
@@ -34,12 +36,9 @@ def perfil_usuario():
         peso = float(forms.peso.data)
         idade = int(forms.idade.data)
         nova_senha = forms.senha.data
+        sexo = forms.sexo.data
         
-        tbm = 10 * peso + 6.25 * altura - 5 * idade + 5
-        calorias = tbm * 1.55
-        proteinas = peso * 2.2
-        gorduras = peso * 1
-        carboidratos = (calorias - (proteinas * 4 + gorduras * 9)) / 4
+        macros = calcular_tmb_macros(peso=peso, altura=altura, idade=idade, sexo=sexo)
         
         with engine.begin() as conn:
             query = text("""
@@ -52,7 +51,8 @@ def perfil_usuario():
                     calorias = :calorias,
                     proteinas = :proteinas,
                     carboidratos = :carboidratos,
-                    gorduras = :gorduras
+                    gorduras = :gorduras,
+                    ultima_atualizacao = :hoje
                 WHERE id = :id
             """)
             conn.execute(query, {
@@ -62,10 +62,11 @@ def perfil_usuario():
                 "peso": peso,
                 "idade": idade,
                 "senha": nova_senha if nova_senha else None,
-                "calorias": calorias,
-                "proteinas": proteinas,
-                "carboidratos": carboidratos,
-                "gorduras": gorduras
+                "calorias": macros["calorias"],
+                "proteinas": macros["proteinas"],
+                "carboidratos": macros["carboidratos"],
+                "gorduras": macros["gorduras"],
+                "hoje": date.today()
             })
             
         flash("Perfil atualizado com sucesso!", category="success")
