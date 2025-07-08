@@ -48,10 +48,10 @@ def perfil_usuario():
                     peso = :peso,
                     idade = :idade,
                     senha = COALESCE(:senha, senha),
-                    calorias = :calorias,
-                    proteinas = :proteinas,
-                    carboidratos = :carboidratos,
-                    gorduras = :gorduras,
+                    calorias_meta = :calorias,
+                    proteinas_meta = :proteinas,
+                    carboidratos_meta = :carboidratos,
+                    gorduras_meta = :gorduras,
                     ultima_atualizacao = :hoje
                 WHERE id = :id
             """)
