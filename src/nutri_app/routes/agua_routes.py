@@ -20,7 +20,6 @@ def registrar_agua():
     
         hoje = date.today()
         
-        # Reseta o valor caso seja um novo dia
         if usuario.ultima_atualizacao.date() != hoje:
             conn.execute(text("""
                 UPDATE usuario SET
@@ -32,7 +31,6 @@ def registrar_agua():
         if forms.validate_on_submit():
             quantidade = forms.quantidade.data
             
-            # Atualiza o consumo diário do usuário
             conn.execute(text("""
                 UPDATE usuario SET
                     agua_consumida = agua_consumida + :qtd
