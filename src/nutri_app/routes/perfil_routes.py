@@ -8,7 +8,7 @@ from datetime import date
 
 perfil_bp = Blueprint('perfil', __name__)
 
-@perfil_bp.route('/perfil' ,methods=['GET', 'POST'])
+@perfil_bp.route('/perfil', methods=['GET', 'POST'])
 @login_required
 def perfil_usuario():
     forms = PerfilForm()
