@@ -15,7 +15,10 @@ def registrar_refeicao():
     forms = RefeicaoForm()
     
     with engine.begin() as conn:
-        produtos1 = conn.execute(text("SELECT id, nome FROM produtos")).fetchall()
+        produtos1 = conn.execute(
+            text("SELECT id, nome FROM produtos WHERE usuario_id = :id"),
+            {"id": current_user.id}
+        ).fetchall()
         forms.produto_id.choices = [(p.id, p.nome) for p in produtos1]
      
         if forms.validate_on_submit():
@@ -54,10 +57,11 @@ def registrar_refeicao():
             """), {"id": current_user.id, "hoje": hoje})
             
             query = text(""" 
-                INSERT INTO refeicoes (produto_id, porcao, quantidade, calorias, proteinas, carboidratos, gorduras, tipo_refeicao)
-                VALUES (:produto_id, :porcao, :calorias, :proteinas, :carboidratos, :gorduras, :tipo_refeicao) 
+                INSERT INTO refeicoes (usuario_id, produto_id, porcao, quantidade, calorias, proteinas, carboidratos, gorduras, tipo_refeicao)
+                VALUES (:usuario_id, :produto_id, :porcao, :calorias, :proteinas, :carboidratos, :gorduras, :tipo_refeicao) 
             """)
             conn.execute(query, {
+                "usuario_id": current_user.id,
                 "produto_id": produto_id,
                 "porcao": porcao,
                 "calorias": macros[0],
