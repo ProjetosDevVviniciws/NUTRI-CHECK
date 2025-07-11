@@ -5,7 +5,6 @@ from sqlalchemy import text
 from flask_login import login_required, current_user
 from src.nutri_app.utils.macros import calcular_macros_totais
 from datetime import date
-import numpy as np
 
 refeicoes_bp = Blueprint('refeicoes', __name__)
 
@@ -35,7 +34,7 @@ def registrar_refeicao():
                     SELECT calorias_meta, proteinas_meta, carboidratos_meta, gorduras_meta,
                             calorias_consumidas, proteinas_consumidas, carboidratos_consumidos, gorduras_consumidas,
                             ultima_atualizacao
-                    FROM usuario WHERE id = :id"""),
+                    FROM usuarios WHERE id = :id"""),
                 {"id": current_user.id}
             ).fetchone()
             
@@ -47,7 +46,7 @@ def registrar_refeicao():
             hoje = date.today()
             if usuario.ultima_atualizacao.date() != hoje:
                 conn.execute(text("""
-                    UPDATE usuario SET
+                    UPDATE usuarios SET
                             calorias_consumidas = 0,
                             proteinas_consumidas = 0,
                             carboidratos_consumidos = 0,
@@ -72,7 +71,7 @@ def registrar_refeicao():
             })
             
             conn.execute(text("""
-                UPDATE usuario SET
+                UPDATE usuarios SET
                     calorias_consumidas = calorias_consumidas + :cal,
                     proteinas_consumidas = proteinas_consumidas + :prot,
                     carboidratos_consumidos = carboidratos_consumidos + :carb,
