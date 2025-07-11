@@ -4,6 +4,7 @@ from src.nutri_app.database import engine
 from sqlalchemy import text
 from flask_login import login_required, current_user
 from src.nutri_app.utils.macros import calcular_tmb_macros
+from src.nutri_app.utils.hash import gerar_hash
 from datetime import date
 
 perfil_bp = Blueprint('perfil', __name__)
@@ -40,6 +41,8 @@ def perfil_usuario():
         
         macros = calcular_tmb_macros(peso=peso, altura=altura, idade=idade, sexo=sexo)
         
+        senha_hash = gerar_hash(nova_senha) if nova_senha else None
+        
         with engine.begin() as conn:
             query = text("""
                 UPDATE usuario SET 
@@ -61,7 +64,7 @@ def perfil_usuario():
                 "altura": altura,
                 "peso": peso,
                 "idade": idade,
-                "senha": nova_senha if nova_senha else None,
+                "senha": senha_hash,
                 "calorias": macros["calorias"],
                 "proteinas": macros["proteinas"],
                 "carboidratos": macros["carboidratos"],
