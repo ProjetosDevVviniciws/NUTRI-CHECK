@@ -15,14 +15,14 @@ def registrar_agua():
     with engine.begin() as conn:
         usuario = conn.execute(text("""
             SELECT agua_consumida, ultima_atualizacao
-            FROM usuario WHERE id = :id
+            FROM usuarios WHERE id = :id
         """), {"id": current_user.id}).fetchone()
     
         hoje = date.today()
         
         if usuario.ultima_atualizacao.date() != hoje:
             conn.execute(text("""
-                UPDATE usuario SET
+                UPDATE usuarios SET
                     agua_consumida = 0,
                     ultima_atualizacao = :hoje
                 WHERE id = :id
@@ -32,7 +32,7 @@ def registrar_agua():
             quantidade = forms.quantidade.data
             
             conn.execute(text("""
-                UPDATE usuario SET
+                UPDATE usuarios SET
                     agua_consumida = agua_consumida + :qtd
                 WHERE id = :id
             """), {"id": current_user.id, "qtd": quantidade})
