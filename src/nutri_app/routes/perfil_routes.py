@@ -16,7 +16,7 @@ def perfil_usuario():
     
     with engine.connect() as conn:
         usuario = conn.execute(
-            text("SELECT * FROM usuario WHERE id = :id"),
+            text("SELECT nome, altura, peso, idade, sexo FROM usuarios WHERE id = :id"),
             {"id": current_user.id}
         ).fetchone()
     
@@ -45,7 +45,7 @@ def perfil_usuario():
         
         with engine.begin() as conn:
             query = text("""
-                UPDATE usuario SET 
+                UPDATE usuarios SET 
                     nome = :nome,
                     altura = :altura,
                     peso = :peso,
