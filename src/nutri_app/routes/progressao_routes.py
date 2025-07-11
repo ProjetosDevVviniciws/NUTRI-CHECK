@@ -2,10 +2,8 @@ from flask import Blueprint, render_template, redirect, url_for, flash
 from src.nutri_app.forms.progressao_forms import ProgressaoForm
 from flask_login import login_required, current_user
 from sqlalchemy import text
-from datetime import date
 from src.nutri_app.database import engine
 from src.nutri_app.utils.progressao_peso import gerar_graficos_progressao
-import base64
 
 progressao_bp = Blueprint('progressao', __name__)
 
