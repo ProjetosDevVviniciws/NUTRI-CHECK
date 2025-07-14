@@ -1,0 +1,8 @@
+.hero-bg {
+    background-image: url("/src/nutri_app/static/images/fundo.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    padding:100px 0;
+}
