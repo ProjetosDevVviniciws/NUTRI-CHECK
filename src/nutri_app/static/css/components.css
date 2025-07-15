@@ -1,0 +1,14 @@
+/* Estilização de botões, formulários, etc */
+
+.btn-primary {
+    background-color: #1ea7d1;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #168aad;
+}
+
+.form-control {
+    border-radius: 5px;
+}
