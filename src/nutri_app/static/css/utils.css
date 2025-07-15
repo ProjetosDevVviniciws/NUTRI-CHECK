@@ -1,0 +1,13 @@
+/* Classes utilitárias */
+
+.text-center {
+    text-align: center;
+}
+
+.mt-50 {
+    margin-top: 50px;
+}
+
+.rounded {
+    border-radius: 10px;
+}
