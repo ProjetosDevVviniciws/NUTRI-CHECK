@@ -12,3 +12,8 @@
 .form-control {
     border-radius: 5px;
 }
+
+.center-form {
+    display: flex;
+    justify-content: center;
+}
