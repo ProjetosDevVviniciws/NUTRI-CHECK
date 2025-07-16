@@ -23,7 +23,7 @@ def cadastro():
     if forms.errors != {}:
         for err in forms.errors.values():
             flash(f"Erro ao cadastrar: {err}", category="danger")
-        return render_template("cadastro.html", form= forms)
+    return render_template("cadastro.html", form=forms)
 
 @auth_bp.route('/logout')
 @login_required
