@@ -12,3 +12,10 @@ body {
     background-color: #f4f4f4;
     color: #333;
 }
+
+.logo-navbar {
+    background-image: url(/src/nutri_app/static/images/logo.png);
+    height: 70px;
+    width: 210px;
+    object-fit: cover;
+}
