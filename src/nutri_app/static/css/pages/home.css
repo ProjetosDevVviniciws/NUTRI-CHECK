@@ -15,3 +15,10 @@
     -webkit-text-fill-color: transparent;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
+
+.box-login {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    background-color: white;
+    border-radius: 10px;
+    padding: 2rem;
+}
