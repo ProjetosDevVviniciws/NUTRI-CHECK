@@ -1,16 +1,22 @@
 from flask import Flask
 from flask_bcrypt import Bcrypt
+from flask_login import LoginManager
 import os
 from dotenv import load_dotenv
 
 load_dotenv()
 bcrypt = Bcrypt()
+login_manager = LoginManager()
 
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
     
     bcrypt.init_app(app)
+    login_manager.init_app(app)
+    login_manager.login_view = 'home.home'
+    login_manager.login_message = 'Por favor, realize o login'
+    login_manager.login_message_category = 'info'
     
     from .routes.home_routes import home_bp
     from .routes.auth_routes import auth_bp
