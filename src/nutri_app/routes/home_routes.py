@@ -24,7 +24,7 @@ def home():
                 user = UserLogin(result)
                 login_user(user)
                 flash(f"Sucesso! Bem-Vindo(a), {result.usuario}", category="success")
-                return redirect(url_for('refeicoes.registrar_refeicao'))
+                return redirect(url_for('produtos.cadastrar_produto'))
             else:
                 flash("Usuário ou senha estão incorretos! Tente novamente.", category="danger")
     return render_template("home.html", form=forms)
