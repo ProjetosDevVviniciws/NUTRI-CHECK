@@ -5,18 +5,18 @@
             {{ form.hidden_tag() }}
 
             <div class="mb-3">
-                {{ form.usuario.label(class="form-label") }}
+                {{ form.usuario.label(class="form-label-custom") }}
                 {{ form.usuario(class="form-control", placeholder="Informe seu usuário") }}
             </div>
 
             <div class="mb-3">
-                {{ form.senha.label(class="form-label") }}
+                {{ form.senha.label(class="form-label-custom") }}
                 {{ form.senha(class="form-control", placeholder="Informe sua senha") }}
             </div>
 
             <div class="mb-3 text-center">
-                <small class="text-muted">Ainda não tem uma conta?</small><br>
-                <a class="btn btn-outline-secondary btn-sm mt-1" href="{{ url_for('auth.cadastro') }}">Cadastre-se</a>
+                <small class="text-muted-custom">Ainda não tem uma conta?</small><br>
+                <a class="btn btn-ouline-custom mt-2" href="{{ url_for('auth.cadastro') }}">Cadastre-se</a>
             </div>
 
             <div class="d-grid">
