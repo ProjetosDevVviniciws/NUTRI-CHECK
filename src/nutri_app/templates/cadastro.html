@@ -8,13 +8,13 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/pages/home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pages/cadastro.css') }}">
 </head>
 <body>
     {% include 'includes/navbar.html' %}
     <div class="hero-bg">
         <h1 class="text-center my-5 gradient-text">Bem Vindo ao NutriCheck</h1>
-        <p class="text-center text-white fs-5">Acompanhe sua alimentação, hidratação e evolução com praticidade.</p>
+        <p class="paragraph-highlight">Acompanhe sua alimentação, hidratação e evolução com praticidade.</p>
         <div class="container center-form align-items-center">
             <div class="card p-4 shadow" style="max-width: 400px; width:100%; background-color:rgba(255, 255, 255, 0.95); border-radius:15px;">
                 <h2 class="text-center mb-4 text-dark">Cadastro</h2>
@@ -22,28 +22,28 @@
                     {{ form.hidden_tag() }}
 
                     <div class="mb-3">
-                        {{ form.usuario.label(class="form-label") }}
+                        {{ form.usuario.label(class="form-label-custom") }}
                         {{ form.usuario(class="form-control", placeholder="Informe seu usuário") }}
                     </div>
 
                     <div class="mb-3">
-                        {{ form.email.label(class="form-label") }}
+                        {{ form.email.label(class="form-label-custom") }}
                         {{ form.email(class="form-control", placeholder="Informe seu e-mail") }}
                     </div>
 
                     <div class="mb-3">
-                        {{ form.senha1.label(class="form-label") }}
+                        {{ form.senha1.label(class="form-label-custom") }}
                         {{ form.senha1(class="form-control", placeholder="Informe sua senha") }}
                     </div>
 
                     <div class="mb-3">
-                        {{ form.senha2.label(class="form-label") }}
+                        {{ form.senha2.label(class="form-label-custom") }}
                         {{ form.senha2(class="form-control", placeholder="Confirme sua senha") }}
                     </div>
 
                     <div class="mb-3 text-center">
-                        <small class="text-muted">Você já possuí um cadastro?</small><br>
-                        <a class="btn btn-outline-secondary btn-sm mt-1" href="{{ url_for('home.home') }}">Login</a>
+                        <small class="text-muted-custom">Você já possuí um cadastro?</small><br>
+                        <a class="btn btn-ouline-custom mt-2" href="{{ url_for('home.home') }}">Login</a>
                     </div>
                     <div class="d-grid">
                         {{ form.submit(class="btn btn-primary btn-lg") }}
