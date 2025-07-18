@@ -17,9 +17,10 @@ def cadastro():
         
         with engine.connect() as conn:
             query = text("INSERT INTO usuarios (usuario, email, senha) VALUES (:usuario, :email, :senha)")
-            conn.execute(query, {"usuario": usuario, "email": email, "senha": senha_hash})   
+            conn.execute(query, {"usuario": usuario, "email": email, "senha": senha_hash})
+            conn.commit()   
             flash("Cadastro realizado com sucesso!", category="success")
-            return redirect(url_for('refeicoes.registrar_refeicao'))
+            return redirect(url_for('home.home'))
     if forms.errors != {}:
         for err in forms.errors.values():
             flash(f"Erro ao cadastrar: {err}", category="danger")
@@ -30,5 +31,5 @@ def cadastro():
 def logout():
     logout_user()
     flash("Você fez o logout", category="info")
-    return redirect(url_for('/.home'))
+    return redirect(url_for('home.home'))
                     
