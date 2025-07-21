@@ -20,11 +20,11 @@ def cadastro():
             conn.execute(query, {"usuario": usuario, "email": email, "senha": senha_hash})
             conn.commit()   
             flash("Cadastro realizado com sucesso!", category="success")
-            return redirect(url_for('home.home'))
+            return redirect(url_for('login.login'))
     if forms.errors != {}:
         for err in forms.errors.values():
             flash(f"Erro ao cadastrar: {err}", category="danger")
-    return render_template("cadastro.html", form=forms)
+    return render_template("includes/cadastro.html", form=forms)
 
 @auth_bp.route('/logout')
 @login_required
