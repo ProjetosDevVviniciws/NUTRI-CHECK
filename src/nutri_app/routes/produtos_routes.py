@@ -40,5 +40,5 @@ def cadastrar_produto():
         for err in forms.errors.values(): 
             flash(f"Erro ao cadastrar produto: {err}", category="danger")
         
-    return render_template("produtos.html", form=forms)
+    return render_template("includes/produtos.html", form=forms)
        
