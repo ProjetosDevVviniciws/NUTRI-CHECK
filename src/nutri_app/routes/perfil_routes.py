@@ -75,5 +75,5 @@ def perfil_usuario():
         flash("Perfil atualizado com sucesso!", category="success")
         return redirect(url_for('perfil.perfil_usuario'))
     
-    return render_template("perfil.html", form=forms)
+    return render_template("includes/perfil.html", form=forms)
             
