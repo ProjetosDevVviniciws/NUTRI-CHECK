@@ -92,6 +92,6 @@ def registrar_refeicao():
             for err in forms.errors.values():
                 flash(f"Erro ao registrar sua refeição: {err}", category="danger")
 
-    return render_template("refeicoes.html", form=forms, produtos=produtos1)
+    return render_template("includes/refeicoes.html", form=forms, produtos=produtos1)
             
     
