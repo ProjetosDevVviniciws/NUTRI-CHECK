@@ -44,4 +44,4 @@ def registrar_progressao_peso():
             flash("Você ainda não registrou nenhum progresso para gerar o gráfico.", category="danger")
             return redirect(url_for('progressao.registrar_progressao_peso'))
     
-    return render_template("progressao.html", form=forms, grafico=grafico_base64, historico=historico_progressao)
+    return render_template("includes/progressao.html", form=forms, grafico=grafico_base64, historico=historico_progressao)
