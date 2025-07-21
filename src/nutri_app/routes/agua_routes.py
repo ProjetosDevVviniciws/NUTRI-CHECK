@@ -40,4 +40,4 @@ def registrar_agua():
             flash(f"{quantidade}ml de água registrados com sucesso!", category="success")
             return redirect(url_for('agua.registrar_agua'))
             
-    return render_template('agua.html', form=forms)
+    return render_template('includes/agua.html', form=forms)
