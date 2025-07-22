@@ -1,10 +1,60 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
-  <div class="container">
-    <a class="navbar-brand" href="{{ url_for('home.home') }}">
+  <div class="container-fluid">
+    <a class="navbar-brand">
         <img src="{{ url_for('static', filename='images/logo.png') }}" alt="NutriCheck Logo" class="logo-navbar">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
+
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav mx-auto text-center">
+        <li class="nav-item mx-2">
+          <a class="nav-link" href="{{ url_for('produtos.cadastrar_produto') }}">
+            <img src="" alt="">
+            <div class="small">Produtos</div>
+          </a>
+        </li>
+        <li class="nav-item mx-2">
+          <a class="nav-link" href="{{ url_for('refeicoes.registrar_refeicao') }}">
+            <img src="" alt="">
+            <div class="small">Refeições</div>
+          </a>
+        </li>
+        <li class="nav-item mx-2">
+          <a class="nav-link" href="{{ url_for('agua.registrar_agua') }}">
+            <img src="" alt="">
+            <div class="small">Água</div>
+          </a>
+        </li>
+        <li class="nav-item mx-2">
+          <a class="nav-link" href="{{ url_for('progressao.registrar_progressao_peso') }}">
+            <img src="" alt="">
+            <div class="small">Progresso</div>
+          </a>
+        </li>
+        <li class="nav-item mx-2">
+          <a class="nav-link" href="{{ url_for('perfil.perfil_usuario') }}">
+            <img src="" alt="">
+            <div class="small">Perfil</div>
+          </a>
+        </li>
+      </ul>
+      
+      <ul class="navbar-nav text-center">
+        <li class="nav-item mx-2">
+          <a class="nav-link" href="{{ url_for('login.login') }}">
+            <img src="" alt="">
+            <div class="small">Login</div>
+          </a>
+        </li>
+        <li class="nav-item mx-2">
+          <a class="nav-link" href="{{ url_for('auth.logout') }}">
+            <img src="" alt="">
+            <div class="small">Sair</div>
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>
