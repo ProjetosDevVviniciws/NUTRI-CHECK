@@ -61,3 +61,17 @@
     background-color: #6c757d;
     color: #fff;
 }
+
+.nav-nav .nav-link {
+    color: #ffffff;
+    transition: color 0.3s ease;
+}
+
+.nav-nav .nav-link:hover {
+    color: red;
+}
+
+.nav-nav .nav-link i {
+    font-size: 1.2rem;
+    display: flex;
+}
