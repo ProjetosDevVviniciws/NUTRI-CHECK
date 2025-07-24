@@ -62,16 +62,11 @@
     color: #fff;
 }
 
-.nav-nav .nav-link {
-    color: #ffffff;
-    transition: color 0.3s ease;
-}
-
-.nav-nav .nav-link:hover {
-    color: red;
-}
-
-.nav-nav .nav-link i {
-    font-size: 1.2rem;
-    display: flex;
+.lucide-icon {
+    width: 18px;
+    height: 18px;
+    margin-bottom: 3px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
