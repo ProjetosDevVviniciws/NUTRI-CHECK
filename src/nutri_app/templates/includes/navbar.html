@@ -10,48 +10,48 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
       <ul class="navbar-nav mx-auto text-center">
         <li class="nav-item mx-2">
-          <a class="nav-link" href="{{ url_for('produtos.cadastrar_produto') }}">
-            <img src="" alt="">
-            <div class="small">Produtos</div>
+          <a class="nav-link d-flex flex-column align-items-center" href="{{ url_for('produtos.cadastrar_produto') }}">
+            <i class="lucide-icon fs-5" data-lucide="shopping-bag"></i>
+            <div class="small nav-label">Produtos</div>
           </a>
         </li>
         <li class="nav-item mx-2">
-          <a class="nav-link" href="{{ url_for('refeicoes.registrar_refeicao') }}">
-            <img src="" alt="">
-            <div class="small">Refeições</div>
+          <a class="nav-link d-flex flex-column align-items-center" href="{{ url_for('refeicoes.registrar_refeicao') }}">
+            <i class="lucide-icon fs-5" data-lucide="utensils"></i>
+            <div class="small nav-label">Refeições</div>
           </a>
         </li>
         <li class="nav-item mx-2">
-          <a class="nav-link" href="{{ url_for('agua.registrar_agua') }}">
-            <img src="" alt="">
-            <div class="small">Água</div>
+          <a class="nav-link d-flex flex-column align-items-center" href="{{ url_for('agua.registrar_agua') }}">
+            <i class="lucide-icon fs-5" data-lucide="glass-water"></i>
+            <div class="small nav-label">Água</div>
           </a>
         </li>
         <li class="nav-item mx-2">
-          <a class="nav-link" href="{{ url_for('progressao.registrar_progressao_peso') }}">
-            <img src="" alt="">
-            <div class="small">Progresso</div>
+          <a class="nav-link d-flex flex-column align-items-center" href="{{ url_for('progressao.registrar_progressao_peso') }}">
+            <i class="lucide-icon fs-5" data-lucide="activity"></i>
+            <div class="small nav-label">Progresso</div>
           </a>
         </li>
         <li class="nav-item mx-2">
-          <a class="nav-link" href="{{ url_for('perfil.perfil_usuario') }}">
-            <img src="" alt="">
-            <div class="small">Perfil</div>
+          <a class="nav-link d-flex flex-column align-items-center" href="{{ url_for('perfil.perfil_usuario') }}">
+            <i class="lucide-icon fs-5" data-lucide="user"></i>
+            <div class="small nav-label">Perfil</div>
           </a>
         </li>
       </ul>
       
       <ul class="navbar-nav text-center">
         <li class="nav-item mx-2">
-          <a class="nav-link" href="{{ url_for('login.login') }}">
-            <img src="" alt="">
-            <div class="small">Login</div>
+          <a class="nav-link d-flex flex-column align-items-center" href="{{ url_for('login.login') }}">
+            <i class="lucide-icon fs-5" data-lucide="log-in"></i>
+            <div class="small nav-label">Login</div>
           </a>
         </li>
         <li class="nav-item mx-2">
-          <a class="nav-link" href="{{ url_for('auth.logout') }}">
-            <img src="" alt="">
-            <div class="small">Sair</div>
+          <a class="nav-link d-flex flex-column align-items-center" href="{{ url_for('auth.logout') }}">
+            <i class="lucide-icon f-5" data-lucide="log-out"></i>
+            <div class="small nav-label">Sair</div>
           </a>
         </li>
       </ul>
