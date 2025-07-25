@@ -70,3 +70,24 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+.nav-label {
+    color: #f8f9fa;
+    font-weight: 500;
+    font-size: 0.85rem;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.flash-container {
+    max-width: 650px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.flash-container .alert {
+    padding: 0.95rem 1rem;
+    border-radius: 8px;
+}
