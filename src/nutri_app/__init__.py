@@ -23,7 +23,7 @@ def create_app():
     from .routes.home_routes import home_bp
     from .routes.perfil_routes import perfil_bp
     from .routes.refeicoes_routes import refeicoes_bp
-    from .routes.produtos_routes import produtos_bp
+    from .routes.alimentos_routes import alimentos_bp
     from .routes.agua_routes import agua_bp
     from .routes.progressao_routes import progressao_bp
     
@@ -32,7 +32,7 @@ def create_app():
     app.register_blueprint(home_bp)
     app.register_blueprint(perfil_bp)
     app.register_blueprint(refeicoes_bp)
-    app.register_blueprint(produtos_bp)
+    app.register_blueprint(alimentos_bp)
     app.register_blueprint(agua_bp)
     app.register_blueprint(progressao_bp)
     
