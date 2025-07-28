@@ -27,6 +27,8 @@ def create_app():
     from .routes.agua_routes import agua_bp
     from .routes.progressao_routes import progressao_bp
     
+    from .utils.importar_alimentos import importar_alimentos_csv
+    
     app.register_blueprint(login_bp)
     app.register_blueprint(auth_bp)
     app.register_blueprint(home_bp)
@@ -35,5 +37,7 @@ def create_app():
     app.register_blueprint(alimentos_bp)
     app.register_blueprint(agua_bp)
     app.register_blueprint(progressao_bp)
+    
+    importar_alimentos_csv()
     
     return app
