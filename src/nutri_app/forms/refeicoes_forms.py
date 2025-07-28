@@ -17,7 +17,7 @@ class RefeicaoForm(FlaskForm):
         label='Tipo de Refeição',
         choices=[
             ('cafe', 'Café da Manhã'),
-            ('amolmoco', 'Almoço'),
+            ('almoco', 'Almoço'),
             ('lanche', 'Lanche da Tarde'),
             ('jantar', 'Jantar')
         ],
