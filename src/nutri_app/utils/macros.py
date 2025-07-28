@@ -10,7 +10,7 @@ def calcular_macros_totais(produto, porcao_consumida):
     ]) * fator
     
 def calcular_tmb_macros(peso: float, altura: float, idade: int, sexo: str = "masculino") -> dict:
-    if sexo.lower() == "femino":
+    if sexo.lower() == "feminino":
         tmb = 10 * peso + 6.25 * altura - 5 * idade - 161
     else:
         tmb = 10 * peso + 6.25 * altura - 5 * idade + 5
