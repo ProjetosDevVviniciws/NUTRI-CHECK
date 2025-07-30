@@ -1,0 +1,13 @@
+.hero-bg {
+    background-image: url("/static/images/fundo.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    padding:100px 0;
+}
+
+.card {
+    border-radius: 12px;
+    background-color: #f8f9fa;
+}
