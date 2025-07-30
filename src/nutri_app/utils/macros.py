@@ -1,14 +1,23 @@
 import numpy as np
 
-def calcular_macros_totais(produto, porcao_consumida):
-    fator = porcao_consumida / produto.porcao
+def calcular_macros_totais(alimento, porcao_consumida):
+    fator = porcao_consumida / alimento.porcao
     return np.array([
-        produto.calorias,
-        produto.proteinas,
-        produto.carboidratos,
-        produto.gorduras
+        alimento.calorias,
+        alimento.proteinas,
+        alimento.carboidratos,
+        alimento.gorduras
     ]) * fator
-    
+
+def calcular_macros_por_porcao(porcao, macros_100g):
+    fator = porcao / 100.00
+    return {
+        'calorias': round(macros_100g.get('calorias', 0) * fator, 2),
+        'proteinas': round(macros_100g.get('proteinas', 0) * fator, 2),
+        'carboidratos': round(macros_100g.get('carboidratos', 0) * fator, 2),
+        'gorduras': round(macros_100g.get('gorduras', 0) * fator, 2)
+    }
+
 def calcular_tmb_macros(peso: float, altura: float, idade: int, sexo: str = "masculino") -> dict:
     if sexo.lower() == "feminino":
         tmb = 10 * peso + 6.25 * altura - 5 * idade - 161
