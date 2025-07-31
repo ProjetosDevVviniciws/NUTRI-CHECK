@@ -3,7 +3,7 @@ from wtforms.validators import DataRequired, NumberRange
 from flask_wtf import FlaskForm
 
 class RefeicaoForm(FlaskForm):
-    produto_id = SelectField(label='Produto', coerce=int, validators=[DataRequired()])
+    alimento_id = SelectField(label='Alimento', coerce=int, validators=[DataRequired()])
     
     porcao = DecimalField(
         label='Porção (g)', 
