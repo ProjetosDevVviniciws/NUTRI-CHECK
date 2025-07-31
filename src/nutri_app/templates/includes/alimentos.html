@@ -18,28 +18,28 @@
             <div class="card p-4 shadow" style="max-width: 400px; width:100%; background-color:rgba(255, 255, 255, 0.95); border-radius:15px;">
                 <h2 class="text-center mb-4">Cadastrar Alimento</h2>
 
-            <form method="POST">
-                {{ form.hidden_tag() }}
+                <form method="POST">
+                    {{ form.hidden_tag() }}
 
-                <div class="mb-3">
-                    {{ form.nome.label(class="form-label-custom") }}
-                    {{ form.nome(class="form-control", placeholder="ex. Frango cozido") }}
-                </div>
+                    <div class="mb-3">
+                        {{ form.nome.label(class="form-label-custom") }}
+                        {{ form.nome(class="form-control", placeholder="ex. Frango cozido") }}
+                    </div>
 
-                <div class="mb-3">
-                    {{ form.codigo_barras.label(class="form-label-custom") }}
-                    {{ form.codigo_barras(class="form-control") }}
-                </div>
+                    <div class="mb-3">
+                        {{ form.codigo_barras.label(class="form-label-custom") }}
+                        {{ form.codigo_barras(class="form-control") }}
+                    </div>
 
-                <div class="mb-3">
-                    {{ form.porcao.label(class="form-label-custom") }}
-                    {{ form.porcao(class="form-control", placeholder="ex. 100g") }}
-                </div>
+                    <div class="mb-3">
+                        {{ form.porcao.label(class="form-label-custom") }}
+                        {{ form.porcao(class="form-control", placeholder="ex. 100g") }}
+                    </div>
 
-                <div class="d-grid">
-                    {{ form.submit(class="btn btn-primary btn-lg") }}
-                </div>
-            </form>
+                    <div class="d-grid">
+                        {{ form.submit(class="btn btn-primary btn-lg") }}
+                    </div>
+                </form>
             </div>
         </div>
     </main>
