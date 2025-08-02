@@ -2,12 +2,12 @@ import requests
 from sqlalchemy import text
 from src.nutri_app.database import engine
 
-def importar_alimentos_polulares():
+def importar_alimentos_populares():
     url = "https://br.openfoodfacts.org/cgi/search.pl"
     
     total_paginas = 6
     
-    with engine.connect() as conn:
+    with engine.begin() as conn:
         for pagina in range(1, total_paginas + 1):
             parametros = {
                 "action": "process",
@@ -52,7 +52,7 @@ def importar_alimentos_polulares():
                         INSERT INTO alimentos (
                             nome, codigo_barras, porcao, calorias, proteinas, gorduras, carboidratos, usuario_id 
                         ) VALUES (
-                            :nome, codigo_barras, porcao, calorias, proteinas, gorduras, carboidratos, NULL
+                            :nome, :codigo_barras, :porcao, :calorias, :proteinas, :gorduras, :carboidratos, NULL
                         )
                     """), {
                         "nome": nome,
@@ -66,9 +66,10 @@ def importar_alimentos_polulares():
                     print(f"Inserido: {nome}")
                 except Exception as e:
                     print(f"Erro ao inserir {nome}: {e}")
+                    raise
     
     print("\nImportação concluída.")
     
 if __name__ == "__main__":
-    importar_alimentos_polulares()
+    importar_alimentos_populares()
                     
