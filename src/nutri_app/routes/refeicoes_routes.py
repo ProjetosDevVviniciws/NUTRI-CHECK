@@ -1,9 +1,11 @@
-from flask import Blueprint, render_template, redirect, url_for, flash
+from flask import Blueprint, render_template, redirect, url_for, flash, request
 from src.nutri_app.forms.refeicoes_forms import RefeicaoForm
+from src.nutri_app.utils.decorators import perfil_completo_required
 from src.nutri_app.database import engine
 from sqlalchemy import text
 from flask_login import login_required, current_user
 from src.nutri_app.utils.macros import calcular_macros_totais
+from src.nutri_app.utils.api_openfoodfacts import buscar_por_codigo_barras
 from datetime import date
 
 refeicoes_bp = Blueprint('refeicoes', __name__)
@@ -11,23 +13,49 @@ refeicoes_bp = Blueprint('refeicoes', __name__)
 @refeicoes_bp.route('/refeicoes', methods=['GET', 'POST'])
 @login_required
 def registrar_refeicao():
-    forms = RefeicaoForm()
+    form = RefeicaoForm()
+    alimento_api = None
     
     with engine.begin() as conn:
-        produtos1 = conn.execute(
-            text("SELECT id, nome FROM produtos WHERE usuario_id = :id"),
+        alimentos_db = conn.execute(
+            text("SELECT id, nome, usuario_id FROM alimentos WHERE usuario_id = :id OR usuario_id IS NULL"),
             {"id": current_user.id}
         ).fetchall()
-        forms.produto_id.choices = [(p.id, p.nome) for p in produtos1]
+        
+        choices = [(p.id, f"{p.nome}") if p.usuario_id is None else (p.id, p.nome) for p in alimentos_db]
+        
+        codigo_barras = request.args.get("codigo_barras")
+        if codigo_barras:
+            alimento_api = buscar_por_codigo_barras(codigo_barras)
+            if alimento_api:
+                choices.insert(0, (-1, f"{alimento_api['nome']} (via OpenFoodFacts)"))
+            else:
+                flash("Produto não encontrado via OpenFoodFacts.", category="warning")
+        if not choices:
+            flash("Nenhum alimento cadastrado. Você pode buscar por código de barras.", category="info")
+                
+        form.alimento_id.choices = choices
      
-        if forms.validate_on_submit():
-            produto_id = forms.produto_id.data
-            porcao = float(forms.porcao.data)
-            tipo_refeicao = forms.tipo_refeicao.data
+        if form.validate_on_submit():
+            alimento_id = form.alimento.data
+            porcao = float(form.porcao.data)
+            tipo_refeicao = form.tipo_refeicao.data
             
-            produto = conn.execute(
-                text("SELECT * FROM produtos WHERE id = :id"),
-                {"id": produto_id}).fetchone()
+            if alimento_id == -1:
+                if not alimento_api:
+                    flash("Não foi possível registrar o alimento da API.", category="danger")
+                    return redirect(url_for('refeicoes.registrar_refeicao'))
+                
+                macros = calcular_macros_totais(alimento_api, porcao)
+            else:
+                alimento = conn.execute(
+                    text("""SELECT * FROM alimentos WHERE id = :id"""),{"id": alimento_id}).fetchone()
+                
+                if not alimento:
+                    flash("Alimento não encontrado!", category="danger")
+                    return redirect(url_for('refeicoes.registrar_refeicao'))
+                
+                macros = calcular_macros_totais(alimento, porcao)
                 
             usuario = conn.execute(
                 text("""
@@ -37,11 +65,6 @@ def registrar_refeicao():
                     FROM usuarios WHERE id = :id"""),
                 {"id": current_user.id}
             ).fetchone()
-            
-            if not produto:
-                flash("Produto não econtrado!", category="danger")
-                return redirect(url_for('refeicoes.registrar_refeicao'))
-            macros = calcular_macros_totais(produto, porcao)
                 
             hoje = date.today()
             if usuario.ultima_atualizacao.date() != hoje:
@@ -56,12 +79,12 @@ def registrar_refeicao():
             """), {"id": current_user.id, "hoje": hoje})
             
             query = text(""" 
-                INSERT INTO refeicoes (usuario_id, produto_id, porcao, quantidade, calorias, proteinas, carboidratos, gorduras, tipo_refeicao)
-                VALUES (:usuario_id, :produto_id, :porcao, :calorias, :proteinas, :carboidratos, :gorduras, :tipo_refeicao) 
+                INSERT INTO refeicoes (usuario_id, alimento_id, porcao, calorias, proteinas, carboidratos, gorduras, tipo_refeicao)
+                VALUES (:usuario_id, :alimento_id, :porcao, :calorias, :proteinas, :carboidratos, :gorduras, :tipo_refeicao) 
             """)
             conn.execute(query, {
                 "usuario_id": current_user.id,
-                "produto_id": produto_id,
+                "alimento_id": None if alimento_id == -1 else alimento_id,
                 "porcao": porcao,
                 "calorias": macros[0],
                 "proteinas": macros[1],
@@ -88,10 +111,10 @@ def registrar_refeicao():
             flash("Refeição registrada com sucesso!", category="success")
             return redirect(url_for('refeicoes.registrar_refeicao'))
             
-        if forms.errors != {}:
-            for err in forms.errors.values():
+        if form.errors != {}:
+            for err in form.errors.values():
                 flash(f"Erro ao registrar sua refeição: {err}", category="danger")
 
-    return render_template("includes/refeicoes.html", form=forms, produtos=produtos1)
+    return render_template("includes/refeicoes.html", form=form)
             
     
