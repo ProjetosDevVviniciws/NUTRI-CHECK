@@ -22,6 +22,11 @@
                     {{ form.hidden_tag() }}
 
                     <div class="mb-3">
+                        {{ form.nome_busca.label(class="form-label-custom") }}
+                        {{ form.nome_busca(class="form-control", placeholder="Digite um nome para buscar") }}
+                    </div>
+
+                    <div class="mb-3">
                         {{ form.nome.label(class="form-label-custom") }}
                         {{ form.nome(class="form-control", placeholder="ex. Frango cozido") }}
                     </div>
