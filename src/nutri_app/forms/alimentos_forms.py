@@ -5,6 +5,7 @@ from flask_wtf import FlaskForm
 class AlimentoForm(FlaskForm):
     nome = StringField(label='Nome:' , validators=[DataRequired(), Length(min=2, max=100)])
     codigo_barras = StringField(label='Código de Barras:', validators=[Optional(), Length(max=50)])
+    nome_busca = StringField(label='Buscar por Nome:', validators=[Optional()])
     porcao = FloatField(label='Porção (g):', validators=[DataRequired()])
     calorias = DecimalField("Calorias", validators=[Optional()])
     proteinas = DecimalField("Proteínas", validators=[Optional()])
