@@ -26,20 +26,24 @@ def buscar_por_codigo_barras(codigo_barras):
     }
 
 def buscar_por_nome(nome_alimento):
-    url = f"https://br.openfoodfacts.org/cgi/search.pl?search_terms={nome_alimento}&search_simple=1&action=process&json=1&page_size=1"
+    url = f"https://world.openfoodfacts.org/cgi/search.pl?search_terms={nome_alimento}&search_simple=1&action=process&json=1&page_size=10&fields=product_name,nutriments"
+
     response = requests.get(url)
 
     if response.status_code == 200:
-        resultados = response.json().get("products")
-        if resultados:
-            produto = resultados[0]
-            return {
-                "nome": produto.get("product_name", ""),
-                "calorias": produto.get("nutriments", {}).get("energy-kcal_100g"),
-                "proteinas": produto.get("nutriments", {}).get("proteins_100g"),
-                "carboidratos": produto.get("nutriments", {}).get("carbohydrates_100g"),
-                "gorduras": produto.get("nutriments", {}).get("fat_100g")
-            }
+        produtos = response.json().get("products", [])
+        for produto in produtos:
+            nutr = produto.get("nutriments", {})
+            if all(nutr.get(k) is not None for k in ["energy-kcal_100g", "proteins_100g", "carbohydrates_100g", "fat_100g"]):
+                return {
+                    "nome": produto.get("product_name", ""),
+                    "calorias": nutr["energy-kcal_100g"],
+                    "proteinas": nutr["proteins_100g"],
+                    "carboidratos": nutr["carbohydrates_100g"],
+                    "gorduras": nutr["fat_100g"]
+                }
     return None
+
+
 
 
