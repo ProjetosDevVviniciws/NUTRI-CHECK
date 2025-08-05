@@ -41,6 +41,26 @@
                         {{ form.porcao(class="form-control", placeholder="ex. 100g") }}
                     </div>
 
+                    <div class="mb-3">
+                        {{ form.calorias.label(class="form-label-custom") }}
+                        {{ form.calorias(class="form-control", id="calorias", readonly=true) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.proteinas.label(class="form-label-custom") }}
+                        {{ form.proteinas(class="form-control", id="proteinas", readonly=true) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.carboidratos.label(class="form-label-custom") }}
+                        {{ form.carboidratos(class="form-control", id="carboidratos", readonly=true) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.gorduras.label(class="form-label-custom") }}
+                        {{ form.gorduras(class="form-control", id="gorduras", readonly=true) }}
+                    </div>
+
                     <div class="d-grid">
                         {{ form.submit(class="btn btn-primary btn-lg") }}
                     </div>
@@ -56,5 +76,6 @@
     <script>
       lucide.createIcons();
     </script>
+    <script src="{{ url_for('static', filename='js/alimentos.js') }}"></script>
 </body>
 </html>
