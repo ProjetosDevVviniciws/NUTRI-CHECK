@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const nomeBuscaInput = document.querySelector('input[name="nome_busca"]');
-    const porcaoInput = document.getElementById('porcao');
+    const porcaoInput = document.querySelector('input[name="porcao"]');
     const caloriasInput = document.getElementById('calorias');
     const proteinasInput = document.getElementById('proteinas');
     const carboidratosInput = document.getElementById('carboidratos');
