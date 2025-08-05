@@ -15,56 +15,63 @@ def cadastrar_alimento():
     form = AlimentoForm()
 
     if request.method == 'POST':
-        if form.codigo_barras.data and not form.calorias.data:
-            dados = buscar_por_codigo_barras(form.codigo_barras.data)
-            if dados:
-                form.nome.data = dados["nome"]
-                form.calorias.data = dados["calorias"]
-                form.proteinas.data = dados["proteinas"]
-                form.carboidratos.data = dados["carboidratos"]
-                form.gorduras.data = dados["gorduras"]
-                flash("Produto encontrado! Preencha a porção para finalizar o cadastro.", category="info")
-            else:
-                flash("Produto não encontrado. Por favor, preencha os dados manualmente.", category="warning")
-            return render_template("includes/alimentos.html", form=form)
+        if 'buscar_codigo' in request.form:
+            if form.codigo_barras.data:
+                dados = buscar_por_codigo_barras(form.codigo_barras.data)
+                if dados:
+                    form.nome.data = dados["nome"]
+                    form.calorias.data = dados["calorias"]
+                    form.proteinas.data = dados["proteinas"]
+                    form.carboidratos.data = dados["carboidratos"]
+                    form.gorduras.data = dados["gorduras"]
+                    flash("Produto encontrado! Preencha a porção para finalizar o cadastro.", category="info")
+                else:
+                    flash("Produto não encontrado. Por favor, preencha os dados manualmente.", category="warning")
+                return render_template("includes/alimentos.html", form=form)
 
-        elif form.nome_busca.data and not form.calorias.data:
-            dados = buscar_por_nome(form.nome_busca.data)
-            if dados:
-                form.nome.data = dados["nome"]
-                form.calorias.data = dados["calorias"]
-                form.proteinas.data = dados["proteinas"]
-                form.carboidratos.data = dados["carboidratos"]
-                form.gorduras.data = dados["gorduras"]
-                flash("Produto encontrado por nome! Preencha a porção para finalizar o cadastro.", category="info")
-            else:
-                flash("Produto não encontrado por nome. Preencha os dados manualmente.", category="warning")
-            return render_template("includes/alimentos.html", form=form)
+        elif 'buscar_nome' in request.form:
+            if form.nome_busca.data:
+                dados = buscar_por_nome(form.nome_busca.data)
+                if dados:
+                    form.nome.data = dados["nome"]
+                    form.calorias.data = dados["calorias"]
+                    form.proteinas.data = dados["proteinas"]
+                    form.carboidratos.data = dados["carboidratos"]
+                    form.gorduras.data = dados["gorduras"]
+                    flash("Produto encontrado por nome! Dados nutricionais preenchidos automaticamente. Agora preencha a porção e finalize o cadastro.", category="info")
+                else:
+                    flash("Produto não encontrado por nome. Preencha os dados manualmente.", category="warning")
+                return render_template("includes/alimentos.html", form=form)
         
-    if form.validate_on_submit():
-        nome = form.nome.data
-        codigo_barras = form.codigo_barras.data or None
-        porcao = float(form.porcao.data)
-
-        macros = calcular_macros_por_porcao(porcao, {
-            "calorias": float(form.calorias.data),
-            "proteinas": float(form.proteinas.data),
-            "carboidratos": float(form.carboidratos.data),
-            "gorduras": float(form.gorduras.data)
-        })
-
-        with engine.begin() as conn:
-            query = text("""
-                INSERT INTO alimentos (usuario_id, nome, codigo_barras, porcao, calorias, proteinas, carboidratos, gorduras)
-                VALUES (:usuario_id, :nome, :codigo_barras, :porcao, :calorias, :proteinas, :carboidratos, :gorduras)
-            """)
-            conn.execute(query, {
-                "usuario_id": current_user.id,
-                "nome": nome,
-                "codigo_barras": codigo_barras,
-                "porcao": porcao,
-                **macros
+        elif form.validate_on_submit():
+            try:
+                porcao = float(form.porcao.data)
+            except (TypeError, ValueError):
+                flash("Porção inválida. Preencha corretamente.", category="danger")
+                return render_template("includes/alimentos.html", form=form)
+                
+            nome = form.nome.data
+            codigo_barras = form.codigo_barras.data or None
+            
+            macros = calcular_macros_por_porcao(porcao, {
+                "calorias": float(form.calorias.data),
+                "proteinas": float(form.proteinas.data),
+                "carboidratos": float(form.carboidratos.data),
+                "gorduras": float(form.gorduras.data)
             })
+
+            with engine.begin() as conn:
+                query = text("""
+                    INSERT INTO alimentos (usuario_id, nome, codigo_barras, porcao, calorias, proteinas, carboidratos, gorduras)
+                    VALUES (:usuario_id, :nome, :codigo_barras, :porcao, :calorias, :proteinas, :carboidratos, :gorduras)
+                """)
+                conn.execute(query, {
+                    "usuario_id": current_user.id,
+                    "nome": nome,
+                    "codigo_barras": codigo_barras,
+                    "porcao": porcao,
+                    **macros
+                })
 
         flash("Alimento adicionado com sucesso!", category="success")
         return redirect(url_for('refeicoes.registrar_refeicao'))
