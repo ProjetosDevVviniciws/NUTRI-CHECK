@@ -1,0 +1,19 @@
+<div class="modal fade" id="modalRegistrarAgua" tabindex="-1" aria-labelledby="modalRegistrarAguaLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form method="POST" action="{{ url_for('agua.registrar_agua') }}">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalRegistrarAguaLabel">Registrar Água</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+          {{ form_agua.hidden_tag() }}
+          {{ form_agua.quantidade.label }} {{ form_agua.quantidade(class="form-control mb-3") }}
+        </div>
+        <div class="modal-footer">
+          {{ form_agua.submit(class="btn btn-info") }}
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
