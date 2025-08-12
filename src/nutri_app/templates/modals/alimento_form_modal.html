@@ -1,0 +1,62 @@
+<div class="modal fade" id="alimentoModal" tabindex="-1" aria-labelledby="alimentoModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="alimentoModalLabel">Adicionar Alimento</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formAdicionarAlimento">
+          <div class="mb-3">
+            <label for="buscaAlimento" class="form-label fw-bold">Buscar Alimento</label>
+            <select id="buscaAlimento" placeholder="Digite o nome do alimento..."></select>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Nome</label>
+              <input type="text" class="form-control" id="nome" name="nome" readonly>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Porção (g)</label>
+              <input type="number" class="form-control" id="porcao" name="porcao" min="1" value="100">
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Código de Barras</label>
+              <input type="text" class="form-control" id="codigo_barras" name="codigo_barras" readonly>
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="row g-3">
+            <div class="col-md-3">
+              <label class="form-label">Calorias</label>
+              <input type="number" class="form-control" id="calorias" name="calorias" readonly>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Proteínas (g)</label>
+              <input type="number" class="form-control" id="proteinas" name="proteinas" readonly>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Carboidratos (g)</label>
+              <input type="number" class="form-control" id="carboidratos" name="carboidratos" readonly>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Gorduras (g)</label>
+              <input type="number" class="form-control" id="gorduras" name="gorduras" readonly>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary" form="formAdicionarAlimento">Adicionar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.bootstrap5.min.css">
+<script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
