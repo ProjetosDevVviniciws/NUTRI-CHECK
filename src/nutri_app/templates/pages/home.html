@@ -16,21 +16,21 @@
     <main class="hero-bg py-4">
         {% include 'includes/flash_messages.html' %}
         <h1 class="text-center my-5 gradient-text">Bem Vindo ao NutriCheck</h1>
-        <p class="paragraph-highlight">Acompanhe sua alimentação, hidratação e evolução com praticidade.</p>   
+        <p class="paragraph-highlight mb-5">Acompanhe sua alimentação, hidratação e evolução com praticidade.</p>   
         <div class="container mb-4">
             <div class="card shadow-sm border-0 rounded-3">
                 <div class="card-body text-center">
-                    <h5 class="mb-3">Resumo Diário</h5>
+                    <h3 class="fw-bold mb-5">Resumo Diário</h3>
                     <div class="row">
-                        <div class="col-3"><h6>Calorias</h6><p class="fw-bold text-primary">{{ totais_dia.calorias }}</p></div>
-                        <div class="col-3"><h6>Proteínas</h6><p class="fw-bold text-success">{{ totais_dia.proteinas }} g</p></div>
-                        <div class="col-3"><h6>Carboidratos</h6><p class="fw-bold text-warning">{{ totais_dia.carboidratos }} g</p></div>
-                        <div class="col-3"><h6>Gorduras</h6><p class="fw-bold text-danger">{{ totais_dia.gorduras }} g</p></div>
+                        <div class="col-3"><h5>Calorias</h5><p class="fw-bold text-primary">{{ totais_dia.calorias }}</p></div>
+                        <div class="col-3"><h5>Proteínas</h5><p class="fw-bold text-success">{{ totais_dia.proteinas }} g</p></div>
+                        <div class="col-3"><h5>Carboidratos</h5><p class="fw-bold text-warning">{{ totais_dia.carboidratos }} g</p></div>
+                        <div class="col-3"><h5>Gorduras</h5><p class="fw-bold text-danger">{{ totais_dia.gorduras }} g</p></div>
                     </div>
+                    {% include 'includes/refeicoes.html' %}
                 </div>
             </div>
-        </div>
-        {% include 'pages/refeicoes.html' %}
+        </div> 
     </main>
     {% include 'modals/registrar_agua_modal.html' %}
     {% include 'modals/registrar_progressao_modal.html' %}
