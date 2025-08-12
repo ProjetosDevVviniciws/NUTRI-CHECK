@@ -33,7 +33,7 @@ def home():
         totais_dia["gorduras"] += r.gorduras
 
     return render_template(
-        "home.html",
+        "pages/home.html",
         totais_dia=totais_dia,
         refeicoes_por_tipo=refeicoes_por_tipo,
         current_date=hoje
