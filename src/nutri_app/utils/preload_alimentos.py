@@ -5,7 +5,7 @@ from src.nutri_app.database import engine
 LIMIT = 500  
 
 def carregar_catalogo_inicial():
-    url = f"https://world.openfoodfacts.org/cgi/search.pl?action=process&sort_by=unique_scans_n&page_size={LIMIT}&json=true&fields=code,product_name,serving_size_gram,energy-kcal_100g,proteins_100g,carbohydrates_100g,fat_100g"
+    url = f"https://br.openfoodfacts.org/cgi/search.pl?action=process&sort_by=unique_scans_n&page_size={LIMIT}&json=true&fields=code,product_name,serving_size_gram,energy-kcal_100g,proteins_100g,carbohydrates_100g,fat_100g"
     r = requests.get(url)
     data = r.json()
 
