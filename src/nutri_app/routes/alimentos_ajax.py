@@ -63,29 +63,37 @@ def buscar_alimentos():
 
     with engine.connect() as conn:
         result_catalogo = conn.execute(text("""
-            SELECT id, nome
+            SELECT codigo_barras, nome
             FROM catalogo_alimentos
             WHERE nome LIKE :termo
             LIMIT 10
         """), {"termo": f"%{termo}%"}).mappings().all()
 
         result_usuario = conn.execute(text("""
-            SELECT id, nome
+            SELECT codigo_barras, nome
             FROM alimentos
             WHERE nome LIKE :termo AND usuario_id = :usuario_id
             LIMIT 10
         """), {"termo": f"%{termo}%", "usuario_id": current_user.id}).mappings().all()
 
-    alimentos = [{"id": row["id"], "text": row["nome"]} for row in result_usuario + result_catalogo]
+    alimentos = [{"id": row["codigo_barras"], "text": row["nome"]} 
+                 for row in result_usuario + result_catalogo]
     return jsonify(alimentos)
 
 @alimentos_ajax_bp.route('/buscar_codigo/<codigo>', methods=['GET'])
 @login_required
 def buscar_codigo(codigo):
     with engine.connect() as conn:
+        
         alimento = conn.execute(text("""
             SELECT * FROM catalogo_alimentos WHERE codigo_barras = :codigo
-        """), {"codigo": codigo}).fetchone()
+        """), {"codigo": codigo}).mappings().first()
+
+        if not alimento:
+            alimento = conn.execute(text("""
+                SELECT * FROM alimentos
+                WHERE codigo_barras = :codigo AND usuario_id = :usuario_id
+            """), {"codigo": codigo, "usuario_id": current_user.id}).mappings().first()
 
     if alimento:
         return jsonify(dict(alimento))
@@ -95,3 +103,4 @@ def buscar_codigo(codigo):
         return jsonify(novo_alimento)
 
     return jsonify({"erro": "Alimento não encontrado"}), 404
+
