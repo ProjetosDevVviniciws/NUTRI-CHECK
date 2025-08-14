@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const nomeBuscaInput = document.querySelector('input[name="nome_busca"]');
+  const nomeBuscaInput = document.getElementById('buscaAlimento');
   const porcaoInput = document.querySelector('input[name="porcao"]');
   const caloriasInput = document.getElementById('calorias');
   const proteinasInput = document.getElementById('proteinas');
@@ -7,31 +7,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const gordurasInput = document.getElementById('gorduras');
 
   let originalMacros = {
-    calorias: parseFloat(caloriasInput.value) || 0,
-    proteinas: parseFloat(proteinasInput.value) || 0,
-    carboidratos: parseFloat(carboidratosInput.value) || 0,
-    gorduras: parseFloat(gordurasInput.value) || 0
+    calorias: 0,
+    proteinas: 0,
+    carboidratos: 0,
+    gorduras: 0
   };
-
-  const ts = new TomSelect(nomeBuscaInput, {
-    valueField: "nome",
-    labelField: "nome",
-    searchField: "nome",
-    load: function(query, callback) {
-      if (!query.length) return callback();
-      fetch(`/buscar_alimentos?q=${encodeURIComponent(query)}`)
-        .then(res => res.json())
-        .then(json => {
-          callback(json.map(item => ({ nome: item.text })));
-        })
-        .catch(() => callback());
-    },
-    render: {
-      option: function(item, escape) {
-        return `<div>${escape(item.nome)}</div>`;
-      }
-    }
-  });
 
   function recalcularMacros(porcao) {
     if (!isNaN(porcao) && porcao > 0) {
@@ -44,47 +24,56 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  porcaoInput.addEventListener('input', function () {
-    const porcao = parseFloat(porcaoInput.value);
-    recalcularMacros(porcao);
-  });
-
-  nomeBuscaInput.addEventListener("blur", async () => {
-    const nome = nomeBuscaInput.value.trim();
-    if (!nome) return;
-
-    try {
-      const response = await fetch(`/buscar_nome_api?nome=${encodeURIComponent(nome)}`);
-      if (!response.ok) throw new Error("Erro na API");
-
-      const data = await response.json();
-
-      if (data.nome) {
-        document.querySelector('input[name="nome"]').value = data.nome;
-        caloriasInput.value = data.calorias;
-        proteinasInput.value = data.proteinas;
-        carboidratosInput.value = data.carboidratos;
-        gordurasInput.value = data.gorduras;
-
-        alert("Produto encontrado por nome! Preencha a porção para finalizar o cadastro.");
-
-        atualizarMacrosOriginais();
-      } else {
-        alert("Produto não encontrado.");
-      }
-    } catch (error) {
-      console.error("Erro ao buscar alimento:", error);
-      alert("Erro ao buscar alimento.");
-    }
-  });
-
   window.atualizarMacrosOriginais = function () {
     originalMacros.calorias = parseFloat(caloriasInput.value) || 0;
     originalMacros.proteinas = parseFloat(proteinasInput.value) || 0;
     originalMacros.carboidratos = parseFloat(carboidratosInput.value) || 0;
     originalMacros.gorduras = parseFloat(gordurasInput.value) || 0;
-
-    const evento = new Event('input');
-    porcaoInput.dispatchEvent(evento);
+    recalcularMacros(parseFloat(porcaoInput.value));
   };
+
+  porcaoInput.addEventListener('input', () => {
+    recalcularMacros(parseFloat(porcaoInput.value));
+  });
+
+  new TomSelect(nomeBuscaInput, {
+    valueField: "id",
+    labelField: "nome",
+    searchField: "nome",
+    load: function (query, callback) {
+      if (!query.length) return callback();
+      fetch(`/buscar_alimentos?q=${encodeURIComponent(query)}`)
+        .then(res => res.json())
+        .then(json => {
+          callback(json.map(item => ({
+            id: item.id,
+            nome: item.text
+          })));
+        })
+        .catch(() => callback());
+    },
+    render: {
+      option: function (item, escape) {
+        return `<div>${escape(item.nome)}</div>`;
+      }
+    },
+    onChange: function (value) {
+      if (!value) return;
+      fetch(`/buscar_codigo/${value}`)
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('nome').value = data.nome;
+          document.getElementById('codigo_barras').value = data.codigo_barras;
+          caloriasInput.value = data.calorias;
+          proteinasInput.value = data.proteinas;
+          carboidratosInput.value = data.carboidratos;
+          gordurasInput.value = data.gorduras;
+          atualizarMacrosOriginais();
+        })
+        .catch(err => {
+          console.error("Erro ao buscar código do alimento:", err);
+          alert("Erro ao buscar alimento.");
+        });
+    }
+  });
 });
