@@ -74,33 +74,50 @@ def buscar_alimentos():
             FROM alimentos
             WHERE nome LIKE :termo AND usuario_id = :usuario_id
             LIMIT 10
-        """), {"termo": f"%{termo}%", "usuario_id": current_user.id}).mappings().all()
+        """), {
+            "termo": f"%{termo}%",
+            "usuario_id": current_user.id
+        }).mappings().all()
 
-    alimentos = [{"id": row["codigo_barras"], "text": row["nome"]} 
-                 for row in result_usuario + result_catalogo]
+    vistos = set()
+    alimentos = []
+    for row in result_usuario + result_catalogo:
+        codigo = row.get("codigo_barras") or ""
+        nome = row.get("nome") or ""
+        if codigo and codigo not in vistos:
+            vistos.add(codigo)
+            alimentos.append({
+                "id": codigo,
+                "text": nome
+            })
+
     return jsonify(alimentos)
 
 @alimentos_ajax_bp.route('/buscar_codigo/<codigo>', methods=['GET'])
 @login_required
 def buscar_codigo(codigo):
     with engine.connect() as conn:
-        
         alimento = conn.execute(text("""
-            SELECT * FROM catalogo_alimentos WHERE codigo_barras = :codigo
+            SELECT * FROM catalogo_alimentos
+            WHERE codigo_barras = :codigo
         """), {"codigo": codigo}).mappings().first()
 
         if not alimento:
             alimento = conn.execute(text("""
                 SELECT * FROM alimentos
                 WHERE codigo_barras = :codigo AND usuario_id = :usuario_id
-            """), {"codigo": codigo, "usuario_id": current_user.id}).mappings().first()
+            """), {
+                "codigo": codigo,
+                "usuario_id": current_user.id
+            }).mappings().first()
 
     if alimento:
-        return jsonify(dict(alimento))
+        return jsonify({k: v if v is not None else "" for k, v in dict(alimento).items()})
 
     novo_alimento = buscar_api_e_salvar(codigo)
     if novo_alimento:
-        return jsonify(novo_alimento)
+        return jsonify({k: v if v is not None else "" for k, v in novo_alimento.items()})
 
     return jsonify({"erro": "Alimento não encontrado"}), 404
+
 
