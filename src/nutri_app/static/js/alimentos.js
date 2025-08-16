@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const nomeBuscaInput = document.getElementById('buscaAlimento');
+  const nomeInput = document.getElementById('nome');
+  const codigoBarrasInput = document.getElementById('codigo_barras');
   const porcaoInput = document.querySelector('input[name="porcao"]');
   const caloriasInput = document.getElementById('calorias');
   const proteinasInput = document.getElementById('proteinas');
@@ -13,8 +15,14 @@ document.addEventListener("DOMContentLoaded", () => {
     gorduras: 0
   };
 
+  function safeNumber(value) {
+    let num = parseFloat(value)
+    return isNaN(num) ? 0 : num;
+  }
+
   function recalcularMacros(porcao) {
-    if (!isNaN(porcao) && porcao > 0) {
+    porcao = safeNumber(porcao)
+    if (porcao > 0) {
       caloriasInput.value = ((porcao / 100) * originalMacros.calorias).toFixed(2);
       proteinasInput.value = ((porcao / 100) * originalMacros.proteinas).toFixed(2);
       carboidratosInput.value = ((porcao / 100) * originalMacros.carboidratos).toFixed(2);
@@ -25,10 +33,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   window.atualizarMacrosOriginais = function () {
-    originalMacros.calorias = parseFloat(caloriasInput.value) || 0;
-    originalMacros.proteinas = parseFloat(proteinasInput.value) || 0;
-    originalMacros.carboidratos = parseFloat(carboidratosInput.value) || 0;
-    originalMacros.gorduras = parseFloat(gordurasInput.value) || 0;
+    originalMacros.calorias = safeNumber(caloriasInput.value) || 0;
+    originalMacros.proteinas = safeNumber(proteinasInput.value) || 0;
+    originalMacros.carboidratos = safeNumber(carboidratosInput.value) || 0;
+    originalMacros.gorduras = safeNumber(gordurasInput.value) || 0;
     recalcularMacros(parseFloat(porcaoInput.value));
   };
 
@@ -46,15 +54,15 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(res => res.json())
         .then(json => {
           callback(json.map(item => ({
-            id: item.id,
-            nome: item.text
+            id: item.id || "",
+            nome: item.text || ""
           })));
         })
         .catch(() => callback());
     },
     render: {
       option: function (item, escape) {
-        return `<div>${escape(item.nome)}</div>`;
+        return `<div>${escape(item.nome || "")}</div>`;
       }
     },
     onChange: function (value) {
@@ -62,12 +70,16 @@ document.addEventListener("DOMContentLoaded", () => {
       fetch(`/buscar_codigo/${value}`)
         .then(res => res.json())
         .then(data => {
-          document.getElementById('nome').value = data.nome;
-          document.getElementById('codigo_barras').value = data.codigo_barras;
-          caloriasInput.value = data.calorias;
-          proteinasInput.value = data.proteinas;
-          carboidratosInput.value = data.carboidratos;
-          gordurasInput.value = data.gorduras;
+          if (data.erro) {
+            alert(data.erro);
+            return;
+          }
+          nomeInput.value = data.nome || '';
+          codigoBarrasInput.value = data.codigo_barras || '';
+          caloriasInput.value = safeNumber(data.calorias);
+          proteinasInput.value = safeNumber(data.proteinas);
+          carboidratosInput.value = safeNumber(data.carboidratos);
+          gordurasInput.value = safeNumber(data.gorduras);
           atualizarMacrosOriginais();
         })
         .catch(err => {
