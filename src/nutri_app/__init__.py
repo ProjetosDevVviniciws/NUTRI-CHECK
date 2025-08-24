@@ -4,7 +4,6 @@ from flask_login import LoginManager
 import os
 from dotenv import load_dotenv
 
-from nutri_app.forms.alimentos_forms import AlimentoForm
 from nutri_app.forms.agua_forms import AguaForm  
 from nutri_app.forms.progressao_forms import ProgressaoForm
 
@@ -43,7 +42,6 @@ def create_app():
     @app.context_processor
     def inject_forms():
         return {
-            'form_alimento': AlimentoForm(),
             'form_agua': AguaForm(),
             'form_peso': ProgressaoForm()
         }
