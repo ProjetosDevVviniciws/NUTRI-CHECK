@@ -3,7 +3,7 @@ from src.nutri_app.forms.auth_forms import CadastroForm
 from src.nutri_app.database import engine
 from src.nutri_app.utils.hash import gerar_hash
 from sqlalchemy import text
-from flask_login import  login_required, logout_user
+from flask_login import login_required, logout_user
 
 auth_bp = Blueprint('auth', __name__)
 
