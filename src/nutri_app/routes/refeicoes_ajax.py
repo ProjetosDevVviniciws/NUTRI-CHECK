@@ -29,32 +29,36 @@ def criar_refeicao():
                 "id": alimento_id,
                 "usuario_id": current_user.id
             }).mappings().first()
-        else:
+            
+        elif origem == "catalogo":
             query_catalogo = text("""
                 SELECT id, nome, porcao, calorias, proteinas, carboidratos, gorduras
                 FROM catalogo_alimentos
                 WHERE id = :id
             """)
             alimento = conn.execute(query_catalogo, {"id": alimento_id}).mappings().first()
+        else:
+            return jsonify({'erro': 'Origem inválida'}), 400
         
         if not alimento:
             return jsonify({'erro': 'Alimento não encontrado'}), 404
 
-        fator = float(porcao) / alimento.porcao
-        calorias = round(alimento.calorias * fator, 2)
-        proteinas = round(alimento.proteinas * fator, 2)
-        carboidratos = round(alimento.carboidratos * fator, 2)
-        gorduras = round(alimento.gorduras * fator, 2)
+        fator = float(porcao) / float(alimento.porcao)
+        calorias = round(float(alimento.calorias) * fator, 2)
+        proteinas = round(float(alimento.proteinas) * fator, 2)
+        carboidratos = round(float(alimento.carboidratos) * fator, 2)
+        gorduras = round(float(alimento.gorduras) * fator, 2)
 
         data_refeicao = datetime.now().date()
 
         insert = text('''
-            INSERT INTO refeicoes (usuario_id, alimento_id, porcao, data, tipo_refeicao, calorias, proteinas, carboidratos, gorduras)
-            VALUES (:usuario_id, :alimento_id, :porcao, :data, :tipo_refeicao, :calorias, :proteinas, :carboidratos, :gorduras)
+            INSERT INTO refeicoes (usuario_id, alimento_id, catalogo_alimento_id, porcao, data, tipo_refeicao, calorias, proteinas, carboidratos, gorduras)
+            VALUES (:usuario_id, :alimento_id, :catalogo_alimento_id, :porcao, :data, :tipo_refeicao, :calorias, :proteinas, :carboidratos, :gorduras)
         ''')
         conn.execute(insert, {
             "usuario_id": current_user.id,
-            "alimento_id": alimento_id,
+            "alimento_id": alimento_id if origem == "usuario" else None,
+            "catalogo_alimento_id": alimento_id if origem == "catalogo" else None,
             "porcao": porcao,
             "data": data_refeicao,
             "tipo_refeicao": tipo_refeicao,
@@ -72,7 +76,7 @@ def criar_refeicao():
 def listar_refeicoes():
     data_refeicao = request.args.get('data') or datetime.now().date()
 
-    tipos_fixos = ["Café da Manhã", "Almoço", "Jantar", "Lanches"]
+    tipos_fixos = ["Café da Manhã", "Almoço", "Jantar", "Lanche"]
 
     with engine.connect() as conn:
         query = text('''
