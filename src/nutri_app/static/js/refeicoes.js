@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const tipoHidden = document.getElementById("tipo-refeicao-hidden");
+    let alimentoSelecionado = null;
 
     function carregarRefeicoes() {
         fetch("/refeicoes/listar")
@@ -35,5 +36,40 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+    document.getElementById("btnAdicionarAlimento").addEventListener("click", () => {
+        const porcao = document.getElementById("porcao").value;
+        const tipo_refeicao = tipoHidden.value;
+
+        if (!alimentoSelecionado) {
+            alert("Selecione um alimento antes de adicionar.");
+            return;
+        }
+
+        fetch("/refeicoes/criar", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                alimento_id: alimentoSelecionado.id,
+                origem: alimentoSelecionado.origem,
+                porcao: porcao,
+                tipo_refeicao: tipo_refeicao
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.erro) {
+                alert(data.erro);
+            } else {
+                bootstrap.Modal.getInstance(document.getElementById("alimentoModal")).hide();
+                carregarRefeicoes();
+            }
+        })
+        .catch(err => console.error("Erro ao adicionar refeição:", err));
+    });
+
     carregarRefeicoes();
+
+    window.setAlimentoSelecionado = (item) => {
+        alimentoSelecionado = item;
+    };
 });
