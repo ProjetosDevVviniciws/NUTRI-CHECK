@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const nomeBuscaInput = document.getElementById('buscaAlimento');
   const nomeInput = document.getElementById('nome');
-  const codigoBarrasInput = document.getElementById('codigo_barras');
   const porcaoInput = document.querySelector('input[name="porcao"]');
   const caloriasInput = document.getElementById('calorias');
   const proteinasInput = document.getElementById('proteinas');
@@ -54,38 +53,37 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(res => res.json())
         .then(json => {
           callback(json.map(item => ({
-            id: item.id || "",
-            nome: item.text || ""
+            id: item.id,
+            nome: item.nome,
+            origem: item.origem,
+            calorias: item.calorias,
+            proteinas: item.proteinas,
+            carboidratos: item.carboidratos,
+            gorduras: item.gorduras
           })));
         })
         .catch(() => callback());
     },
     render: {
       option: function (item, escape) {
-        return `<div>${escape(item.nome || "")}</div>`;
+        return `<div>${escape(item.nome || "")} <small>(${escape(item.origem)})</small></div>`;
       }
     },
     onChange: function (value) {
       if (!value) return;
-      fetch(`/buscar_codigo/${value}`)
-        .then(res => res.json())
-        .then(data => {
-          if (data.erro) {
-            alert(data.erro);
-            return;
-          }
-          nomeInput.value = data.nome || '';
-          codigoBarrasInput.value = data.codigo_barras || '';
-          caloriasInput.value = safeNumber(data.calorias);
-          proteinasInput.value = safeNumber(data.proteinas);
-          carboidratosInput.value = safeNumber(data.carboidratos);
-          gordurasInput.value = safeNumber(data.gorduras);
-          atualizarMacrosOriginais();
-        })
-        .catch(err => {
-          console.error("Erro ao buscar código do alimento:", err);
-          alert("Erro ao buscar alimento.");
-        });
+      const item = this.options[value];
+      if (!item) return;
+
+      nomeInput.value = item.nome || '';
+      caloriasInput.value = item.calorias || 0;
+      proteinasInput.value = item.proteinas || 0;
+      carboidratosInput.value = item.carboidratos || 0;
+      gordurasInput.value = item.gorduras || 0;
+      atualizarMacrosOriginais();
+
+      if (window.setAlimentoSelecionado) {
+        window.setAlimentoSelecionado(item);
+      }
     }
   });
 });
