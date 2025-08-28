@@ -6,8 +6,8 @@ import requests
 
 alimentos_ajax_bp = Blueprint('alimentos_ajax', __name__)
 
-def buscar_api_e_salvar(codigo):
-    url = f"https://world.openfoodfacts.org/api/v0/product/{codigo}.json"
+def buscar_api_e_salvar(nome):
+    url = f"https://world.openfoodfacts.org/api/v0/product/{nome}.json"
     r = requests.get(url).json()
 
     if r.get("status") != 1:
@@ -32,11 +32,10 @@ def buscar_api_e_salvar(codigo):
 
     with engine.begin() as conn:
         conn.execute(text("""
-            INSERT INTO catalogo_alimentos (nome, codigo_barras, porcao, calorias, proteinas, carboidratos, gorduras)
-            VALUES (:nome, :codigo, :porcao, :calorias, :proteinas, :carboidratos, :gorduras)
+            INSERT INTO catalogo_alimentos (nome, porcao, calorias, proteinas, carboidratos, gorduras)
+            VALUES (:nome, :porcao, :calorias, :proteinas, :carboidratos, :gorduras)
         """), {
             "nome": nome[:100],
-            "codigo": codigo,
             "porcao": porcao or 100,
             "calorias": calorias,
             "proteinas": proteinas,
@@ -46,7 +45,6 @@ def buscar_api_e_salvar(codigo):
 
     return {
         "nome": nome,
-        "codigo_barras": codigo,
         "porcao": porcao or 100,
         "calorias": calorias,
         "proteinas": proteinas,
@@ -63,17 +61,15 @@ def buscar_alimentos():
 
     with engine.connect() as conn:
         result_catalogo = conn.execute(text("""
-            SELECT codigo_barras, nome
+            SELECT id, nome, calorias, proteinas, carboidratos, gorduras
             FROM catalogo_alimentos
             WHERE nome LIKE :termo
-            LIMIT 10
         """), {"termo": f"%{termo}%"}).mappings().all()
 
         result_usuario = conn.execute(text("""
-            SELECT codigo_barras, nome
+            SELECT id, nome, calorias, proteinas, carboidratos, gorduras
             FROM alimentos
             WHERE nome LIKE :termo AND usuario_id = :usuario_id
-            LIMIT 10
         """), {
             "termo": f"%{termo}%",
             "usuario_id": current_user.id
@@ -82,42 +78,21 @@ def buscar_alimentos():
     vistos = set()
     alimentos = []
     for row in result_usuario + result_catalogo:
-        codigo = row.get("codigo_barras") or ""
+        alimento_id = row.get("id")
         nome = row.get("nome") or ""
-        if codigo and codigo not in vistos:
-            vistos.add(codigo)
+        if alimento_id not in vistos:
+            vistos.add(alimento_id)
             alimentos.append({
-                "id": codigo,
-                "text": nome
+                "id": alimento_id,
+                "nome": nome,
+                "origem": "usuario" if row in result_usuario else "catalogo",
+                "calorias": float(row.get("calorias") or 0),
+                "proteinas": float(row.get("proteinas") or 0),
+                "carboidratos": float(row.get("carboidratos") or 0),
+                "gorduras": float(row.get("gorduras") or 0)
             })
 
     return jsonify(alimentos)
 
-@alimentos_ajax_bp.route('/buscar_codigo/<codigo>', methods=['GET'])
-@login_required
-def buscar_codigo(codigo):
-    with engine.connect() as conn:
-        alimento = conn.execute(text("""
-            SELECT * FROM catalogo_alimentos
-            WHERE codigo_barras = :codigo
-        """), {"codigo": codigo}).mappings().first()
-
-        if not alimento:
-            alimento = conn.execute(text("""
-                SELECT * FROM alimentos
-                WHERE codigo_barras = :codigo AND usuario_id = :usuario_id
-            """), {
-                "codigo": codigo,
-                "usuario_id": current_user.id
-            }).mappings().first()
-
-    if alimento:
-        return jsonify({k: v if v is not None else "" for k, v in dict(alimento).items()})
-
-    novo_alimento = buscar_api_e_salvar(codigo)
-    if novo_alimento:
-        return jsonify({k: v if v is not None else "" for k, v in novo_alimento.items()})
-
-    return jsonify({"erro": "Alimento não encontrado"}), 404
 
 
