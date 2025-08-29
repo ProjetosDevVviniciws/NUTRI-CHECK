@@ -100,7 +100,7 @@ def listar_refeicoes():
             "usuario_id": current_user.id,
             "data_refeicao": str(data_refeicao)
         })
-        registros = [dict(row) for row in result]
+        registros = [dict(row) for row in result.mappings()]
 
     refeicoes_por_tipo = {tipo: [] for tipo in tipos_fixos}
 
