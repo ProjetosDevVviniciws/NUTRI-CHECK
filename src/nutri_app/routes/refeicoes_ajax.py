@@ -82,7 +82,7 @@ def listar_refeicoes():
         query = text('''
             SELECT 
                 r.id, 
-                a.nome AS alimento, 
+                COALESCE (a.nome, c.nome) AS alimento, 
                 r.porcao, 
                 r.calorias, 
                 r.proteinas, 
@@ -90,14 +90,15 @@ def listar_refeicoes():
                 r.gorduras,
                 r.tipo_refeicao
             FROM refeicoes r
-            JOIN alimentos a ON r.alimento_id = a.id
+            LEFT JOIN alimentos a ON r.alimento_id = a.id
+            LEFT JOIN catalogo_alimentos c ON r.catalogo_alimento_id = c.id
             WHERE r.usuario_id = :usuario_id 
-              AND r.data = :data_refeicao
+              AND DATE(r.data) = :data_refeicao
             ORDER BY r.tipo_refeicao, r.id DESC
         ''')
         result = conn.execute(query, {
             "usuario_id": current_user.id,
-            "data_refeicao": data_refeicao
+            "data_refeicao": str(data_refeicao)
         })
         registros = [dict(row) for row in result]
 
