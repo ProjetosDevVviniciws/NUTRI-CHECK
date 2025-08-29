@@ -3,7 +3,6 @@ from src.nutri_app.forms.progressao_forms import ProgressaoForm
 from flask_login import login_required, current_user
 from sqlalchemy import text
 from src.nutri_app.database import engine
-from src.nutri_app.utils.progressao_peso import gerar_graficos_progressao
 
 progressao_bp = Blueprint('progressao', __name__)
 
@@ -11,8 +10,7 @@ progressao_bp = Blueprint('progressao', __name__)
 @login_required
 def registrar_progressao_peso():
     forms = ProgressaoForm()
-    grafico_base64 = None
-    historico_progressao = []
+    datas, pesos = [], []
     
     with engine.begin() as conn:
         if forms.validate_on_submit():
@@ -37,11 +35,7 @@ def registrar_progressao_peso():
         if resultados:
             pesos = [float(r.peso) for r in resultados]
             datas = [r.data.strftime('%d/%m') for r in resultados]
-            historico_progressao = resultados
-            
-            grafico_base64 = gerar_graficos_progressao(datas, pesos)
         else:
-            flash("Você ainda não registrou nenhum progresso para gerar o gráfico.", category="danger")
-            return redirect(url_for('progressao.registrar_progressao_peso'))
+            flash("Você ainda não registrou nenhum progresso para gerar o gráfico.", category="warning")
     
-    return render_template("includes/progressao.html", form=forms, grafico=grafico_base64, historico=historico_progressao)
+    return render_template("progressao.html", form=forms, datas=datas, pesos=pesos)
