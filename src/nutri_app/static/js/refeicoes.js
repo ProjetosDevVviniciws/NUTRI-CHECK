@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         if (dados[tipo].length > 0) {
                             lista.innerHTML = dados[tipo].map(a => `
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <span>${a.nome} — ${a.porcao}g</span>
+                                    <span>${a.alimento} — ${a.porcao}g</span>
                                     <span>${a.calorias} kcal</span>
                                 </li>
                             `).join("");
