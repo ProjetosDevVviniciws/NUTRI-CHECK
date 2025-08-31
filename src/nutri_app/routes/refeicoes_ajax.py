@@ -122,11 +122,18 @@ def editar_refeicao(id):
 
     with engine.begin() as conn:
         select_query = text("""
-            SELECT r.*, a.porcao AS porcao_padrao, a.calorias AS cal_a, a.proteinas AS prot_a, a.carboidratos AS carb_a, a.gorduras AS gord_a
+            SELECT r.*, 
+                COALESCE(a.porcao, ca.porcao) AS porcao_padrao,
+                COALESCE(a.calorias, ca.calorias) AS cal_a,
+                COALESCE(a.proteinas, ca.proteinas) AS prot_a,
+                COALESCE(a.carboidratos, ca.carboidratos) AS carb_a,
+                COALESCE(a.gorduras, ca.gorduras) AS gord_a
             FROM refeicoes r
-            JOIN alimentos a ON r.alimento_id = a.id
+            LEFT JOIN alimentos a ON r.alimento_id = a.id
+            LEFT JOIN catalogo_alimentos ca ON r.catalogo_alimento_id = ca.id
             WHERE r.id = :id AND r.usuario_id = :usuario_id
         """)
+
         refeicao = conn.execute(select_query, {
             "id": id,
             "usuario_id": current_user.id
@@ -135,11 +142,11 @@ def editar_refeicao(id):
         if not refeicao:
             return jsonify({'erro': 'Refeição não encontrada'}), 404
 
-        fator = float(nova_porcao) / refeicao.porcao_padrao
-        calorias = round(refeicao.cal_a * fator, 2)
-        proteinas = round(refeicao.prot_a * fator, 2)
-        carboidratos = round(refeicao.carb_a * fator, 2)
-        gorduras = round(refeicao.gord_a * fator, 2)
+        fator = float(nova_porcao) / float(refeicao.porcao_padrao)
+        calorias = round(float(refeicao.cal_a) * fator, 2)
+        proteinas = round(float(refeicao.prot_a) * fator, 2)
+        carboidratos = round(float(refeicao.carb_a) * fator, 2)
+        gorduras = round(float(refeicao.gord_a) * fator, 2)
 
         update = text('''
             UPDATE refeicoes
