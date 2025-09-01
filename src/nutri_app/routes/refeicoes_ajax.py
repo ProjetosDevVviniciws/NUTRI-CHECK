@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from flask_login import login_required, current_user
-from datetime import datetime
+from datetime import datetime, date
 from sqlalchemy import text
 from src.nutri_app.database import engine
 
@@ -19,6 +19,24 @@ def criar_refeicao():
         return jsonify({'erro': 'Dados incompletos'}), 400
 
     with engine.begin() as conn:
+        usuario = conn.execute(text("""
+            SELECT ultima_atualizacao
+            FROM usuarios
+            WHERE id = :id
+        """), {"id": current_user.id}).mappings().first()
+
+        hoje = date.today()
+        if not usuario or not usuario["ultima_atualizacao"] or usuario["ultima_atualizacao"] != hoje:
+            conn.execute(text("""
+                UPDATE usuarios
+                SET calorias_consumidas = 0,
+                    proteinas_consumidas = 0,
+                    carboidratos_consumidos = 0,
+                    gorduras_consumidas = 0,
+                    ultima_atualizacao = :hoje
+                WHERE id = :id
+            """), {"id": current_user.id, "hoje": hoje})
+        
         if origem == "usuario":
             query_usuario = text("""
                 SELECT id, nome, porcao, calorias, proteinas, carboidratos, gorduras
@@ -68,6 +86,25 @@ def criar_refeicao():
             "gorduras": gorduras
         })
 
+        # 2) Atualiza o acumulado do usuário
+        update_user = text('''
+            UPDATE usuarios
+            SET calorias_consumidas = calorias_consumidas + :calorias,
+                proteinas_consumidas = proteinas_consumidas + :proteinas,
+                carboidratos_consumidos = carboidratos_consumidos + :carboidratos,
+                gorduras_consumidas = gorduras_consumidas + :gorduras,
+                ultima_atualizacao = :hoje
+            WHERE id = :usuario_id
+        ''')
+        conn.execute(update_user, {
+            "usuario_id": current_user.id,
+            "calorias": calorias,
+            "proteinas": proteinas,
+            "carboidratos": carboidratos,
+            "gorduras": gorduras,
+            "hoje": hoje
+        })
+        
     return jsonify({'mensagem': 'Refeição registrada com sucesso'})
 
 
