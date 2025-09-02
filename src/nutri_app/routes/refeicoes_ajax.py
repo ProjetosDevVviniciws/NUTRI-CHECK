@@ -86,7 +86,6 @@ def criar_refeicao():
             "gorduras": gorduras
         })
 
-        # 2) Atualiza o acumulado do usuário
         update_user = text('''
             UPDATE usuarios
             SET calorias_consumidas = calorias_consumidas + :calorias,
@@ -179,6 +178,23 @@ def editar_refeicao(id):
         if not refeicao:
             return jsonify({'erro': 'Refeição não encontrada'}), 404
 
+        hoje = date.today()       
+        conn.execute(text("""
+            UPDATE usuarios
+            SET calorias_consumidas = calorias_consumidas - :calorias,
+                proteinas_consumidas = proteinas_consumidas - :proteinas,
+                carboidratos_consumidos = carboidratos_consumidos - :carboidratos,
+                gorduras_consumidas = gorduras_consumidas - :gorduras
+            WHERE id = :usuario_id AND ultima_atualizacao = :hoje
+        """), {
+            "usuario_id": current_user.id,
+            "hoje": hoje,
+            "calorias": refeicao.calorias,
+            "proteinas": refeicao.proteinas,
+            "carboidratos": refeicao.carboidratos,
+            "gorduras": refeicao.gorduras
+        })
+        
         fator = float(nova_porcao) / float(refeicao.porcao_padrao)
         calorias = round(float(refeicao.cal_a) * fator, 2)
         proteinas = round(float(refeicao.prot_a) * fator, 2)
@@ -195,6 +211,7 @@ def editar_refeicao(id):
                 gorduras = :gorduras
             WHERE id = :id AND usuario_id = :usuario_id
         ''')
+        
         conn.execute(update, {
             "porcao": nova_porcao,
             "tipo_refeicao": novo_tipo_refeicao,
@@ -206,6 +223,23 @@ def editar_refeicao(id):
             "usuario_id": current_user.id
         })
 
+        hoje = date.today() 
+        conn.execute(text("""
+            UPDATE usuarios
+            SET calorias_consumidas = calorias_consumidas + :calorias,
+                proteinas_consumidas = proteinas_consumidas + :proteinas,
+                carboidratos_consumidos = carboidratos_consumidos + :carboidratos,
+                gorduras_consumidas = gorduras_consumidas + :gorduras
+            WHERE id = :usuario_id and ultima_atualizacao = :hoje
+        """), {
+            "usuario_id": current_user.id,
+            "hoje": hoje,
+            "calorias": calorias,
+            "proteinas": proteinas,
+            "carboidratos": carboidratos,
+            "gorduras": gorduras
+        })
+        
     return jsonify({'mensagem': 'Refeição atualizada com sucesso'})
 
 
