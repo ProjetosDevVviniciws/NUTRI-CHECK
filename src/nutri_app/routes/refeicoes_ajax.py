@@ -246,7 +246,32 @@ def editar_refeicao(id):
 @refeicoes_ajax_bp.route('/refeicoes/excluir/<int:id>', methods=['DELETE'])
 @login_required
 def excluir_refeicao(id):
-    with engine.begin() as conn:  
+    with engine.begin() as conn: 
+        
+        refeicao = conn.execute(text("""
+            SELECT calorias, proteinas, carboidratos, gorduras
+            FROM refeicoes
+            WHERE id = :id AND usuario_id = :usuario_id
+        """), {"id": id, "usuario_id": current_user.id}).mappings().first()
+
+        if not refeicao:
+            return jsonify({'erro': 'Refeição não encontrada'}), 404
+        
+        conn.execute(text("""
+            UPDATE usuarios
+            SET calorias_consumidas = calorias_consumidas - :calorias,
+                proteinas_consumidas = proteinas_consumidas - :proteinas,
+                carboidratos_consumidos = carboidratos_consumidos - :carboidratos,
+                gorduras_consumidas = gorduras_consumidas - :gorduras
+            WHERE id = :usuario_id
+        """), {
+            "usuario_id": current_user.id,
+            "calorias": refeicao.calorias,
+            "proteinas": refeicao.proteinas,
+            "carboidratos": refeicao.carboidratos,
+            "gorduras": refeicao.gorduras
+        })
+         
         delete = text("DELETE FROM refeicoes WHERE id = :id AND usuario_id = :usuario_id")
         conn.execute(delete, {
             "id": id,
