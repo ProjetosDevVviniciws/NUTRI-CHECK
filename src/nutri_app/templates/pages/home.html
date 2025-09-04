@@ -22,10 +22,10 @@
                 <div class="card-body text-center">
                     <h3 class="fw-bold mb-5">Resumo Diário</h3>
                     <div class="row">
-                        <div class="col-3"><h5>Calorias</h5><p class="fw-bold text-primary">{{ totais_dia.calorias_consumidas }} g</p></div>
-                        <div class="col-3"><h5>Proteínas</h5><p class="fw-bold text-success">{{ totais_dia.proteinas_consumidas }} g</p></div>
-                        <div class="col-3"><h5>Carboidratos</h5><p class="fw-bold text-warning">{{ totais_dia.carboidratos_consumidos }} g</p></div>
-                        <div class="col-3"><h5>Gorduras</h5><p class="fw-bold text-danger">{{ totais_dia.gorduras_consumidas }} g</p></div>
+                        <div class="col-3"><h5>Calorias</h5><p id="totais-calorias" class="fw-bold text-primary">{{ totais_dia.calorias_consumidas }} g</p></div>
+                        <div class="col-3"><h5>Proteínas</h5><p id="totais-proteinas" class="fw-bold text-success">{{ totais_dia.proteinas_consumidas }} g</p></div>
+                        <div class="col-3"><h5>Carboidratos</h5><p id="totais-carboidratos" class="fw-bold text-warning">{{ totais_dia.carboidratos_consumidos }} g</p></div>
+                        <div class="col-3"><h5>Gorduras</h5><p id="totais-gorduras" class="fw-bold text-danger">{{ totais_dia.gorduras_consumidas }} g</p></div>
                     </div>
                     {% include 'includes/refeicoes.html' %}
                 </div>
