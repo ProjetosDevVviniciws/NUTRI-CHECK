@@ -240,7 +240,13 @@ def editar_refeicao(id):
             "gorduras": gorduras
         })
         
-    return jsonify({'mensagem': 'Refeição atualizada com sucesso'})
+        totais = conn.execute(text("""
+            SELECT calorias_consumidas, proteinas_consumidas, carboidratos_consumidos, gorduras_consumidas
+            FROM usuarios
+            WHERE id = :usuario_id
+        """), {"usuario_id": current_user.id}).mappings().first()
+        
+    return jsonify({'mensagem': 'Refeição atualizada com sucesso', 'totais': dict(totais)})
 
 
 @refeicoes_ajax_bp.route('/refeicoes/excluir/<int:id>', methods=['DELETE'])
