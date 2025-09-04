@@ -290,4 +290,10 @@ def excluir_refeicao(id):
             "usuario_id": current_user.id
         })
 
-    return jsonify({'mensagem': 'Refeição excluída com sucesso'})
+        totais = conn.execute(text("""
+            SELECT calorias_consumidas, proteinas_consumidas, carboidratos_consumidos, gorduras_consumidas
+            FROM usuarios
+            WHERE id = :usuario_id
+        """), {"usuario_id": current_user.id}).mappings().first()
+        
+    return jsonify({'mensagem': 'Refeição excluída com sucesso', 'totais': dict(totais)})
