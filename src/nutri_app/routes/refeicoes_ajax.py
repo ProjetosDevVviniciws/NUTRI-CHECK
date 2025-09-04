@@ -104,7 +104,13 @@ def criar_refeicao():
             "hoje": hoje
         })
         
-    return jsonify({'mensagem': 'Refeição registrada com sucesso'})
+        totais = conn.execute(text("""
+            SELECT calorias_consumidas, proteinas_consumidas, carboidratos_consumidos, gorduras_consumidas
+            FROM usuarios
+            WHERE id = :id
+        """), {"id": current_user.id}).mappings().first()
+        
+    return jsonify({'mensagem': 'Refeição registrada com sucesso', 'totais': dict(totais)})
 
 
 @refeicoes_ajax_bp.route('/refeicoes/listar', methods=['GET'])
