@@ -4,6 +4,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const modalEditar = new bootstrap.Modal(document.getElementById("editarRefeicaoModal"));
 
+    function atualizarTotais(totais) {
+        if (!totais) return;
+        document.querySelector("#totais-calorias").textContent = `${totais.calorias_consumidas} kcal`;
+        document.querySelector("#totais-proteinas").textContent = `${totais.proteinas_consumidas} g`;
+        document.querySelector("#totais-carboidratos").textContent = `${totais.carboidratos_consumidos} g`;
+        document.querySelector("#totais-gorduras").textContent = `${totais.gorduras_consumidas} g`;
+    }
+
     function carregarRefeicoes() {
         fetch("/refeicoes/listar")
             .then(res => res.json())
@@ -77,6 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
             } else {
                 modalEditar.hide();
                 carregarRefeicoes();
+                atualizarTotais(data.totais);
             }
         })
         .catch(err => console.error("Erro ao editar refeição:", err));
@@ -97,6 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
             } else {
                 modalEditar.hide();
                 carregarRefeicoes();
+                atualizarTotais(data.totais);
             }
         })
         .catch(err => console.error("Erro ao remover refeição:", err));
@@ -135,6 +145,7 @@ document.addEventListener("DOMContentLoaded", function () {
             } else {
                 bootstrap.Modal.getInstance(document.getElementById("alimentoModal")).hide();
                 carregarRefeicoes();
+                atualizarTotais(data.totais);
             }
         })
         .catch(err => console.error("Erro ao adicionar refeição:", err));
