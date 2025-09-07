@@ -42,5 +42,7 @@ def home():
     return render_template(
         "pages/home.html",
         totais_dia=totais_dia,
+        metas_dia=metas_dia,
+        restantes_dia=restantes_dia,
         current_date=hoje
     )
