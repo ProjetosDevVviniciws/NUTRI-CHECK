@@ -28,4 +28,52 @@ def perfil_dados():
     if not usuario:
         return jsonify({"error": "Usuário não encontrado"}), 404
 
-    return jsonify(dict(usuario)), 200            
+    return jsonify(dict(usuario)), 200
+
+
+@perfil_bp.route("/perfil/atualizar", methods=["PUT"])
+@login_required
+def perfil_atualizar():
+    data = request.json
+    nome = data.get("nome")
+    altura = float(data.get("altura"))
+    peso = float(data.get("peso"))
+    idade = int(data.get("idade"))
+    sexo = data.get("sexo")
+    nova_senha = data.get("senha")
+
+    macros = calcular_tmb_macros(peso=peso, altura=altura, idade=idade, sexo=sexo)
+    senha_hash = gerar_hash(nova_senha) if nova_senha else None
+
+    with engine.begin() as conn:
+        query = text("""
+            UPDATE usuarios SET 
+                nome = :nome,
+                altura = :altura,
+                peso = :peso,
+                idade = :idade,
+                sexo = :sexo,
+                senha = COALESCE(:senha, senha),
+                calorias_meta = :calorias,
+                proteinas_meta = :proteinas,
+                carboidratos_meta = :carboidratos,
+                gorduras_meta = :gorduras,
+                ultima_atualizacao = :hoje
+            WHERE id = :id
+        """)
+        conn.execute(query, {
+            "id": current_user.id,
+            "nome": nome,
+            "altura": altura,
+            "peso": peso,
+            "idade": idade,
+            "sexo": sexo,
+            "senha": senha_hash,
+            "calorias": macros["calorias"],
+            "proteinas": macros["proteinas"],
+            "carboidratos": macros["carboidratos"],
+            "gorduras": macros["gorduras"],
+            "hoje": date.today()
+        })
+
+    return jsonify({"message": "Perfil atualizado com sucesso!"}), 200            
