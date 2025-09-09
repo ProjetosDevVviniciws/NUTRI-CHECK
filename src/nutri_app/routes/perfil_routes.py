@@ -12,4 +12,20 @@ perfil_bp = Blueprint('perfil', __name__)
 @login_required
 def perfil_page():
     return render_template("includes/perfil.html")
-            
+
+
+@perfil_bp.route("/perfil/dados", methods=["GET"])
+@login_required
+def perfil_dados():
+    with engine.connect() as conn:
+        usuario = conn.execute(text("""
+            SELECT nome, altura, peso, idade, sexo,
+                   calorias_meta, proteinas_meta, carboidratos_meta, gorduras_meta
+            FROM usuarios
+            WHERE id = :id
+        """), {"id": current_user.id}).mappings().first()
+
+    if not usuario:
+        return jsonify({"error": "Usuário não encontrado"}), 404
+
+    return jsonify(dict(usuario)), 200            
