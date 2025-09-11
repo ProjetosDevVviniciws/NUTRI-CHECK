@@ -16,7 +16,7 @@ def home():
             SELECT 
                 calorias_meta, proteinas_meta, carboidratos_meta, gorduras_meta,
                 calorias_consumidas, proteinas_consumidas, carboidratos_consumidos, gorduras_consumidas,
-                calorias_restantes, proteinas_restantes, carboidratos_restantes, gorduras_restantes,
+                calorias_restantes, proteinas_restantes, carboidratos_restantes, gorduras_restantes
             FROM usuarios
             WHERE id = :usuario_id AND ultima_atualizacao = :ultima_atualizacao
         """), {"usuario_id": current_user.id, "ultima_atualizacao": hoje}).mappings().first()
@@ -39,15 +39,7 @@ def home():
                 "gorduras_consumidas": 0,
                 "ultima_atualizacao": hoje
             }
-        else:
-            totais_dia = {
-                "calorias_consumidas": usuario["calorias_consumidas"],
-                "proteinas_consumidas": usuario["proteinas_consumidas"],
-                "carboidratos_consumidos": usuario["carboidratos_consumidos"],
-                "gorduras_consumidas": usuario["gorduras_consumidas"],
-                "ultima_atualizacao": usuario["ultima_atualizacao"]
-            }
-
+            
             metas_dia = {
                 "calorias_meta": usuario["calorias_meta"],
                 "proteinas_meta": usuario["proteinas_meta"],
@@ -61,7 +53,15 @@ def home():
                 "carboidratos_restantes": usuario["carboidratos_restantes"],
                 "gorduras_restantes": usuario["gorduras_restantes"]
             }
-            
+        else:
+            totais_dia = {
+                "calorias_consumidas": usuario["calorias_consumidas"],
+                "proteinas_consumidas": usuario["proteinas_consumidas"],
+                "carboidratos_consumidos": usuario["carboidratos_consumidos"],
+                "gorduras_consumidas": usuario["gorduras_consumidas"],
+                "ultima_atualizacao": usuario["ultima_atualizacao"]
+            }
+                  
     return render_template(
         "pages/home.html",
         totais_dia=totais_dia,
