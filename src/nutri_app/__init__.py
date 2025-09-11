@@ -24,7 +24,7 @@ def create_app():
     from .routes.login_routes import login_bp
     from .routes.auth_routes import auth_bp
     from .routes.home_routes import home_bp
-    from .routes.perfil_routes import perfil_bp
+    from .routes.perfil_ajax import perfil_bp
     from .routes.refeicoes_ajax import refeicoes_ajax_bp
     from .routes.alimentos_ajax import alimentos_ajax_bp
     from .routes.agua_routes import agua_bp
