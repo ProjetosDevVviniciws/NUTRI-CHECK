@@ -41,7 +41,38 @@ def home():
                 "carboidratos_restantes": 0,
                 "gorduras_restantes": 0
             }
-                  
+        
+        elif usuario["ultima_atualizacao"] != hoje:
+            conn.execute(text("""
+                UPDATE usuarios
+                SET calorias_consumidas = 0,
+                    proteinas_consumidas = 0,
+                    carboidratos_consumidos = 0,
+                    gorduras_consumidas = 0,
+                    ultima_atualizacao = :hoje
+                WHERE id = :usuario_id
+            """), {"hoje": hoje, "usuario_id": current_user.id})
+
+            totais_dia = {
+                "calorias_consumidas": 0,
+                "proteinas_consumidas": 0,
+                "carboidratos_consumidos": 0,
+                "gorduras_consumidas": 0,
+                "ultima_atualizacao": hoje
+            }
+            metas_dia = {
+                "calorias_meta": usuario["calorias_meta"],
+                "proteinas_meta": usuario["proteinas_meta"],
+                "carboidratos_meta": usuario["carboidratos_meta"],
+                "gorduras_meta": usuario["gorduras_meta"]
+            }
+            restantes_dia = {
+                "calorias_restantes": usuario["calorias_restantes"],
+                "proteinas_restantes": usuario["proteinas_restantes"],
+                "carboidratos_restantes": usuario["carboidratos_restantes"],
+                "gorduras_restantes": usuario["gorduras_restantes"]
+            }
+        
     return render_template(
         "pages/home.html",
         totais_dia=totais_dia,
