@@ -73,6 +73,27 @@ def home():
                 "gorduras_restantes": usuario["gorduras_restantes"]
             }
         
+        else:
+            totais_dia = {
+                "calorias_consumidas": usuario["calorias_consumidas"],
+                "proteinas_consumidas": usuario["proteinas_consumidas"],
+                "carboidratos_consumidos": usuario["carboidratos_consumidos"],
+                "gorduras_consumidas": usuario["gorduras_consumidas"],
+                "ultima_atualizacao": usuario["ultima_atualizacao"]
+            }
+            metas_dia = {
+                "calorias_meta": usuario["calorias_meta"],
+                "proteinas_meta": usuario["proteinas_meta"],
+                "carboidratos_meta": usuario["carboidratos_meta"],
+                "gorduras_meta": usuario["gorduras_meta"]
+            }
+            restantes_dia = {
+                "calorias_restantes": usuario["calorias_restantes"],
+                "proteinas_restantes": usuario["proteinas_restantes"],
+                "carboidratos_restantes": usuario["carboidratos_restantes"],
+                "gorduras_restantes": usuario["gorduras_restantes"]
+            }
+        
     return render_template(
         "pages/home.html",
         totais_dia=totais_dia,
