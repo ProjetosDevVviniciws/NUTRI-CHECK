@@ -8,13 +8,13 @@ from datetime import date
 
 perfil_bp = Blueprint('perfil', __name__)
 
-@perfil_bp.route("/perfil", methods=["GET"])
+@perfil_bp.route("/perfil")
 @login_required
 def perfil_page():
     return render_template("includes/perfil.html")
 
 
-@perfil_bp.route("/perfil/dados", methods=["GET"])
+@perfil_bp.route("/perfil/dados")
 @login_required
 def perfil_dados():
     with engine.connect() as conn:
