@@ -312,6 +312,6 @@ def excluir_refeicao(id):
             SELECT calrorias_restantes, proteinas_restante, carboidratos_restantes, gorduras_restantes
             FROM usuarios
             WHERE id = :id
-        """, {"id": current_user.id})).mappings().all()
+        """), {"id": current_user.id}).mappings().first()
         
     return jsonify({'mensagem': 'Refeição excluída com sucesso', 'totais': dict(totais), 'restantes': dict(restantes)})
