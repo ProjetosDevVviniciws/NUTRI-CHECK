@@ -8,7 +8,7 @@ from datetime import date
 
 agua_bp = Blueprint('agua', __name__)
 
-@agua_bp.route('/agua', methods=['GET', 'POST'])
+@agua_bp.route("/agua", methods=['GET', 'POST'])
 @login_required
 @perfil_completo_required
 def registrar_agua():
