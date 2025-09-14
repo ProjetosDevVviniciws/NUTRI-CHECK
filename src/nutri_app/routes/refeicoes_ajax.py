@@ -6,7 +6,7 @@ from src.nutri_app.database import engine
 
 refeicoes_ajax_bp = Blueprint('refeicoes_ajax', __name__)
 
-@refeicoes_ajax_bp.route('/refeicoes/criar', methods=['POST'])
+@refeicoes_ajax_bp.route("/refeicoes/criar", methods=['POST'])
 @login_required
 def criar_refeicao():
     data = request.json
@@ -119,7 +119,7 @@ def criar_refeicao():
     return jsonify({'mensagem': 'Refeição registrada com sucesso', 'totais': dict(totais), 'restantes': dict(restantes)})
 
 
-@refeicoes_ajax_bp.route('/refeicoes/listar', methods=['GET'])
+@refeicoes_ajax_bp.route("/refeicoes/listar")
 @login_required
 def listar_refeicoes():
     data_refeicao = request.args.get('data') or datetime.now().date()
@@ -161,7 +161,7 @@ def listar_refeicoes():
     return jsonify(refeicoes_por_tipo)
 
 
-@refeicoes_ajax_bp.route('/refeicoes/editar/<int:id>', methods=['PUT'])
+@refeicoes_ajax_bp.route("/refeicoes/editar/<int:id>", methods=['PUT'])
 @login_required
 def editar_refeicao(id):
     data = request.json
@@ -267,7 +267,7 @@ def editar_refeicao(id):
     return jsonify({'mensagem': 'Refeição atualizada com sucesso', 'totais': dict(totais), 'restantes': dict(restantes)})
 
 
-@refeicoes_ajax_bp.route('/refeicoes/excluir/<int:id>', methods=['DELETE'])
+@refeicoes_ajax_bp.route("/refeicoes/excluir/<int:id>", methods=['DELETE'])
 @login_required
 def excluir_refeicao(id):
     with engine.begin() as conn: 
