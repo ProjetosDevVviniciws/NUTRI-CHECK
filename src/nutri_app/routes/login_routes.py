@@ -8,7 +8,7 @@ from flask_login import login_user
 
 login_bp = Blueprint('login', __name__)
 
-@login_bp.route('/login', methods=['GET', 'POST'])
+@login_bp.route("/login", methods=['GET', 'POST'])
 def login():
     forms = LoginForm()
     if forms.validate_on_submit():
