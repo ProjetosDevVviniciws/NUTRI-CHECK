@@ -16,10 +16,11 @@ def home():
             SELECT 
                 calorias_meta, proteinas_meta, carboidratos_meta, gorduras_meta,
                 calorias_consumidas, proteinas_consumidas, carboidratos_consumidos, gorduras_consumidas,
-                calorias_restantes, proteinas_restantes, carboidratos_restantes, gorduras_restantes
+                calorias_restantes, proteinas_restantes, carboidratos_restantes, gorduras_restantes,
+                ultima_atualizacao
             FROM usuarios
-            WHERE id = :usuario_id AND ultima_atualizacao = :ultima_atualizacao
-        """), {"usuario_id": current_user.id, "ultima_atualizacao": hoje}).mappings().first()
+            WHERE id = :usuario_id 
+        """), {"usuario_id": current_user.id}).mappings().first()
 
         if not usuario:
             totais_dia = {
