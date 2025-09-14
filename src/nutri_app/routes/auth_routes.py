@@ -7,7 +7,7 @@ from flask_login import login_required, logout_user
 
 auth_bp = Blueprint('auth', __name__)
 
-@auth_bp.route('/cadastro', methods=['GET', 'POST'])
+@auth_bp.route("/cadastro", methods=['GET', 'POST'])
 def cadastro():
     forms = CadastroForm()
     if forms.validate_on_submit():
@@ -26,7 +26,7 @@ def cadastro():
             flash(f"Erro ao cadastrar: {err}", category="danger")
     return render_template("includes/cadastro.html", form=forms)
 
-@auth_bp.route('/logout')
+@auth_bp.route("/logout")
 @login_required
 def logout():
     logout_user()
