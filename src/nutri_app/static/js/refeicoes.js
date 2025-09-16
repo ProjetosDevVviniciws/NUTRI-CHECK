@@ -116,6 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 modalEditar.hide();
                 carregarRefeicoes();
                 atualizarTotais(data.totais);
+                atualizarRestantes(data.restantes);
             }
         })
         .catch(err => console.error("Erro ao remover refeição:", err));
