@@ -20,15 +20,25 @@ def perfil_dados():
     with engine.connect() as conn:
         usuario = conn.execute(text("""
             SELECT nome, altura, peso, idade, sexo,
-                   calorias_meta, proteinas_meta, carboidratos_meta, gorduras_meta
+                calorias_meta, proteinas_meta, carboidratos_meta, gorduras_meta
             FROM usuarios
             WHERE id = :id
         """), {"id": current_user.id}).mappings().first()
-
-    if not usuario:
-        return jsonify({"error": "Usuário não encontrado"}), 404
-
-    return jsonify(dict(usuario)), 200
+    
+    if usuario:
+        return jsonify(dict(usuario)), 200
+    else:
+        return jsonify({
+            "nome": "",
+            "altura": "",
+            "peso": "",
+            "idade": "",
+            "sexo": "M",
+            "calorias_meta": "",
+            "proteinas_meta": "",
+            "carboidratos_meta": "",
+            "gorduras_meta": ""
+        }), 200
 
 
 @perfil_bp.route("/perfil/atualizar", methods=["PUT"])
