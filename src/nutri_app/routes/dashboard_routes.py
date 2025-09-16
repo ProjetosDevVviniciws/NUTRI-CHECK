@@ -6,7 +6,7 @@ from datetime import date
 
 alimentos_bp = Blueprint('resumo_diario', __name__)
 
-@alimentos_bp.route('/resumo_diario')
+@alimentos_bp.route("/resumo_diario")
 @login_required
 def resumo_diario():
     hoje = date.today()
