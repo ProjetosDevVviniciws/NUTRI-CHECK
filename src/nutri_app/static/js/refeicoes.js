@@ -156,6 +156,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 bootstrap.Modal.getInstance(document.getElementById("alimentoModal")).hide();
                 carregarRefeicoes();
                 atualizarTotais(data.totais);
+                atualizarRestantes(data.restantes);
             }
         })
         .catch(err => console.error("Erro ao adicionar refeição:", err));
