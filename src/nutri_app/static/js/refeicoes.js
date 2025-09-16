@@ -12,6 +12,14 @@ document.addEventListener("DOMContentLoaded", function () {
         document.querySelector("#totais-gorduras").textContent = `${totais.gorduras_consumidas} g`;
     }
 
+    function atualizarRestantes(restantes) {
+        if (!restantes) return;
+        document.querySelector("#restantes-calorias").textContent = `${restantes.calorias_restantes} kcal`;
+        document.querySelector("#restantes-proteinas").textContent = `${restantes.proteinas_restantes} g`;
+        document.querySelector("#restantes-carboidratos").textContent = `${restantes.carboidratos_restantes} g`;
+        document.querySelector("#restantes-gorduras").textContent = `${restantes.gorduras_restantes} g`;
+    }
+
     function carregarRefeicoes() {
         fetch("/refeicoes/listar")
             .then(res => res.json())
