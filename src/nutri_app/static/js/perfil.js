@@ -4,13 +4,11 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch("/perfil/dados")
     .then(res => res.json())
     .then(data => {
-      if (!data.error) {
-        document.getElementById("nome").value = data.nome || "";
-        document.getElementById("altura").value = data.altura || "";
-        document.getElementById("peso").value = data.peso || "";
-        document.getElementById("idade").value = data.idade || "";
-        document.getElementById("sexo").value = data.sexo || "M";
-      }
+      document.getElementById("nome").value = data.nome || "";
+      document.getElementById("altura").value = data.altura || "";
+      document.getElementById("peso").value = data.peso || "";
+      document.getElementById("idade").value = data.idade || "";
+      document.getElementById("sexo").value = data.sexo || "M";
     });
 
   form.addEventListener("submit", (e) => {
