@@ -26,7 +26,13 @@ document.addEventListener("DOMContentLoaded", () => {
           cameraId,
           {
             fps: 10,
-            qrbox: { width: 250, height: 250 },
+            qrbox: function (viewfinderWidth, viewfinderHeight) {
+              let minEdgeSize = Math.min(viewfinderWidth, viewfinderHeight);
+              return { 
+                width: minEdgeSize * 0.8, 
+                height: minEdgeSize * 0.4 
+              };
+            },
             formatsToSupport: [
               Html5QrcodeSupportedFormats.EAN_13,
               Html5QrcodeSupportedFormats.UPC_A,
