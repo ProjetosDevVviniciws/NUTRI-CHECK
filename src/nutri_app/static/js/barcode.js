@@ -15,13 +15,28 @@ document.addEventListener("DOMContentLoaded", () => {
     // Lista as câmeras disponíveis
     Html5Qrcode.getCameras().then(devices => {
       if (devices && devices.length) {
-        // Tenta achar uma câmera USB (se não achar, usa a primeira)
         let cameraId = devices[0].id;
+
+        // 1. Procura câmera traseira em dispositivos móveis
+        const backCamera = devices.find(d =>
+          d.label.toLowerCase().includes("back") ||
+          d.label.toLowerCase().includes("rear") ||
+          d.label.toLowerCase().includes("environment")
+        );
+
+        // 2. Se não encontrar, tenta uma USB (no PC)
         const usbCamera = devices.find(d => d.label.toLowerCase().includes("usb"));
         if (usbCamera) {
           cameraId = usbCamera.id;
         }
 
+        if (backCamera) {
+          cameraId = backCamera.id;
+        } else if (usbCamera) {
+          cameraId = usbCamera.id;
+        }
+
+        // Inicia o scanner
         html5QrCode.start(
           cameraId,
           {
