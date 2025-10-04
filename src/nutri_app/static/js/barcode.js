@@ -12,90 +12,107 @@ document.addEventListener("DOMContentLoaded", () => {
       html5QrCode = new Html5Qrcode("reader");
     }
 
-    // Lista as câmeras disponíveis
-    Html5Qrcode.getCameras().then(devices => {
-      if (devices && devices.length) {
-        let cameraId = devices[0].id;
+    // Detecta se é mobile
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-        // 1. Procura câmera traseira em dispositivos móveis
-        const backCamera = devices.find(d =>
-          d.label.toLowerCase().includes("back") ||
-          d.label.toLowerCase().includes("rear") ||
-          d.label.toLowerCase().includes("environment")
-        );
-
-        // 2. Se não encontrar, tenta uma USB (no PC)
-        const usbCamera = devices.find(d => d.label.toLowerCase().includes("usb"));
-        if (usbCamera) {
-          cameraId = usbCamera.id;
-        }
-
-        if (backCamera) {
-          cameraId = backCamera.id;
-        } else if (usbCamera) {
-          cameraId = usbCamera.id;
-        }
-
-        // Inicia o scanner
-        html5QrCode.start(
-          cameraId,
-          {
-            fps: 15,
-            qrbox: function (viewfinderWidth, viewfinderHeight) {
-              let minEdgeSize = Math.min(viewfinderWidth, viewfinderHeight);
-              return { 
-                width: minEdgeSize * 0.8, 
-                height: minEdgeSize * 0.4 
-              };
-            },
-            formatsToSupport: [
-              Html5QrcodeSupportedFormats.EAN_13,
-              Html5QrcodeSupportedFormats.UPC_A,
-              Html5QrcodeSupportedFormats.UPC_E,
-              Html5QrcodeSupportedFormats.CODE_128
-            ]
+    if (isMobile) {
+      // 🚀 Em mobile, tenta forçar câmera traseira
+      html5QrCode.start(
+        { facingMode: { exact: "environment" } },
+        {
+          fps: 15,
+          qrbox: function (viewfinderWidth, viewfinderHeight) {
+            let minEdgeSize = Math.min(viewfinderWidth, viewfinderHeight);
+            return { 
+              width: minEdgeSize * 0.8, 
+              height: minEdgeSize * 0.4 
+            };
           },
-          (decodedText, decodedResult) => {
-            console.log("Código de barras detectado:", decodedText);
+          formatsToSupport: [
+            Html5QrcodeSupportedFormats.EAN_13,
+            Html5QrcodeSupportedFormats.UPC_A,
+            Html5QrcodeSupportedFormats.UPC_E,
+            Html5QrcodeSupportedFormats.CODE_128
+          ]
+        },
+        onScanSuccess,
+        onScanError
+      ).catch(err => {
+        console.error("Erro ao iniciar câmera traseira:", err);
+        alert("Erro ao acessar câmera traseira. Verifique permissões ou use HTTPS/localhost");
+      });
+    
+    } else {
+      // 🚀 Em desktop, segue listando as câmeras
+      Html5Qrcode.getCameras().then(devices => {
+        if (devices && devices.length) {
+          let cameraId = devices[0].id;
 
-            // Para após detectar
-            html5QrCode.stop().then(() => {
-              scannerContainer.style.display = "none";
-              html5QrCode = null; // 🔑 libera o objeto p/ reiniciar depois
-            });
-
-            // Buscar alimento no backend
-            fetch(`/alimentos/buscar_codigo/${decodedText}`)
-              .then(res => res.json())
-              .then(data => {
-                if (data.nome) {
-                  document.getElementById("nome").value = data.nome;
-                  document.getElementById("calorias").value = data.calorias;
-                  document.getElementById("proteinas").value = data.proteinas;
-                  document.getElementById("carboidratos").value = data.carboidratos;
-                  document.getElementById("gorduras").value = data.gorduras;
-                } else {
-                  alert("Alimento não encontrado.");
-                }
-              })
-              .catch(err => {
-                console.error("Erro ao buscar alimento:", err);
-                alert("Erro ao buscar alimento.");
-              });
-          },
-          errorMessage => {
-            console.warn("Erro na leitura:", errorMessage);
+          const usbCamera = devices.find(d => d.label.toLowerCase().includes("usb"));
+          if (usbCamera) {
+            cameraId = usbCamera.id;
           }
-        ).catch(err => {
-          console.error("Erro ao iniciar câmera:", err);
-          alert("Erro ao acessar câmera. Verifique permissões ou use HTTPS/localhost");
-        });
-      } else {
-        alert("Nenhuma câmera encontrada.");
-      }
-    }).catch(err => {
-      console.error("Erro ao listar câmeras:", err);
-      alert("Erro ao listar câmeras.");
-    });
+
+          html5QrCode.start(
+            cameraId,
+            {
+              fps: 15,
+              qrbox: function (viewfinderWidth, viewfinderHeight) {
+                let minEdgeSize = Math.min(viewfinderWidth, viewfinderHeight);
+                return { 
+                  width: minEdgeSize * 0.8, 
+                  height: minEdgeSize * 0.4 
+                };
+              },
+              formatsToSupport: [
+                Html5QrcodeSupportedFormats.EAN_13,
+                Html5QrcodeSupportedFormats.UPC_A,
+                Html5QrcodeSupportedFormats.UPC_E,
+                Html5QrcodeSupportedFormats.CODE_128
+              ]
+            },
+            onScanSuccess,
+            onScanError
+          );
+        } else {
+          alert("Nenhuma câmera encontrada.");
+        }
+      }).catch(err => {
+        console.error("Erro ao listar câmeras:", err);
+        alert("Erro ao listar câmeras.");
+      });
+    }
   });
+
+  // Após ler o código de barras, busca no backend as informações do alimento e preenche os campos
+  function onScanSuccess(decodedText, decodedResult) {
+    console.log("Código de barras detectado:", decodedText);
+
+    html5QrCode.stop().then(() => {
+      scannerContainer.style.display = "none";
+      html5QrCode = null;
+    });
+
+    fetch(`/alimentos/buscar_codigo/${decodedText}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.nome) {
+          document.getElementById("nome").value = data.nome;
+          document.getElementById("calorias").value = data.calorias;
+          document.getElementById("proteinas").value = data.proteinas;
+          document.getElementById("carboidratos").value = data.carboidratos;
+          document.getElementById("gorduras").value = data.gorduras;
+        } else {
+          alert("Alimento não encontrado.");
+        }
+      })
+      .catch(err => {
+        console.error("Erro ao buscar alimento:", err);
+        alert("Erro ao buscar alimento.");
+      });
+  }
+
+  function onScanError(errorMessage) {
+    console.warn("Erro na leitura:", errorMessage);
+  }
 });
