@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
         html5QrCode.start(
           cameraId,
           {
-            fps: 10,
+            fps: 15,
             qrbox: function (viewfinderWidth, viewfinderHeight) {
               let minEdgeSize = Math.min(viewfinderWidth, viewfinderHeight);
               return { 
