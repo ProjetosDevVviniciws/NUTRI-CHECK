@@ -119,7 +119,7 @@ def buscar_codigo(codigo):
     gorduras = produto.get("nutriments", {}).get("fat_100g")
 
     if not nome or calorias is None:
-        return jsonify({"error": "Dados nutricionais incompletos"}), 400
+        return jsonify({"success": False, "message": "Dados nutricionais incompletos"}), 200
 
     with engine.begin() as conn:
         conn.execute(text("""
@@ -133,6 +133,16 @@ def buscar_codigo(codigo):
             "carboidratos": carboidratos,
             "gorduras": gorduras
         })
+        
+        return jsonify({
+        "success": True,
+        "nome": nome,
+        "porcao": porcao or 100,
+        "calorias": calorias,
+        "proteinas": proteinas,
+        "carboidratos": carboidratos,
+        "gorduras": gorduras
+    })
 
 
 
