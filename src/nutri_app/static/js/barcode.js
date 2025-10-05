@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch(`/alimentos/buscar_codigo/${decodedText}`)
       .then(res => res.json())
       .then(data => {
-        if (data.nome) {
+        if (data.success) {
           document.getElementById("nome").value = data.nome;
           document.getElementById("calorias").value = data.calorias;
           document.getElementById("proteinas").value = data.proteinas;
