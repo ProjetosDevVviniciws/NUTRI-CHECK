@@ -31,8 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
           formatsToSupport: [
             Html5QrcodeSupportedFormats.EAN_13,
             Html5QrcodeSupportedFormats.UPC_A,
-            Html5QrcodeSupportedFormats.UPC_E,
-            Html5QrcodeSupportedFormats.CODE_128
+            Html5QrcodeSupportedFormats.UPC_E
           ]
         },
         onScanSuccess,
@@ -56,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
           html5QrCode.start(
             cameraId,
             {
-              fps: 15,
+              fps: 30,
               qrbox: function (viewfinderWidth, viewfinderHeight) {
                 let minEdgeSize = Math.min(viewfinderWidth, viewfinderHeight);
                 return { 
@@ -67,8 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
               formatsToSupport: [
                 Html5QrcodeSupportedFormats.EAN_13,
                 Html5QrcodeSupportedFormats.UPC_A,
-                Html5QrcodeSupportedFormats.UPC_E,
-                Html5QrcodeSupportedFormats.CODE_128
+                Html5QrcodeSupportedFormats.UPC_E
               ]
             },
             onScanSuccess,
