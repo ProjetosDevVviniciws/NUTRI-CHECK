@@ -34,7 +34,11 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         onScanSuccess,
         onScanError
-      ).catch(err => {
+      ).then(() => {
+        html5QrCode.applyVideoConstraints({ advanced: [{ torch: true }] }).catch(err => {
+          console.warn("Torch não suportado:", err);
+        });
+      }).catch(err => {
         console.error("Erro ao iniciar câmera traseira:", err);
         alert("Erro ao acessar câmera traseira. Verifique permissões ou use HTTPS/localhost");
       });
