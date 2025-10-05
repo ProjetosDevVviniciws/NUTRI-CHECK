@@ -18,12 +18,12 @@ document.addEventListener("DOMContentLoaded", () => {
       html5QrCode.start(
         { facingMode: { exact: "environment" } },
         {
-          fps: 15,
+          fps: 30,
           qrbox: function (viewfinderWidth, viewfinderHeight) {
             let minEdgeSize = Math.min(viewfinderWidth, viewfinderHeight);
             return { 
-              width: minEdgeSize * 0.8, 
-              height: minEdgeSize * 0.4 
+              width: minEdgeSize * 0.9, 
+              height: minEdgeSize * 0.5 
             };
           },
           formatsToSupport: [
