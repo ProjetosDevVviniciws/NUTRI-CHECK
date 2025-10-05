@@ -12,11 +12,9 @@ document.addEventListener("DOMContentLoaded", () => {
       html5QrCode = new Html5Qrcode("reader");
     }
 
-    // Detecta se é mobile
     const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
     if (isMobile) {
-      // 🚀 Em mobile, tenta forçar câmera traseira
       html5QrCode.start(
         { facingMode: { exact: "environment" } },
         {
@@ -42,7 +40,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     
     } else {
-      // 🚀 Em desktop, segue listando as câmeras
       Html5Qrcode.getCameras().then(devices => {
         if (devices && devices.length) {
           let cameraId = devices[0].id;
@@ -82,7 +79,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Após ler o código de barras, busca no backend as informações do alimento e preenche os campos
   function onScanSuccess(decodedText, decodedResult) {
     console.log("Código de barras detectado:", decodedText);
 
