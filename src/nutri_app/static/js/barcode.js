@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const readerElement = document.getElementById("reader");
 
   let html5QrCode = null;
+  let torchEnabled = false;
 
   btnLerCodigo.addEventListener("click", () => {
     scannerContainer.style.display = "block";
@@ -44,7 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("Erro ao iniciar câmera traseira:", err);
         alert("Erro ao acessar câmera traseira. Verifique permissões ou use HTTPS/localhost");
       });
-    
     } else {
       Html5Qrcode.getCameras().then(devices => {
         if (devices && devices.length) {
@@ -117,4 +117,25 @@ document.addEventListener("DOMContentLoaded", () => {
   function onScanError(errorMessage) {
     console.warn("Erro na leitura:", errorMessage);
   }
+
+  function stopScanner() {
+      if (html5QrCode) {
+        html5QrCode.stop().then(() => {
+          if (torchEnabled) {
+            html5QrCode
+              .applyVideoConstraints({ advanced: [{ torch: false }] })
+              .catch(() => console.warn("Falha ao desligar lanterna."));
+            torchEnabled = false;
+          }
+          scannerContainer.style.display = "none";
+          html5QrCode = null;
+        }).catch(err => console.warn("Erro ao parar scanner:", err));
+      }
+    }
+  
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) stopScanner();
+  });
+
+  window.addEventListener("beforeunload", stopScanner);
 });
