@@ -22,8 +22,8 @@ document.addEventListener("DOMContentLoaded", () => {
           qrbox: function (viewfinderWidth, viewfinderHeight) {
             let minEdgeSize = Math.min(viewfinderWidth, viewfinderHeight);
             return { 
-              width: minEdgeSize * 0.9, 
-              height: minEdgeSize * 0.5 
+              width: minEdgeSize * 0.95, 
+              height: minEdgeSize * 0.6 
             };
           },
           formatsToSupport: [
@@ -62,8 +62,8 @@ document.addEventListener("DOMContentLoaded", () => {
               qrbox: function (viewfinderWidth, viewfinderHeight) {
                 let minEdgeSize = Math.min(viewfinderWidth, viewfinderHeight);
                 return { 
-                  width: minEdgeSize * 0.8, 
-                  height: minEdgeSize * 0.4 
+                  width: minEdgeSize * 0.9, 
+                  height: minEdgeSize * 0.5 
                 };
               },
               formatsToSupport: [
