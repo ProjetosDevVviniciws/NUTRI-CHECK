@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
       html5QrCode.start(
         { facingMode: { exact: "environment" } },
         {
-          fps: 30,
+          fps: 20,
           qrbox: function (viewfinderWidth, viewfinderHeight) {
             let minEdgeSize = Math.min(viewfinderWidth, viewfinderHeight);
             return { 
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
           html5QrCode.start(
             cameraId,
             {
-              fps: 30,
+              fps: 20,
               qrbox: function (viewfinderWidth, viewfinderHeight) {
                 let minEdgeSize = Math.min(viewfinderWidth, viewfinderHeight);
                 return { 
