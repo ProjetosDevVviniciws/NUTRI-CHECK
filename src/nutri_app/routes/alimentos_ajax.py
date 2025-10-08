@@ -94,55 +94,6 @@ def buscar_alimentos():
 
     return jsonify(alimentos)
 
-@alimentos_ajax_bp.route("/buscar_codigo/<codigo>")
-@login_required
-def buscar_codigo(codigo):
-    url = f"https://world.openfoodfacts.org/api/v0/product/{codigo}.json"
-    r = requests.get(url).json()
-
-    if r.get("status") != 1:
-        return jsonify({"error": "Produto não encontrado"}), 404
-
-    produto = r["product"]
-    
-    nome = produto.get("product_name")
-    porcao = produto.get("serving_size")
-    if porcao and "g" in porcao.lower():
-        try:
-            porcao = float(porcao.lower().replace("g", "").strip())
-        except:
-            porcao = None
-
-    calorias = produto.get("nutriments", {}).get("energy-kcal_100g")
-    proteinas = produto.get("nutriments", {}).get("proteins_100g")
-    carboidratos = produto.get("nutriments", {}).get("carbohydrates_100g")
-    gorduras = produto.get("nutriments", {}).get("fat_100g")
-
-    if not nome or calorias is None:
-        return jsonify({"success": False, "message": "Dados nutricionais incompletos"}), 200
-
-    with engine.begin() as conn:
-        conn.execute(text("""
-            INSERT INTO catalogo_alimentos (nome, porcao, calorias, proteinas, carboidratos, gorduras)
-            VALUES (:nome, :porcao, :calorias, :proteinas, :carboidratos, :gorduras)
-        """), {
-            "nome": nome[:100],
-            "porcao": porcao or 100,
-            "calorias": calorias,
-            "proteinas": proteinas,
-            "carboidratos": carboidratos,
-            "gorduras": gorduras
-        })
-        
-        return jsonify({
-        "success": True,
-        "nome": nome,
-        "porcao": porcao or 100,
-        "calorias": calorias,
-        "proteinas": proteinas,
-        "carboidratos": carboidratos,
-        "gorduras": gorduras
-    })
 
 
 
