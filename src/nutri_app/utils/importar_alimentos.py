@@ -22,42 +22,46 @@ def importar_alimentos_populares():
             
             reponse = requests.get(url, params=parametros)
             if reponse.status_code != 200:
-                print("Erro ao acessar a API do OpenFoodFacts.")
+                print("Erro ao acessar a API do OpenFoodFacts na página {pagina}.")
     
             data = reponse.json()
             produtos = data.get("products", [])
             
             for produto in produtos:
                 nome = produto.get("product_name", "").strip()
-                codigo_barras = produto.get("code", "").strip()
-                
                 nutriments = produto.get("nutriments", {})
                 calorias = nutriments.get("energy-kcal_100g")
                 proteinas = nutriments.get("proteins_100g")
                 gordura = nutriments.get("fat_100g")
                 carboidrato = nutriments.get("carbohydrates_100g")
                 
-                if not nome or calorias is None or not codigo_barras:
+                if not nome or calorias is None:
                     continue
                 
                 existe = conn.execute(text("""
-                    SELECT id FROM alimentos WHERE codigo_barras = :codigo_barras
-                    """), {"codigo_barras": codigo_barras}).fetchone()
+                    SELECT id FROM catalogo_alimentos WHERE nome = :nome
+                    """), {"nome": nome}).fetchone()
                 
                 if existe:
                     print(f"Produto já existe: {nome}")
-                    
+                    continue
+                
                 try:
+                    porcao = produto.get("serving_size")
+                    if porcao and "g" in str(porcao).lower():
+                        try:
+                            porcao = float(str(porcao).lower().replace("g", "").strip())
+                        except:
+                            porcao = 100
+                    else:
+                        porcao = 100
+                    
                     conn.execute(text("""
-                        INSERT INTO alimentos (
-                            nome, codigo_barras, porcao, calorias, proteinas, gorduras, carboidratos, usuario_id 
-                        ) VALUES (
-                            :nome, :codigo_barras, :porcao, :calorias, :proteinas, :gorduras, :carboidratos, NULL
-                        )
+                        INSERT INTO catalogo_alimentos (nome, porcao, calorias, proteinas, carboidratos, gorduras)
+                        VALUES (:nome, :porcao, :calorias, :proteinas, :carboidratos, :gorduras)
                     """), {
-                        "nome": nome,
-                        "codigo_barras": codigo_barras,
-                        "porcao": 100,
+                        "nome": nome[:100],
+                        "porcao": porcao,
                         "calorias": calorias,
                         "proteinas": proteinas or 0,
                         "gorduras": gordura or 0,
