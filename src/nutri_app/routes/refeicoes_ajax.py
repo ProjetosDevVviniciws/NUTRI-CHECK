@@ -11,11 +11,10 @@ refeicoes_ajax_bp = Blueprint('refeicoes_ajax', __name__)
 def criar_refeicao():
     data = request.json
     alimento_id = data.get('alimento_id')
-    origem = data.get("origem")
     porcao = data.get('porcao')
     tipo_refeicao = data.get('tipo_refeicao')
 
-    if not alimento_id or not porcao or not tipo_refeicao or not origem:
+    if not alimento_id or not porcao or not tipo_refeicao:
         return jsonify({'erro': 'Dados incompletos'}), 400
 
     with engine.begin() as conn:
@@ -36,28 +35,15 @@ def criar_refeicao():
                     ultima_atualizacao = :hoje
                 WHERE id = :id
             """), {"id": current_user.id, "hoje": hoje})
-        
-        if origem == "usuario":
-            query_usuario = text("""
-                SELECT id, nome, porcao, calorias, proteinas, carboidratos, gorduras
-                FROM alimentos
-                WHERE id = :id and usuario_id = :usuario_id
-            """)
-            alimento = conn.execute(query_usuario, {
-                "id": alimento_id,
-                "usuario_id": current_user.id
-            }).mappings().first()
             
-        elif origem == "catalogo":
             query_catalogo = text("""
                 SELECT id, nome, porcao, calorias, proteinas, carboidratos, gorduras
                 FROM catalogo_alimentos
                 WHERE id = :id
             """)
+            
             alimento = conn.execute(query_catalogo, {"id": alimento_id}).mappings().first()
-        else:
-            return jsonify({'erro': 'Origem inválida'}), 400
-        
+
         if not alimento:
             return jsonify({'erro': 'Alimento não encontrado'}), 404
 
@@ -75,8 +61,7 @@ def criar_refeicao():
         ''')
         conn.execute(insert, {
             "usuario_id": current_user.id,
-            "alimento_id": alimento_id if origem == "usuario" else None,
-            "catalogo_alimento_id": alimento_id if origem == "catalogo" else None,
+            "catalogo_alimento_id": alimento_id,
             "porcao": porcao,
             "data": data_refeicao,
             "tipo_refeicao": tipo_refeicao,
