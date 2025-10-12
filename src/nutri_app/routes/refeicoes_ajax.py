@@ -103,7 +103,6 @@ def criar_refeicao():
         
     return jsonify({'mensagem': 'Refeição registrada com sucesso', 'totais': dict(totais), 'restantes': dict(restantes)})
 
-
 @refeicoes_ajax_bp.route("/refeicoes/listar")
 @login_required
 def listar_refeicoes():
@@ -143,7 +142,6 @@ def listar_refeicoes():
         refeicoes_por_tipo[tipo].append(r)
 
     return jsonify(refeicoes_por_tipo)
-
 
 @refeicoes_ajax_bp.route("/refeicoes/editar/<int:id>", methods=['PUT'])
 @login_required
@@ -249,7 +247,6 @@ def editar_refeicao(id):
         """), {"id": current_user.id}).mappings().first()
         
     return jsonify({'mensagem': 'Refeição atualizada com sucesso', 'totais': dict(totais), 'restantes': dict(restantes)})
-
 
 @refeicoes_ajax_bp.route("/refeicoes/excluir/<int:id>", methods=['DELETE'])
 @login_required
