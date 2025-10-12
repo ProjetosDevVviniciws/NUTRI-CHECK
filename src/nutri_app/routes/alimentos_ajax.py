@@ -66,31 +66,16 @@ def buscar_alimentos():
             WHERE nome LIKE :termo
         """), {"termo": f"%{termo}%"}).mappings().all()
 
-        result_usuario = conn.execute(text("""
-            SELECT id, nome, calorias, proteinas, carboidratos, gorduras
-            FROM alimentos
-            WHERE nome LIKE :termo AND usuario_id = :usuario_id
-        """), {
-            "termo": f"%{termo}%",
-            "usuario_id": current_user.id
-        }).mappings().all()
-
-    vistos = set()
     alimentos = []
-    for row in result_usuario + result_catalogo:
-        alimento_id = row.get("id")
-        nome = row.get("nome") or ""
-        if alimento_id not in vistos:
-            vistos.add(alimento_id)
-            alimentos.append({
-                "id": alimento_id,
-                "nome": nome,
-                "origem": "usuario" if row in result_usuario else "catalogo",
-                "calorias": float(row.get("calorias") or 0),
-                "proteinas": float(row.get("proteinas") or 0),
-                "carboidratos": float(row.get("carboidratos") or 0),
-                "gorduras": float(row.get("gorduras") or 0)
-            })
+    for row in result_catalogo:
+        alimentos.append({
+            "id": row.get("id"),
+            "nome": row.get("nome") or "",
+            "calorias": float(row.get("calorias") or 0),
+            "proteinas": float(row.get("proteinas") or 0),
+            "carboidratos": float(row.get("carboidratos") or 0),
+            "gorduras": float(row.get("gorduras") or 0)
+        })
 
     return jsonify(alimentos)
 
