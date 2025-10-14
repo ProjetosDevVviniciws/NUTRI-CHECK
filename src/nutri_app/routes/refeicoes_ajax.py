@@ -152,14 +152,14 @@ def editar_refeicao(id):
 
     with engine.begin() as conn:
         select_query = text("""
-            SELECT r.*, 
-                COALESCE(a.porcao, ca.porcao) AS porcao_padrao,
-                COALESCE(a.calorias, ca.calorias) AS cal_a,
-                COALESCE(a.proteinas, ca.proteinas) AS prot_a,
-                COALESCE(a.carboidratos, ca.carboidratos) AS carb_a,
-                COALESCE(a.gorduras, ca.gorduras) AS gord_a
+            SELECT 
+                r.*, 
+                ca.porcao AS porcao_padrao,
+                ca.calorias AS cal_a,
+                ca.proteinas AS prot_a,
+                ca.carboidratos AS carb_a,
+                ca.gorduras AS gord_a
             FROM refeicoes r
-            LEFT JOIN alimentos a ON r.alimento_id = a.id
             LEFT JOIN catalogo_alimentos ca ON r.catalogo_alimento_id = ca.id
             WHERE r.id = :id AND r.usuario_id = :usuario_id
         """)
