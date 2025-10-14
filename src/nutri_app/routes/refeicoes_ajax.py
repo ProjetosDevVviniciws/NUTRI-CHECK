@@ -56,8 +56,8 @@ def criar_refeicao():
         data_refeicao = datetime.now().date()
 
         insert = text('''
-            INSERT INTO refeicoes (usuario_id, alimento_id, catalogo_alimento_id, porcao, data, tipo_refeicao, calorias, proteinas, carboidratos, gorduras)
-            VALUES (:usuario_id, :alimento_id, :catalogo_alimento_id, :porcao, :data, :tipo_refeicao, :calorias, :proteinas, :carboidratos, :gorduras)
+            INSERT INTO refeicoes (usuario_id, catalogo_alimento_id, porcao, data, tipo_refeicao, calorias, proteinas, carboidratos, gorduras)
+            VALUES (:usuario_id, :catalogo_alimento_id, :porcao, :data, :tipo_refeicao, :calorias, :proteinas, :carboidratos, :gorduras)
         ''')
         conn.execute(insert, {
             "usuario_id": current_user.id,
