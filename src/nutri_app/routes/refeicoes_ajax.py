@@ -154,13 +154,13 @@ def editar_refeicao(id):
         select_query = text("""
             SELECT 
                 r.*, 
-                ca.porcao AS porcao_padrao,
-                ca.calorias AS cal_a,
-                ca.proteinas AS prot_a,
-                ca.carboidratos AS carb_a,
-                ca.gorduras AS gord_a
+                c.porcao AS porcao_padrao,
+                c.calorias AS cal_a,
+                c.proteinas AS prot_a,
+                c.carboidratos AS carb_a,
+                c.gorduras AS gord_a
             FROM refeicoes r
-            LEFT JOIN catalogo_alimentos ca ON r.catalogo_alimento_id = ca.id
+            LEFT JOIN catalogo_alimentos c ON r.catalogo_alimento_id = c.id
             WHERE r.id = :id AND r.usuario_id = :usuario_id
         """)
 
