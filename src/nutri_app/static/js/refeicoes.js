@@ -143,7 +143,6 @@ document.addEventListener("DOMContentLoaded", function () {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 alimento_id: alimentoSelecionado.id,
-                origem: alimentoSelecionado.origem,
                 porcao: porcao,
                 tipo_refeicao: tipo_refeicao
             })
