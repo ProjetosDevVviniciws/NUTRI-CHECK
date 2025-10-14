@@ -36,13 +36,13 @@ def criar_refeicao():
                 WHERE id = :id
             """), {"id": current_user.id, "hoje": hoje})
             
-            query_catalogo = text("""
-                SELECT id, nome, porcao, calorias, proteinas, carboidratos, gorduras
-                FROM catalogo_alimentos
-                WHERE id = :id
-            """)
+        query_catalogo = text("""
+            SELECT id, nome, porcao, calorias, proteinas, carboidratos, gorduras
+            FROM catalogo_alimentos
+            WHERE id = :id
+        """)
             
-            alimento = conn.execute(query_catalogo, {"id": alimento_id}).mappings().first()
+        alimento = conn.execute(query_catalogo, {"id": alimento_id}).mappings().first()
 
         if not alimento:
             return jsonify({'erro': 'Alimento não encontrado'}), 404
