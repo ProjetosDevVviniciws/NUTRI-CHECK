@@ -3,6 +3,22 @@ document.addEventListener("DOMContentLoaded", function () {
     let alimentoSelecionado = null;
 
     const modalEditar = new bootstrap.Modal(document.getElementById("editarRefeicaoModal"));
+    const dataSpan = document.getElementById("data-selecionada");
+    const seletorData = document.getElementById("seletor-data");
+    const btnAnterior = document.getElementById("dia-anterior");
+    const btnProximo = document.getElementById("proximo-dia");
+
+    const hoje = new Date();
+    let dataAtual = new Date(seletorData?.value || hoje);
+
+    const atualizarDataDisplay = () => {
+        if (dataSpan) {
+            dataSpan.textContent = dataAtual.toLocaleDateString("pt-BR");
+        }
+        if (seletorData) {
+            seletorData.value = dataAtual.toISOString().split("T")[0];
+        }
+    };
 
     function atualizarTotais(totais) {
         if (!totais) return;
@@ -21,7 +37,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function carregarRefeicoes() {
-        fetch("/refeicoes/listar")
+        const dataFormatada = dataAtual.toISOString().split("T")[0];
+        fetch("`/refeicoes/lista?data=${dataFormatada}`")
             .then(res => res.json())
             .then(dados => {
                 document.querySelectorAll(".refeicao-card").forEach(card => {
@@ -161,6 +178,27 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch(err => console.error("Erro ao adicionar refeição:", err));
     });
 
+    if (btnAnterior && btnProximo && seletorData) {
+        btnAnterior.addEventListener("click", () => {
+            dataAtual.setDate(dataAtual.getDate() - 1);
+            atualizarDataDisplay();
+            carregarRefeicoes();
+        });
+
+        btnProximo.addEventListener("click", () => {
+            dataAtual.setDate(dataAtual.getDate() + 1);
+            atualizarDataDisplay();
+            carregarRefeicoes();
+        });
+
+        seletorData.addEventListener("change", (e) => {
+            dataAtual = new Date(e.target.value);
+            atualizarDataDisplay();
+            carregarRefeicoes();
+        });
+    }
+
+    atualizarDataDisplay();
     carregarRefeicoes();
 
     window.setAlimentoSelecionado = (item) => {
