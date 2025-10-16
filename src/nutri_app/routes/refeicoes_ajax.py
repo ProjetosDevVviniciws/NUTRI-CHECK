@@ -106,7 +106,7 @@ def criar_refeicao():
 @refeicoes_ajax_bp.route("/refeicoes/listar")
 @login_required
 def listar_refeicoes():
-    data_refeicao = request.args.get('data') or datetime.now().date()
+    data_refeicao = datetime.strptime(data_refeicao, "%Y-%m-%d").date()
 
     tipos_fixos = ["Café da Manhã", "Almoço", "Jantar", "Lanche"]
 
