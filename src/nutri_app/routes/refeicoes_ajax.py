@@ -137,8 +137,27 @@ def listar_refeicoes():
         })
         registros = [dict(row) for row in result.mappings()]
 
-    refeicoes_por_tipo = {tipo: [] for tipo in tipos_fixos}
+        totais = conn.execute(text("""
+            SELECT 
+                calorias_consumidas, 
+                proteinas_consumidas, 
+                carboidratos_consumidos, 
+                gorduras_consumidas
+            FROM usuarios
+            WHERE id = :id
+        """), {"id": current_user.id}).mappings().first()
 
+        restantes = conn.execute(text("""
+            SELECT 
+                calorias_restantes, 
+                proteinas_restantes, 
+                carboidratos_restantes, 
+                gorduras_restantes
+            FROM usuarios
+            WHERE id = :id
+        """), {"id": current_user.id}).mappings().first()
+        
+    refeicoes_por_tipo = {tipo: [] for tipo in tipos_fixos}
     for r in registros:
         tipo = r["tipo_refeicao"] or "Outros"
         if tipo not in refeicoes_por_tipo:
