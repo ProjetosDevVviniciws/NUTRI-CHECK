@@ -115,7 +115,7 @@ def listar_refeicoes():
     tipos_fixos = ["Café da Manhã", "Almoço", "Jantar", "Lanche"]
 
     with engine.connect() as conn:
-        query = text('''
+        query_refeicoes = text('''
             SELECT 
                 r.id, 
                 c.nome AS alimento,
@@ -131,7 +131,7 @@ def listar_refeicoes():
               AND DATE(r.data) = :data_refeicao
             ORDER BY r.tipo_refeicao, r.id DESC
         ''')
-        result = conn.execute(query, {
+        result = conn.execute(query_refeicoes, {
             "usuario_id": current_user.id,
             "data_refeicao": str(data_refeicao)
         })
