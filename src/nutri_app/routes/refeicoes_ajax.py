@@ -163,8 +163,12 @@ def listar_refeicoes():
         if tipo not in refeicoes_por_tipo:
             refeicoes_por_tipo[tipo] = []
         refeicoes_por_tipo[tipo].append(r)
-
-    return jsonify(refeicoes_por_tipo)
+    
+    return jsonify({
+        "refeicoes": refeicoes_por_tipo,
+        "totais": dict(totais or {}),
+        "restantes": dict(restantes or {})
+    })
 
 @refeicoes_ajax_bp.route("/refeicoes/editar/<int:id>", methods=['PUT'])
 @login_required
