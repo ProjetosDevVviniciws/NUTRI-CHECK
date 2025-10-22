@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function carregarRefeicoes() {
         const dataFormatada = dataAtual.toISOString().split("T")[0];
-        fetch("`/refeicoes/lista?data=${dataFormatada}`")
+        fetch(`/refeicoes/lista?data=${dataFormatada}`)
             .then(res => res.json())
             .then(dados => {
                 document.querySelectorAll(".refeicao-card").forEach(card => {
