@@ -38,9 +38,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function carregarRefeicoes() {
         const dataFormatada = dataAtual.toISOString().split("T")[0];
+        
         fetch(`/refeicoes/listar?data=${dataFormatada}`)
             .then(res => res.json())
             .then(dados => {
+                const refeicoes = dados.refeicoes || {};
+                const totais = dados.totais || {};
+                const restantes = dados.restantes || {};
+                
                 document.querySelectorAll(".refeicao-card").forEach(card => {
                     card.querySelector(".alimentos-list").innerHTML =
                         `<li class="list-group-item text-muted">Nenhum alimento adicionado</li>`;
