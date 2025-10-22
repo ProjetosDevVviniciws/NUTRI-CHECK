@@ -75,6 +75,9 @@ document.addEventListener("DOMContentLoaded", function () {
                         }
                     }
                 }
+
+                atualizarTotais(totais);
+                atualizarRestantes(restantes);
             })
             .catch(err => console.error("Erro ao carregar refeições:", err));
     }
