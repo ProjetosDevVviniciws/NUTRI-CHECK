@@ -45,18 +45,18 @@ document.addEventListener("DOMContentLoaded", function () {
                 const refeicoes = dados.refeicoes || {};
                 const totais = dados.totais || {};
                 const restantes = dados.restantes || {};
-                
+
                 document.querySelectorAll(".refeicao-card").forEach(card => {
                     card.querySelector(".alimentos-list").innerHTML =
                         `<li class="list-group-item text-muted">Nenhum alimento adicionado</li>`;
                 });
 
-                for (const tipo in dados) {
+                for (const tipo in refeicoes) {
                     const card = document.querySelector(`.refeicao-card[data-tipo="${tipo}"]`);
                     if (card) {
                         const lista = card.querySelector(".alimentos-list");
-                        if (dados[tipo].length > 0) {
-                            lista.innerHTML = dados[tipo].map(a => `
+                        if (refeicoes[tipo].length > 0) {
+                            lista.innerHTML = refeicoes[tipo].map(a => `
                                 <li class="list-group-item d-flex justify-content-between align-items-center refeicao-item"
                                     data-id="${a.id}"
                                     data-nome="${a.alimento}"
