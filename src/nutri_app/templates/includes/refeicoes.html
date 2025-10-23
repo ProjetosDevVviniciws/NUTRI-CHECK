@@ -21,45 +21,18 @@
 
   <div id="refeicoes-container">
 
-    <div class="card mb-4 refeicao-card" data-tipo="Café da Manhã">
-      <div class="card-header d-flex justify-content-between align-items-center">
-        <span class="fw-bold">Café da Manhã</span>
-        <button class="btn btn-sm btn-outline-primary adicionar-alimento-btn" data-tipo="Café da Manhã">
-          Adicionar Alimento
-        </button>
+    {% for tipo in ["Café da Manhã", "Almoço", "Jantar", "Lanche"] %}
+      <div class="card mb-4 refeicao-card" data-tipo="{{ tipo }}">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span class="fw-bold">{{ tipo }}</span>
+          <button class="btn btn-sm btn-outline-primary adicionar-alimento-btn" data-tipo="{{ tipo }}">
+            Adicionar Alimento
+          </button>
+        </div>
+        <ul class="list-group list-group-flush alimentos-list"></ul>
       </div>
-      <ul class="list-group list-group-flush alimentos-list"></ul>
-    </div>
-
-    <div class="card mb-4 refeicao-card" data-tipo="Almoço">
-      <div class="card-header d-flex justify-content-between align-items-center">
-        <span class="fw-bold">Almoço</span>
-        <button class="btn btn-sm btn-outline-primary adicionar-alimento-btn" data-tipo="Almoço">
-          Adicionar Alimento
-        </button>
-      </div>
-      <ul class="list-group list-group-flush alimentos-list"></ul>
-    </div>
-
-    <div class="card mb-4 refeicao-card" data-tipo="Jantar">
-      <div class="card-header d-flex justify-content-between align-items-center">
-        <span class="fw-bold">Jantar</span>
-        <button class="btn btn-sm btn-outline-primary adicionar-alimento-btn" data-tipo="Jantar">
-          Adicionar Alimento
-        </button>
-      </div>
-      <ul class="list-group list-group-flush alimentos-list"></ul>
-    </div>
-
-    <div class="card mb-4 refeicao-card" data-tipo="Lanche">
-      <div class="card-header d-flex justify-content-between align-items-center">
-        <span class="fw-bold">Lanche</span>
-        <button class="btn btn-sm btn-outline-primary adicionar-alimento-btn" data-tipo="Lanche">
-          Adicionar Alimento
-        </button>
-      </div>
-      <ul class="list-group list-group-flush alimentos-list"></ul>
-    </div>
+    {% endfor %}
+  </div>
 
   </div>
 </div>
