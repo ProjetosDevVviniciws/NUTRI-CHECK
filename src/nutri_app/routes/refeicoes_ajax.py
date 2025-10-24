@@ -152,10 +152,8 @@ def listar_refeicoes():
 
         restantes = conn.execute(text("""
             SELECT 
-                calorias_restantes, 
-                proteinas_restantes, 
-                carboidratos_restantes, 
-                gorduras_restantes
+                calorias_meta, proteinas_meta, carboidratos_meta, gorduras_meta,
+                calorias_restantes, proteinas_restantes, carboidratos_restantes, gorduras_restantes
             FROM usuarios
             WHERE id = :id
         """), {"id": current_user.id}).mappings().first()
