@@ -139,13 +139,16 @@ def listar_refeicoes():
 
         totais = conn.execute(text("""
             SELECT 
-                calorias_consumidas, 
-                proteinas_consumidas, 
-                carboidratos_consumidos, 
-                gorduras_consumidas
-            FROM usuarios
-            WHERE id = :id
-        """), {"id": current_user.id}).mappings().first()
+                COALESCE(SUM(calorias), 0) AS calorias_consumidas,
+                COALESCE(SUM(proteinas), 0) AS proteinas_consumidas,
+                COALESCE(SUM(carboidratos), 0) AS carboidratos_consumidos,
+                COALESCE(SUM(gorduras), 0) AS gorduras_consumidas
+            FROM refeicoes
+            WHERE usuario_id = :usuario_id AND DATE(data) = :data_refeicao
+        """), {
+            "usuario_id": current_user.id,
+            "data_refeicao": str(data_refeicao)
+        }).mappings().first()
 
         restantes = conn.execute(text("""
             SELECT 
