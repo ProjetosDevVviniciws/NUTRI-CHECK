@@ -17,3 +17,18 @@ def calcular_totais_conn(conn, usuario_id, data_refeicao):
         "carboidratos_consumidos": float(r["carboidratos_consumidos"] or 0),
         "gorduras_consumidas": float(r["gorduras_consumidas"] or 0),
     }
+    
+def pegar_metas_conn(conn, usuario_id):
+    r = conn.execute(text("""
+        SELECT calorias_meta, proteinas_meta, carboidratos_meta, gorduras_meta
+        FROM usuarios
+        WHERE id = :usuario_id
+    """), {"usuario_id": usuario_id}).mappings().first()
+    if not r:
+        return {"calorias_meta": 0, "proteinas_meta": 0, "carboidratos_meta": 0, "gorduras_meta": 0}
+    return {
+        "calorias_meta": float(r["calorias_meta"] or 0),
+        "proteinas_meta": float(r["proteinas_meta"] or 0),
+        "carboidratos_meta": float(r["carboidratos_meta"] or 0),
+        "gorduras_meta": float(r["gorduras_meta"] or 0),
+    }
