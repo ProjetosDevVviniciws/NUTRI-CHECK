@@ -18,7 +18,7 @@ def calcular_totais_conn(conn, usuario_id, data_refeicao):
         "gorduras_consumidas": float(r["gorduras_consumidas"] or 0),
     }
     
-def pegar_metas_conn(conn, usuario_id):
+def buscar_metas_conn(conn, usuario_id):
     r = conn.execute(text("""
         SELECT calorias_meta, proteinas_meta, carboidratos_meta, gorduras_meta
         FROM usuarios
