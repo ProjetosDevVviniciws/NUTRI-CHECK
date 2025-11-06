@@ -3,6 +3,11 @@ from flask_login import login_required, current_user
 from datetime import datetime, date
 from sqlalchemy import text
 from src.nutri_app.database import engine
+from src.nutri_app.utils.calorias_macros import (
+    calcular_restantes_from_totais,
+    buscar_metas_conn,
+    calcular_totais_conn
+)
 
 refeicoes_ajax_bp = Blueprint('refeicoes_ajax', __name__)
 
@@ -112,6 +117,7 @@ def listar_refeicoes():
     else:
         data_refeicao = datetime.strptime(data_refeicao, "%Y-%m-%d").date()
 
+    hoje = date.today()
     tipos_fixos = ["Café da Manhã", "Almoço", "Jantar", "Lanche"]
 
     with engine.connect() as conn:
@@ -131,32 +137,48 @@ def listar_refeicoes():
               AND DATE(r.data) = :data_refeicao
             ORDER BY r.tipo_refeicao, r.id DESC
         ''')
-        result = conn.execute(query_refeicoes, {
+        registros = conn.execute(query_refeicoes, {
             "usuario_id": current_user.id,
             "data_refeicao": str(data_refeicao)
         })
-        registros = [dict(row) for row in result.mappings()]
-
-        totais = conn.execute(text("""
-            SELECT 
-                COALESCE(SUM(calorias), 0) AS calorias_consumidas,
-                COALESCE(SUM(proteinas), 0) AS proteinas_consumidas,
-                COALESCE(SUM(carboidratos), 0) AS carboidratos_consumidos,
-                COALESCE(SUM(gorduras), 0) AS gorduras_consumidas
-            FROM refeicoes
-            WHERE usuario_id = :usuario_id AND DATE(data) = :data_refeicao
-        """), {
-            "usuario_id": current_user.id,
-            "data_refeicao": str(data_refeicao)
-        }).mappings().first()
+        
+        if data_refeicao == hoje:
+            totais = conn.execute(text("""
+                SELECT 
+                    calorias_consumidas,
+                    proteinas_consumidas,
+                    carboidratos_consumidos,
+                    gorduras_consumidas,
+                    calorias_restantes,
+                    proteinas_restantes,
+                    carboidratos_restantes,
+                    gorduras_restantes
+                FROM usuarios
+                WHERE id = :usuario_id
+            """), {"usuario_id": current_user.id}).mappings().first()
+        else:
+            totais = conn.execute(text("""
+                SELECT 
+                    COALESCE(SUM(calorias), 0) AS calorias_consumidas,
+                    COALESCE(SUM(proteinas), 0) AS proteinas_consumidas,
+                    COALESCE(SUM(carboidratos), 0) AS carboidratos_consumidos,
+                    COALESCE(SUM(gorduras), 0) AS gorduras_consumidas
+                FROM refeicoes
+                WHERE usuario_id = :usuario_id AND DATE(data) = :data_refeicao
+            """), {
+                "usuario_id": current_user.id,
+                "data_refeicao": str(data_refeicao)
+            }).mappings().first()
 
         restantes = conn.execute(text("""
             SELECT 
-                calorias_meta, proteinas_meta, carboidratos_meta, gorduras_meta,
-                calorias_restantes, proteinas_restantes, carboidratos_restantes, gorduras_restantes
+                calorias_restantes, proteinas_restantes, carboidratos_restantes,gorduras_restantes
             FROM usuarios
-            WHERE id = :id
-        """), {"id": current_user.id}).mappings().first()
+            WHERE id = :usuario_id AND DATE(ultima_atualizacao) = :ultima_atualizacao
+        """), {
+            "usuario_id": current_user.id,
+            "ultima_atualizacao": str(data_refeicao)
+        }).mappings().first()
         
     refeicoes_por_tipo = {tipo: [] for tipo in tipos_fixos}
     for r in registros:
