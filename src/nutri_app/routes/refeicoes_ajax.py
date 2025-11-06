@@ -117,7 +117,6 @@ def listar_refeicoes():
     else:
         data_refeicao = datetime.strptime(data_refeicao, "%Y-%m-%d").date()
 
-    hoje = date.today()
     tipos_fixos = ["Café da Manhã", "Almoço", "Jantar", "Lanche"]
 
     with engine.connect() as conn:
@@ -137,48 +136,18 @@ def listar_refeicoes():
               AND DATE(r.data) = :data_refeicao
             ORDER BY r.tipo_refeicao, r.id DESC
         ''')
-        registros = conn.execute(query_refeicoes, {
+        result = conn.execute(query_refeicoes, {
             "usuario_id": current_user.id,
             "data_refeicao": str(data_refeicao)
         })
         
-        if data_refeicao == hoje:
-            totais = conn.execute(text("""
-                SELECT 
-                    calorias_consumidas,
-                    proteinas_consumidas,
-                    carboidratos_consumidos,
-                    gorduras_consumidas,
-                    calorias_restantes,
-                    proteinas_restantes,
-                    carboidratos_restantes,
-                    gorduras_restantes
-                FROM usuarios
-                WHERE id = :usuario_id
-            """), {"usuario_id": current_user.id}).mappings().first()
-        else:
-            totais = conn.execute(text("""
-                SELECT 
-                    COALESCE(SUM(calorias), 0) AS calorias_consumidas,
-                    COALESCE(SUM(proteinas), 0) AS proteinas_consumidas,
-                    COALESCE(SUM(carboidratos), 0) AS carboidratos_consumidos,
-                    COALESCE(SUM(gorduras), 0) AS gorduras_consumidas
-                FROM refeicoes
-                WHERE usuario_id = :usuario_id AND DATE(data) = :data_refeicao
-            """), {
-                "usuario_id": current_user.id,
-                "data_refeicao": str(data_refeicao)
-            }).mappings().first()
+        registros = [dict(row) for row in result.mappings()]
+        
+        totais = calcular_totais_conn(conn, current_user.id, data_refeicao)
 
-        restantes = conn.execute(text("""
-            SELECT 
-                calorias_restantes, proteinas_restantes, carboidratos_restantes,gorduras_restantes
-            FROM usuarios
-            WHERE id = :usuario_id AND DATE(ultima_atualizacao) = :ultima_atualizacao
-        """), {
-            "usuario_id": current_user.id,
-            "ultima_atualizacao": str(data_refeicao)
-        }).mappings().first()
+        metas = buscar_metas_conn(conn, current_user.id)
+
+        restantes = calcular_restantes_from_totais(metas, totais)
         
     refeicoes_por_tipo = {tipo: [] for tipo in tipos_fixos}
     for r in registros:
@@ -189,8 +158,8 @@ def listar_refeicoes():
     
     return jsonify({
         "refeicoes": refeicoes_por_tipo,
-        "totais": dict(totais or {}),
-        "restantes": dict(restantes or {})
+        "totais": totais,
+        "restantes": restantes
     })
 
 @refeicoes_ajax_bp.route("/refeicoes/editar/<int:id>", methods=['PUT'])
