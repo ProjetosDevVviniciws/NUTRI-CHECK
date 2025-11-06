@@ -35,8 +35,8 @@ def pegar_metas_conn(conn, usuario_id):
     
 def calcular_restantes_from_totais(metas, totais):
     return {
-        "calorias_restantes": round(metas["calorias_meta"] - totais["calorias_consumidas"], 2),
-        "proteinas_restantes": round(metas["proteinas_meta"] - totais["proteinas_consumidas"], 2),
-        "carboidratos_restantes": round(metas["carboidratos_meta"] - totais["carboidratos_consumidos"], 2),
-        "gorduras_restantes": round(metas["gorduras_meta"] - totais["gorduras_consumidas"], 2),
+        "calorias_restantes": round(float(metas["calorias_meta"]) - float(totais["calorias_consumidas"]), 2),
+        "proteinas_restantes": round(float(metas["proteinas_meta"]) - float(totais["proteinas_consumidas"]), 2),
+        "carboidratos_restantes": round(float(metas["carboidratos_meta"]) - float(totais["carboidratos_consumidos"]), 2),
+        "gorduras_restantes": round(float(metas["gorduras_meta"]) - float(totais["gorduras_consumidas"]), 2),
     }
