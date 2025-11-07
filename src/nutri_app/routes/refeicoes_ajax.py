@@ -280,22 +280,14 @@ def excluir_refeicao(id):
             "gorduras": refeicao.gorduras
         })
          
-        delete = text("DELETE FROM refeicoes WHERE id = :id AND usuario_id = :usuario_id")
-        conn.execute(delete, {
+        conn.execute(text("DELETE FROM refeicoes WHERE id = :id AND usuario_id = :usuario_id"), {
             "id": id,
             "usuario_id": current_user.id
         })
 
-        totais = conn.execute(text("""
-            SELECT calorias_consumidas, proteinas_consumidas, carboidratos_consumidos, gorduras_consumidas
-            FROM usuarios
-            WHERE id = :usuario_id
-        """), {"usuario_id": current_user.id}).mappings().first()
-        
-        restantes = conn.execute(text("""
-            SELECT calorias_restantes, proteinas_restantes, carboidratos_restantes, gorduras_restantes
-            FROM usuarios
-            WHERE id = :id
-        """), {"id": current_user.id}).mappings().first()
+        data_refeicao = refeicao["data_ref"]
+        totais = calcular_totais_conn(conn, current_user.id, data_refeicao)
+        metas = buscar_metas_conn(conn, current_user.id)
+        restantes = calcular_restantes_from_totais(metas, totais)
         
     return jsonify({'mensagem': 'Refeição excluída com sucesso', 'totais': dict(totais), 'restantes': dict(restantes)})
