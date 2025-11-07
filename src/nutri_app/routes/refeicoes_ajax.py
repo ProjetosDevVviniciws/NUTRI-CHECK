@@ -228,7 +228,6 @@ def editar_refeicao(id):
             "usuario_id": current_user.id
         })
 
-        hoje = date.today() 
         conn.execute(text("""
             UPDATE usuarios
             SET calorias_consumidas = calorias_consumidas + :calorias,
