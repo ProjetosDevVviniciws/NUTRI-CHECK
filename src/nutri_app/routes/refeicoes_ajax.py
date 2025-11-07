@@ -234,7 +234,7 @@ def editar_refeicao(id):
                 proteinas_consumidas = proteinas_consumidas + :proteinas,
                 carboidratos_consumidos = carboidratos_consumidos + :carboidratos,
                 gorduras_consumidas = gorduras_consumidas + :gorduras
-            WHERE id = :usuario_id and ultima_atualizacao = :hoje
+            WHERE id = :usuario_id AND ultima_atualizacao = :hoje
         """), {
             "usuario_id": current_user.id,
             "hoje": hoje,
