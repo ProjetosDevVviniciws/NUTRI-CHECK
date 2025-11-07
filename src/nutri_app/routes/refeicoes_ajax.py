@@ -94,19 +94,11 @@ def criar_refeicao():
             "hoje": hoje
         })
         
-        totais = conn.execute(text("""
-            SELECT calorias_consumidas, proteinas_consumidas, carboidratos_consumidos, gorduras_consumidas
-            FROM usuarios
-            WHERE id = :id
-        """), {"id": current_user.id}).mappings().first()
+        totais = calcular_totais_conn(conn, current_user.id, data_refeicao)
+        metas = buscar_metas_conn(conn, current_user.id)
+        restantes = calcular_restantes_from_totais(metas, totais)
         
-        restantes = conn.execute(text("""
-            SELECT calorias_restantes, proteinas_restantes, carboidratos_restantes, gorduras_restantes
-            FROM usuarios
-            WHERE id = :id
-        """), {"id": current_user.id}).mappings().first()
-        
-    return jsonify({'mensagem': 'Refeição registrada com sucesso', 'totais': dict(totais), 'restantes': dict(restantes)})
+    return jsonify({'mensagem': 'Refeição registrada com sucesso', 'totais': totais, 'restantes': restantes})
 
 @refeicoes_ajax_bp.route("/refeicoes/listar")
 @login_required
