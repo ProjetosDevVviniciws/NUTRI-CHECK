@@ -244,17 +244,10 @@ def editar_refeicao(id):
             "gorduras": gorduras
         })
         
-        totais = conn.execute(text("""
-            SELECT calorias_consumidas, proteinas_consumidas, carboidratos_consumidos, gorduras_consumidas
-            FROM usuarios
-            WHERE id = :usuario_id
-        """), {"usuario_id": current_user.id}).mappings().first()
-        
-        restantes = conn.execute(text("""
-            SELECT calorias_restantes, proteinas_restantes, carboidratos_restantes, gorduras_restantes
-            FROM usuarios
-            WHERE id = :id
-        """), {"id": current_user.id}).mappings().first()
+        data_refeicao = datetime.now().date()
+        totais = calcular_totais_conn(conn, current_user.id, data_refeicao)
+        metas = buscar_metas_conn(conn, current_user.id)
+        restantes = calcular_restantes_from_totais(metas, totais)
         
     return jsonify({'mensagem': 'Refeição atualizada com sucesso', 'totais': dict(totais), 'restantes': dict(restantes)})
 
