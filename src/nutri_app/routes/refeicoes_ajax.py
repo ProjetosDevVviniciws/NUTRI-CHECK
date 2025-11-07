@@ -290,4 +290,4 @@ def excluir_refeicao(id):
         metas = buscar_metas_conn(conn, current_user.id)
         restantes = calcular_restantes_from_totais(metas, totais)
         
-    return jsonify({'mensagem': 'Refeição excluída com sucesso', 'totais': dict(totais), 'restantes': dict(restantes)})
+    return jsonify({'mensagem': 'Refeição excluída com sucesso', 'totais': totais, 'restantes': restantes})
