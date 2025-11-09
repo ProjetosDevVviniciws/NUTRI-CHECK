@@ -54,10 +54,10 @@ def home():
             }
             
             restantes_dia = {
-                "calorias_restantes": round(metas_dia["calorias_meta"] - totais_dia["calorias_consumidas"], 2),
-                "proteinas_restantes": round(metas_dia["proteinas_meta"] - totais_dia["proteinas_consumidas"], 2),
-                "carboidratos_restantes": round(metas_dia["carboidratos_meta"] - totais_dia["carboidratos_consumidos"], 2),
-                "gorduras_restantes": round(metas_dia["gorduras_meta"] - totais_dia["gorduras_consumidas"], 2)
+                "calorias_restantes": round(float(metas_dia["calorias_meta"]) - float(totais_dia["calorias_consumidas"]), 2),
+                "proteinas_restantes": round(float(metas_dia["proteinas_meta"]) - float(totais_dia["proteinas_consumidas"]), 2),
+                "carboidratos_restantes": round(float(metas_dia["carboidratos_meta"]) - float(totais_dia["carboidratos_consumidos"]), 2),
+                "gorduras_restantes": round(float(metas_dia["gorduras_meta"]) - float(totais_dia["gorduras_consumidas"]), 2)
             }
         
     return render_template(
