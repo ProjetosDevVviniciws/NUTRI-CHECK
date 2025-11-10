@@ -170,7 +170,8 @@ document.addEventListener("DOMContentLoaded", function () {
             body: JSON.stringify({
                 alimento_id: alimentoSelecionado.id,
                 porcao: porcao,
-                tipo_refeicao: tipo_refeicao
+                tipo_refeicao: tipo_refeicao,
+                data_refeicao: dataSelecionada
             })
         })
         .then(res => res.json())
