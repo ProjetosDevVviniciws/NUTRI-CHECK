@@ -18,6 +18,7 @@ def criar_refeicao():
     alimento_id = data.get('alimento_id')
     porcao = data.get('porcao')
     tipo_refeicao = data.get('tipo_refeicao')
+    data_refeicao = data.get('data_refeicao')
 
     if not alimento_id or not porcao or not tipo_refeicao:
         return jsonify({'erro': 'Dados incompletos'}), 400
