@@ -22,6 +22,14 @@ def criar_refeicao():
 
     if not alimento_id or not porcao or not tipo_refeicao:
         return jsonify({'erro': 'Dados incompletos'}), 400
+    
+    if data_refeicao:
+        try:
+            data_refeicao = datetime.strptime(data_refeicao, "%Y-%m-%d").date()
+        except ValueError:
+            return jsonify({'erro': 'Formato de data inválido'}), 400
+    else:
+        data_refeicao = datetime.now().date()
 
     with engine.begin() as conn:
         usuario = conn.execute(text("""
