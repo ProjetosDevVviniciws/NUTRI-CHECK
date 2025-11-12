@@ -294,7 +294,7 @@ def excluir_refeicao(id):
             "usuario_id": current_user.id
         })
 
-        data_refeicao = refeicao["data_ref"]
+        data_refeicao = refeicao["data"]
         totais = calcular_totais_conn(conn, current_user.id, data_refeicao)
         metas = buscar_metas_conn(conn, current_user.id)
         restantes = calcular_restantes_from_totais(metas, totais)
