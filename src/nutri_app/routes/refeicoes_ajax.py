@@ -266,7 +266,7 @@ def excluir_refeicao(id):
     with engine.begin() as conn: 
         
         refeicao = conn.execute(text("""
-            SELECT calorias, proteinas, carboidratos, gorduras
+            SELECT calorias, proteinas, carboidratos, gorduras, data
             FROM refeicoes
             WHERE id = :id AND usuario_id = :usuario_id
         """), {"id": id, "usuario_id": current_user.id}).mappings().first()
