@@ -165,13 +165,6 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        console.log("📌 Enviando dados para /refeicoes/criar:", {
-            alimento_id: alimentoSelecionado.id,
-            porcao: porcao,
-            tipo_refeicao: tipo_refeicao,
-            data_refeicao: dataSelecionada
-        });
-
         fetch("/refeicoes/criar", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
