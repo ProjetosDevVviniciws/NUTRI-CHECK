@@ -209,6 +209,10 @@ document.addEventListener("DOMContentLoaded", function () {
             atualizarDataDisplay();
             carregarRefeicoes();
         });
+
+        btnCalendario?.addEventListener("click", () => {
+            seletorData.showPicker();
+        });
     }
 
     atualizarDataDisplay();
