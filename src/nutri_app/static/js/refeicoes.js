@@ -19,6 +19,8 @@ document.addEventListener("DOMContentLoaded", function () {
         if (seletorData) {
             seletorData.value = dataAtual.toISOString().split("T")[0];
         }
+
+        window.dataSelecionada = dataAtual.toISOString().split("T")[0];
     };
 
     function atualizarTotais(totais) {
