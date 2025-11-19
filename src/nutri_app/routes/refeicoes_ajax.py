@@ -67,8 +67,6 @@ def criar_refeicao():
         carboidratos = round(float(alimento.carboidratos) * fator, 2)
         gorduras = round(float(alimento.gorduras) * fator, 2)
 
-        data_refeicao = datetime.now().date()
-
         insert = text('''
             INSERT INTO refeicoes (usuario_id, catalogo_alimento_id, porcao, data, tipo_refeicao, calorias, proteinas, carboidratos, gorduras)
             VALUES (:usuario_id, :catalogo_alimento_id, :porcao, :data, :tipo_refeicao, :calorias, :proteinas, :carboidratos, :gorduras)
