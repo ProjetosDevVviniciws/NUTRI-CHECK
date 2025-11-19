@@ -5,7 +5,7 @@ from src.nutri_app.database import engine
 def importar_alimentos_populares():
     url = "https://br.openfoodfacts.org/cgi/search.pl"
     
-    total_paginas = 6
+    total_paginas = 40
     
     with engine.begin() as conn:
         for pagina in range(1, total_paginas + 1):
@@ -15,7 +15,7 @@ def importar_alimentos_populares():
                 "tag_contains_0": "contains",
                 "tag_0": "brazil", 
                 "sort_by": "unique_scans_n",  
-                "page_size": 50,  
+                "page_size": 100,  
                 "page": pagina,   
                 "json": 1
             }
