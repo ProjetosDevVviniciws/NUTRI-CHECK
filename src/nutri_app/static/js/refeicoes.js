@@ -1,16 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const tipoHidden = document.getElementById("tipo-refeicao-hidden");
-    let alimentoSelecionado = null;
 
+    const tipoHidden = document.getElementById("tipo-refeicao-hidden");
     const modalEditar = new bootstrap.Modal(document.getElementById("editarRefeicaoModal"));
     const dataSpan = document.getElementById("data-selecionada");
     const seletorData = document.getElementById("seletor-data");
     const btnAnterior = document.getElementById("dia-anterior");
     const btnProximo = document.getElementById("proximo-dia");
     const btnCalendario = document.getElementById("abrir-calendario");
-
     const hoje = new Date();
+    
     let dataAtual = new Date(seletorData?.value || hoje);
+    let alimentoSelecionado = null;
 
     const atualizarDataDisplay = () => {
         if (dataSpan) {
