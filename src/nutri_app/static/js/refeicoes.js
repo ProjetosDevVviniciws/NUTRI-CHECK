@@ -205,7 +205,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         seletorData.addEventListener("change", (e) => {
-            dataAtual = new Date(e.target.value);
+            dataAtual = new Date(ano, mes - 1, dia);
             atualizarDataDisplay();
             carregarRefeicoes();
         });
