@@ -205,6 +205,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         seletorData.addEventListener("change", (e) => {
+            const [ano, mes, dia] = e.target.value.split("-").map(Number);
             dataAtual = new Date(ano, mes - 1, dia);
             atualizarDataDisplay();
             carregarRefeicoes();
