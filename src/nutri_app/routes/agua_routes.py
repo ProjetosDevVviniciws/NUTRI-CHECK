@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, flash
+from flask import Blueprint, render_template
 from src.nutri_app.forms.agua_forms import AguaForm
 from src.nutri_app.utils.decorators import perfil_completo_required
 from src.nutri_app.database import engine
