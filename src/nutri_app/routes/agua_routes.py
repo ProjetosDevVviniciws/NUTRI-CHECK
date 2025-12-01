@@ -1,5 +1,4 @@
 from flask import Blueprint, render_template, request, jsonify
-from src.nutri_app.forms.agua_forms import AguaForm
 from src.nutri_app.utils.decorators import perfil_completo_required
 from src.nutri_app.database import engine
 from sqlalchemy import text
