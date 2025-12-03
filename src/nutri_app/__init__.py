@@ -41,7 +41,6 @@ def create_app():
     @app.context_processor
     def inject_forms():
         return {
-            'form_agua': AguaForm(),
             'form_peso': ProgressaoForm()
         }
 
