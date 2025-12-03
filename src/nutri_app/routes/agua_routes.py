@@ -46,8 +46,6 @@ def registrar_agua():
                 WHERE id = :id
             """), {"id": current_user.id, "hoje": hoje})
             
-        if forms.validate_on_submit():
-            quantidade = forms.quantidade.data
             
             conn.execute(text("""
                 UPDATE usuarios SET
@@ -55,7 +53,4 @@ def registrar_agua():
                 WHERE id = :id
             """), {"id": current_user.id, "qtd": quantidade})
 
-            flash(f"{quantidade}ml de água registrados com sucesso!", category="success")
-            return redirect(url_for('agua.registrar_agua'))
             
-    return render_template('includes/agua.html', form=forms)
