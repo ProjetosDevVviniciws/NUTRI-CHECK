@@ -27,6 +27,9 @@ def registrar_agua():
     except ValueError:
         return jsonify({"erro": "Quantidade inválida."}), 400
     
+    if quantidade < 50 or quantidade > 12000:
+        return jsonify({"erro": "Informe uma quantidade entre 50ml e 12000ml."}), 400
+    
     with engine.begin() as conn:
         usuario = conn.execute(text("""
             SELECT agua_consumida, ultima_atualizacao
