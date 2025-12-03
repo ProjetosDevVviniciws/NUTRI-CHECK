@@ -30,13 +30,13 @@ def registrar_agua():
     if quantidade < 50 or quantidade > 12000:
         return jsonify({"erro": "Informe uma quantidade entre 50ml e 12000ml."}), 400
     
+    hoje = date.today()
+    
     with engine.begin() as conn:
         usuario = conn.execute(text("""
             SELECT agua_consumida, ultima_atualizacao
             FROM usuarios WHERE id = :id
         """), {"id": current_user.id}).fetchone()
-    
-        hoje = date.today()
         
         if usuario.ultima_atualizacao.date() != hoje:
             conn.execute(text("""
