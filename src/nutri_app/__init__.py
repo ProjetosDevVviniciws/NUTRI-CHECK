@@ -3,8 +3,7 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 import os
 from dotenv import load_dotenv
-
-from nutri_app.forms.agua_forms import AguaForm  
+ 
 from nutri_app.forms.progressao_forms import ProgressaoForm
 
 load_dotenv()
