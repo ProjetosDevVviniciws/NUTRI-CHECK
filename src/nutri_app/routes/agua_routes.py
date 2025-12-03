@@ -17,7 +17,15 @@ def pagina_agua():
 @login_required
 @perfil_completo_required
 def registrar_agua():
-    forms = AguaForm()
+    data = request.get_json()
+    
+    if not data or "quantidade" not in data:
+        return jsonify({"erro": "Quantidade não enviada."}), 400
+
+    try:
+        quantidade = int(data["quantidade"])
+    except ValueError:
+        return jsonify({"erro": "Quantidade inválida."}), 400
     
     with engine.begin() as conn:
         usuario = conn.execute(text("""
