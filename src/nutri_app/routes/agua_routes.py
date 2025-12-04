@@ -46,8 +46,7 @@ def registrar_agua():
                 WHERE id = :id
             """), {"id": current_user.id, "hoje": hoje})
             
-            
-            conn.execute(text("""
+        conn.execute(text("""
                 UPDATE usuarios SET
                     agua_consumida = agua_consumida + :qtd
                 WHERE id = :id
