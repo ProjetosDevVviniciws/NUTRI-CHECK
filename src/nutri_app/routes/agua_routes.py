@@ -51,5 +51,10 @@ def registrar_agua():
                     agua_consumida = agua_consumida + :qtd
                 WHERE id = :id
             """), {"id": current_user.id, "qtd": quantidade})
+        
+    return jsonify({
+    "mensagem": f"{quantidade}ml registrados com sucesso!",
+    "quantidade": quantidade
+    })
 
             
