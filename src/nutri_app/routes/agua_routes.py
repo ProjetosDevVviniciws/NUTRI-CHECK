@@ -11,7 +11,7 @@ agua_bp = Blueprint('agua', __name__)
 @login_required
 @perfil_completo_required
 def pagina_agua():
-    return render_template("includes/agua.html")
+    return render_template("modals/registrar_agua_modal")
 
 @agua_bp.route("/agua_registrar", methods=['POST'])
 @login_required
