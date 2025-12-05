@@ -13,7 +13,6 @@ perfil_bp = Blueprint('perfil', __name__)
 def perfil_page():
     return render_template("includes/perfil.html")
 
-
 @perfil_bp.route("/perfil/dados")
 @login_required
 def perfil_dados():
@@ -39,7 +38,6 @@ def perfil_dados():
             "carboidratos_meta": "",
             "gorduras_meta": ""
         }), 200
-
 
 @perfil_bp.route("/perfil/atualizar", methods=["PUT"])
 @login_required
