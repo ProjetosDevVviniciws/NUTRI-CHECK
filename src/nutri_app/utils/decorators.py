@@ -11,7 +11,7 @@ def perfil_completo_required(f):
             result = conn.execute(text("""
                 SELECT calorias_meta, proteinas_meta, carboidratos_meta, gorduras_meta
                 FROM usuarios
-                WHERE id = id:
+                WHERE id = :id
             """), {"id": current_user.id}).fetchone()
             
             if result is None or any(valor is None for valor in result):
