@@ -7,12 +7,6 @@ from datetime import date
 
 agua_bp = Blueprint('agua', __name__)
 
-@agua_bp.route("/agua", methods=['GET'])
-@login_required
-@perfil_completo_required
-def pagina_agua():
-    return render_template("modals/registrar_agua_modal")
-
 @agua_bp.route("/agua/registrar", methods=['POST'])
 @login_required
 @perfil_completo_required
