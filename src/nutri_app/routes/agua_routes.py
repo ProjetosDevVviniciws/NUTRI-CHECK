@@ -38,7 +38,7 @@ def registrar_agua():
             FROM usuarios WHERE id = :id
         """), {"id": current_user.id}).fetchone()
         
-        if usuario.ultima_atualizacao.date() != hoje:
+        if usuario.ultima_atualizacao != hoje:
             conn.execute(text("""
                 UPDATE usuarios SET
                     agua_consumida = 0,
