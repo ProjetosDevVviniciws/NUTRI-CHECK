@@ -4,7 +4,7 @@ from sqlalchemy import text
 from src.nutri_app.database import engine
 import requests
 
-alimentos_ajax_bp = Blueprint('alimentos_ajax', __name__)
+alimentos_bp = Blueprint('alimentos', __name__)
 
 def buscar_api_e_salvar(nome):
     url = f"https://world.openfoodfacts.org/api/v0/product/{nome}.json"
@@ -52,7 +52,7 @@ def buscar_api_e_salvar(nome):
         "gorduras": gorduras
     }
 
-@alimentos_ajax_bp.route("/buscar_alimentos")
+@alimentos_bp.route("/buscar_alimentos")
 @login_required
 def buscar_alimentos():
     termo = request.args.get('q', '').strip()
