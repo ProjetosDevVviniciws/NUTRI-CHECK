@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ quantidade: valor })
+            body: JSON.stringify({ quantidade: valor, data: dataSelecionada })
         })
         .then(res => res.json())
         .then(data => {
