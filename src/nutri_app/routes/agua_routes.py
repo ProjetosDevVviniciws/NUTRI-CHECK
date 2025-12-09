@@ -29,7 +29,8 @@ def registrar_agua():
     with engine.begin() as conn:
         usuario = conn.execute(text("""
             SELECT agua_consumida, ultima_atualizacao
-            FROM usuarios WHERE id = :id
+            FROM usuarios 
+            WHERE id = :id
         """), {"id": current_user.id}).fetchone()
         
         if usuario.ultima_atualizacao != hoje:
@@ -47,7 +48,9 @@ def registrar_agua():
             """), {"id": current_user.id, "qtd": quantidade})
         
         total = conn.execute(text("""
-            SELECT agua_consumida FROM usuarios WHERE id = :id
+            SELECT agua_consumida 
+            FROM usuarios 
+            WHERE id = :id
         """), {"id": current_user.id}).scalar()
         
     return jsonify({
