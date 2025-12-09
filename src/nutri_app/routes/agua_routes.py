@@ -3,7 +3,7 @@ from src.nutri_app.utils.decorators import perfil_completo_required
 from src.nutri_app.database import engine
 from sqlalchemy import text
 from flask_login import login_required, current_user
-from datetime import date
+from datetime import date, datetime
 
 agua_bp = Blueprint('agua', __name__)
 
@@ -20,6 +20,15 @@ def registrar_agua():
         quantidade = int(data["quantidade"])
     except ValueError:
         return jsonify({"erro": "Quantidade inválida."}), 400
+    
+    data_registro = data.get("data")
+    if data_registro:
+        try:
+            data_registro = datetime.strptime(data_registro, "%Y-%m-%d").date()
+        except ValueError:
+            return jsonify({"erro": "Formato de data inválido"}), 400
+    else:
+        data_registro = date.today()
     
     if quantidade < 50 or quantidade > 12000:
         return jsonify({"erro": "Informe uma quantidade entre 50ml e 12000ml."}), 400
