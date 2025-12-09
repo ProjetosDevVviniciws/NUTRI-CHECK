@@ -46,9 +46,13 @@ def registrar_agua():
                 WHERE id = :id
             """), {"id": current_user.id, "qtd": quantidade})
         
+        total = conn.execute(text("""
+            SELECT agua_consumida FROM usuarios WHERE id = :id
+        """), {"id": current_user.id}).scalar()
+        
     return jsonify({
     "mensagem": f"{quantidade}ml registrados com sucesso!",
-    "quantidade": quantidade
+    "total": total
     })
 
             
