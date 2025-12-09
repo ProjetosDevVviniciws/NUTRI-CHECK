@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.addEventListener("click", () => {
 
         const valor = Number(input.value.trim());
+        const dataSelecionada = window.dataSelecionada || new Date().toISOString().split("T")[0];
 
         if (!valor) {
             mostrarErro("Informe a quantidade de água.");
