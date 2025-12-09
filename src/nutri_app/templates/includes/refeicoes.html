@@ -34,26 +34,18 @@
     {% endfor %}
 
     <div class="card mb-4 agua-card" data-tipo="Agua">
-    <div class="card-header d-flex justify-content-between align-items-center">
-      <span class="fw-bold">Água</span>
-      <button class="btn btn-sm btn-outline-info registrar-agua-btn" data-bs-toggle="modal" data-bs-target="#modalRegistrarAgua">
-        Registrar Água
-      </button>
-    </div>
-
-    <div class="card-body">
-      <p class="mb-1">Total consumido hoje:</p>
-      <h4 id="total-agua" class="fw-bold text-primary">0 ml</h4>
-
-      <div class="progress mt-2" style="height: 10px;">
-        <div id="barra-agua" class="progress-bar bg-info" role="progressbar" style="width: 0%"></div>
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <span class="fw-bold">Água</span>
+        <button class="btn btn-sm btn-outline-info registrar-agua-btn" data-bs-toggle="modal" data-bs-target="#modalRegistrarAgua">
+          Registrar Água
+        </button>
       </div>
 
-      <small id="meta-agua-info" class="text-muted"></small>
+      <div class="card-body">
+        <p class="mb-1">Total consumido hoje:</p>
+        <h4 id="total-agua" class="fw-bold text-primary">{{ agua_consumida if agua_consumida else 0 }} ml</h4>
+      </div>
     </div>
-  </div>
-  </div>
-
   </div>
 </div>
 
