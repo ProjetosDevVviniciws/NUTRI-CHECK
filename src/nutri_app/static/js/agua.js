@@ -10,15 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const valor = Number(input.value.trim());
         const dataSelecionada = window.dataSelecionada || new Date().toISOString().split("T")[0];
 
-        if (!valor) {
-            mostrarErro("Informe a quantidade de água.");
-            return;
-        }
-
-        if (valor < 50 || valor > 12000) {
-            mostrarErro("Informe uma quantidade entre 50ml e 12000ml.");
-            return;
-        }
+        if (!valor) return mostrarErro("Informe a quantidade de água.");
+        if (valor < 50 || valor > 12000) return mostrarErro("Informe uma quantidade entre 50ml e 12000ml.");
 
         erro.classList.add("d-none");
 
