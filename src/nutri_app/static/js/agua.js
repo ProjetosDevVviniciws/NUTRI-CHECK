@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const input = document.getElementById("input-agua");
     const btn = document.getElementById("btnRegistrarAgua");
     const erro = document.getElementById("erro-agua");
+    const totalAgua = document.getElementById("total-agua")
 
     btn.addEventListener("click", () => {
 
@@ -38,9 +39,11 @@ document.addEventListener("DOMContentLoaded", () => {
             const modal = bootstrap.Modal.getInstance(document.getElementById("modalRegistrarAgua"));
             modal.hide();
 
-            alert(data.mensagem);
-
+            totalAgua.textContent = `${data.total} ml`;
             input.value = "";
+
+            alert(data.mensagem);
+            
         })
         .catch(() => {
             mostrarErro("Erro ao registrar água. Tente novamente.");
