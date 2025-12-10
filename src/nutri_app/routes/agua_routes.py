@@ -60,7 +60,8 @@ def registrar_agua():
         
     return jsonify({
     "mensagem": f"{quantidade}ml registrados com sucesso!",
-    "total": total
+    "total": total,
+    "data": data_registro.strftime("%d/%m/%Y")
     })
 
             
