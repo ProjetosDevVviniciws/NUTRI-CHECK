@@ -5,6 +5,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const erro = document.getElementById("erro-agua");
     const totalAgua = document.getElementById("total-agua")
 
+    function carregarTotalAgua(data) {
+        fetch(`/agua/total?data=${data}`)
+        .then(res => res.json())
+        .then(data => {
+            totalAgua.textContent = `${data.total} ml`;
+        })
+        .catch(() => {
+            totalAgua.textContent = "0 ml";
+        });
+    }
+
     btn.addEventListener("click", () => {
 
         const valor = Number(input.value.trim());
