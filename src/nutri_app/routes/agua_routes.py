@@ -63,5 +63,28 @@ def registrar_agua():
     "total": total,
     "data": data_registro.strftime("%d/%m/%Y")
     })
+    
+@agua_bp.route("/agua/total")
+@login_required
+def total_agua_por_data():
+    data_str = request.args.get("data")
+    
+    if not data_str:
+        return jsonify({"erro": "Data não enviada"}), 400
+
+    try:
+        data = datetime.strptime(data_str, "%Y-%m-%d").date()
+    except ValueError:
+        return jsonify({"erro": "Formato de data inválido"}), 400
+
+    with engine.begin() as conn:
+        total = conn.execute(text("""
+            SELECT quantidade_ml 
+            FROM agua_registros
+            WHERE usuario_id = :uid AND data = :data
+        """), {"uid": current_user.id, "data": data}).scalar()
+
+    return jsonify({"total": total or 0})
+
 
             
