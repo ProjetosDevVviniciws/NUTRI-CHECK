@@ -16,6 +16,18 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    if (window.inputDataAgua) {
+        window.inputDataAgua.addEventListener("change", (e) => {
+            const dataSelecionada = e.target.value;
+            window.dataSelecionada = dataSelecionada;
+            carregarTotalAgua(dataSelecionada);
+        });
+    }
+
+    const dataHoje = new Date().toISOString().split("T")[0];
+    window.dataSelecionada = window.dataSelecionada || dataHoje;
+    carregarTotalAgua(window.dataSelecionada);
+
     btn.addEventListener("click", () => {
 
         const valor = Number(input.value.trim());
