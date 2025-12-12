@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const btn = document.getElementById("btnRegistrarAgua");
     const erro = document.getElementById("erro-agua");
     const totalAgua = document.getElementById("total-agua")
+    const seletorData = document.getElementById("seletor-data");
 
     function carregarTotalAgua(data) {
         fetch(`/agua/total?data=${data}`)
