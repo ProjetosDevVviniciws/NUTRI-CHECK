@@ -5,6 +5,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const erro = document.getElementById("erro-agua");
     const totalAgua = document.getElementById("total-agua");
     const seletorData = document.getElementById("seletor-data");
+    const btnAnterior = document.getElementById("dia-anterior");
+    const btnProximo = document.getElementById("proximo-dia");
+    const btnCalendario = document.getElementById("abrir-calendario");
 
     function carregarTotalAgua(data) {
         fetch(`/agua/total?data=${data}`)
