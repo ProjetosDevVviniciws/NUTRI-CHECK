@@ -17,11 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     }
 
-    seletorData.addEventListener("change", () => {
-        window.dataSelecionada = seletorData.value;
-        carregarTotalAgua(seletorData.value);
-    });
-
     window.dataSelecionada = seletorData.value;
     carregarTotalAgua(window.dataSelecionada);
 
@@ -62,6 +57,15 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     });
 
+    if (btnAnterior && btnProximo && seletorData) {
+        seletorData.addEventListener("change", e => {
+            const [ano, mes, dia] = e.target.value.split("-").map(Number);
+            dataAtual = new Date(ano, mes - 1, dia);
+            atualizarDataDisplay();
+            carregarTotalAgua();
+        });
+    }
+        
     function mostrarErro(msg) {
         erro.textContent = msg;
         erro.classList.remove("d-none");
