@@ -61,6 +61,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     if (btnAnterior && btnProximo && seletorData) {
+        btnAnterior.addEventListener("click", () => {
+            dataAtual.setDate(dataAtual.getDate() - 1);
+            atualizarDataDisplay();
+            carregarTotalAgua();
+        });
+
+        btnProximo.addEventListener("click", () => {
+            dataAtual.setDate(dataAtual.getDate() + 1);
+            atualizarDataDisplay();
+            carregarTotalAgua();
+        });
+
         seletorData.addEventListener("change", e => {
             const [ano, mes, dia] = e.target.value.split("-").map(Number);
             dataAtual = new Date(ano, mes - 1, dia);
