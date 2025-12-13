@@ -79,6 +79,10 @@ document.addEventListener("DOMContentLoaded", () => {
             atualizarDataDisplay();
             carregarTotalAgua();
         });
+
+        btnCalendario?.addEventListener("click", () => {
+            seletorData.showPicker();
+        });
     }
         
     function mostrarErro(msg) {
