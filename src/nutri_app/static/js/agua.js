@@ -12,6 +12,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let dataAtual = new Date(seletorData.value || new Date());
 
+    function atualizarDataDisplay() {
+        seletorData.value = dataAtual.toISOString().split("T")[0];
+        window.dataSelecionada = seletorData.value;
+    }
+
     function carregarTotalAgua(data) {
         fetch(`/agua/total?data=${data}`)
             .then(res => res.json())
