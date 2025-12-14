@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const btn = document.getElementById("btnRegistrarAgua");
     const erro = document.getElementById("erro-agua");
     const totalAgua = document.getElementById("total-agua");
+    const dataSpan = document.getElementById("data-selecionada");
     const seletorData = document.getElementById("seletor-data");
     const btnAnterior = document.getElementById("dia-anterior");
     const btnProximo = document.getElementById("proximo-dia");
