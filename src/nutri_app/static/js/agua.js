@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnProximo = document.getElementById("proximo-dia");
     const btnCalendario = document.getElementById("abrir-calendario");
 
+    let dataAtual = new Date(seletorData.value || new Date());
+
     function carregarTotalAgua(data) {
         fetch(`/agua/total?data=${data}`)
             .then(res => res.json())
