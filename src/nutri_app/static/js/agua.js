@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
         window.dataSelecionada = seletorData.value;
     }
 
-    function carregarTotalAgua(data) {
+    function carregarTotalAgua() {
         fetch(`/agua/total?data=${data}`)
             .then(res => res.json())
             .then(data => {
