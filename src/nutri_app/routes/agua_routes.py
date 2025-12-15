@@ -81,8 +81,8 @@ def total_agua_por_data():
         total = conn.execute(text("""
             SELECT quantidade_ml 
             FROM agua_registros
-            WHERE usuario_id = :uid AND data = :data
-        """), {"uid": current_user.id, "data": data}).scalar()
+            WHERE usuario_id = :id AND data = :data
+        """), {"id": current_user.id, "data": data}).scalar()
 
     return jsonify({"total": total or 0})
 
