@@ -18,6 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function carregarTotalAgua() {
+        const data = dataAtual.toISOString().split("T")[0];
+        
         fetch(`/agua/total?data=${data}`)
             .then(res => res.json())
             .then(data => {
