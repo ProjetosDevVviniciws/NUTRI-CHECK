@@ -108,10 +108,10 @@ def editar_agua():
         resultado = conn.execute(text("""
             UPDATE agua_registros
             SET quantidade_ml = :qtd
-            WHERE usuario_id = :uid AND data = :data
+            WHERE usuario_id = :id AND data = :data
         """), {
             "qtd": nova_quantidade,
-            "uid": current_user.id,
+            "id": current_user.id,
             "data": data_registro
         })
 
