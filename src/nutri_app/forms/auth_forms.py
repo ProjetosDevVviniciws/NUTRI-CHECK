@@ -24,13 +24,13 @@ class CadastroForm(FlaskForm):
             if senha.first():
                 raise ValidationError("Senha já existe! Cadastre outra senha.")
     
-    usuario = StringField(label='Usuario:', validators=[Length(min=2, max=30), DataRequired()])
-    email = StringField(label='Email:', validators=[Email(), DataRequired()])
-    senha1 = PasswordField(label='Senha:', validators=[Length(min=6), DataRequired()])
-    senha2 = PasswordField(label='Confirmação da Senha:', validators=[EqualTo('senha1'), DataRequired()])
+    usuario = StringField(label='Usuario', validators=[Length(min=2, max=30), DataRequired()])
+    email = StringField(label='Email', validators=[Email(), DataRequired()])
+    senha1 = PasswordField(label='Senha', validators=[Length(min=6), DataRequired()])
+    senha2 = PasswordField(label='Confirmação da Senha', validators=[EqualTo('senha1'), DataRequired()])
     submit = SubmitField(label='Cadastrar')
     
 class LoginForm(FlaskForm):
-    usuario = StringField(label='Usuário:', validators=[DataRequired()])
-    senha = PasswordField(label='Senha:', validators=[DataRequired()])
+    usuario = StringField(label='Usuário', validators=[DataRequired()])
+    senha = PasswordField(label='Senha', validators=[DataRequired()])
     submit = SubmitField(label='Login')
