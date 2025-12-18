@@ -24,7 +24,7 @@
     {% for tipo in ["Café da Manhã", "Almoço", "Jantar", "Lanche"] %}
       <div class="card mb-4 refeicao-card" data-tipo="{{ tipo }}">
         <div class="card-header d-flex justify-content-between align-items-center">
-          <span class="fw-bold">{{ tipo }}</span>
+          <span class="fw-semibold">{{ tipo }}</span>
           <button class="btn btn-sm btn-outline-primary adicionar-alimento-btn" data-tipo="{{ tipo }}">
             Adicionar Alimento
           </button>
@@ -35,7 +35,7 @@
 
     <div class="card mb-4 agua-card" data-tipo="Agua">
       <div class="card-header d-flex justify-content-between align-items-center">
-        <span class="fw-bold">Água</span>
+        <span class="fw-semibold">Água</span>
         <button class="btn btn-sm btn-outline-info registrar-agua-btn" data-bs-toggle="modal" data-bs-target="#modalRegistrarAgua">
           Registrar Água
         </button>
