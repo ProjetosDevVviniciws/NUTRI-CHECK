@@ -123,7 +123,7 @@ def editar_agua():
         "total": nova_quantidade
     })
     
-@agua_bp.route("/agua/remover", methods=["PUT"])
+@agua_bp.route("/agua/remover", methods=["DELETE"])
 @login_required
 @perfil_completo_required
 def remover_agua():
