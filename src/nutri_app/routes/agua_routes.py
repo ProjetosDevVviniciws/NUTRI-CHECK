@@ -150,7 +150,7 @@ def remover_agua():
             return jsonify({"erro": "Registro de água não encontrado."}), 404
 
     return jsonify({
-        "mensagem": "",
+        "mensagem": "Consumo de água do dia removido com sucesso.",
         "total": 0
     })
 
