@@ -129,17 +129,13 @@ def editar_agua():
 def remover_agua():
     data = request.get_json()
 
-    if not data or "quantidade" not in data or "data" not in data:
+    if not data or "data" not in data:
         return jsonify({"erro": "Dados incompletos."}), 400
 
     try:
-        quantidade = int(data["quantidade"])
         data_registro = datetime.strptime(data["data"], "%Y-%m-%d").date()
     except ValueError:
         return jsonify({"erro": "Dados inválidos."}), 400
-
-    if quantidade <= 0:
-        return jsonify({"erro": "Quantidade inválida."}), 400
 
     with engine.begin() as conn:
         total_atual = conn.execute(text("""
@@ -154,21 +150,9 @@ def remover_agua():
         if total_atual is None:
             return jsonify({"erro": "Registro de água não encontrado."}), 404
 
-        novo_total = max(total_atual - quantidade, 0)
-
-        conn.execute(text("""
-            UPDATE agua_registros
-            SET quantidade_ml = :novo
-            WHERE usuario_id = :id AND data = :data
-        """), {
-            "novo": novo_total,
-            "id": current_user.id,
-            "data": data_registro
-        })
-
     return jsonify({
-        "mensagem": f"{quantidade}ml removidos.",
-        "total": novo_total
+        "mensagem": "",
+        "total": 0
     })
 
 
