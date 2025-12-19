@@ -138,16 +138,15 @@ def remover_agua():
         return jsonify({"erro": "Dados inválidos."}), 400
 
     with engine.begin() as conn:
-        total_atual = conn.execute(text("""
-            SELECT quantidade_ml
-            FROM agua_registros
+        resultado = conn.execute(text("""
+            DELETE FROM agua_registros
             WHERE usuario_id = :id AND data = :data
         """), {
             "id": current_user.id,
             "data": data_registro
-        }).scalar()
+        })
 
-        if total_atual is None:
+        if resultado.rowcount == 0:
             return jsonify({"erro": "Registro de água não encontrado."}), 404
 
     return jsonify({
