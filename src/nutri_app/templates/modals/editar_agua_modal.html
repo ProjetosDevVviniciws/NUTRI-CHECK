@@ -1,0 +1,30 @@
+<div class="modal fade" id="modalEditarAgua" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Consumo de Água</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+        <label for="inputEditarAgua" class="form-label-custom">
+          Quantidade consumida (ml)
+        </label>
+        <input type="number" id="inputEditarAgua" class="form-control">
+        <small id="erro-editar-agua" class="text-danger d-none"></small>
+      </div>
+
+      <div class="modal-footer d-flex justify-content-between">
+        <button id="btnRemoverAgua" class="btn btn-outline-danger">
+          Remover consumo
+        </button>
+
+        <button id="btnSalvarAgua" class="btn btn-info">
+          Salvar alterações
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
