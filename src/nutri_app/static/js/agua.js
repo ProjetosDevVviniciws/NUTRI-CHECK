@@ -81,6 +81,19 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     });
 
+    if (cardBodyAgua && modalEditarAgua) {
+        cardBodyAgua.addEventListener("click", () => {
+            const totalAtual = parseInt(
+                totalAgua.textContent.replace("ml", "").trim()
+            ) || 0;
+
+            inputEditarAgua.value = totalAtual;
+            erroEditarAgua.classList.add("d-none");
+
+            modalEditarAgua.show();
+        });
+    }
+
     if (btnAnterior && btnProximo && seletorData) {
         btnAnterior.addEventListener("click", () => {
             dataAtual.setDate(dataAtual.getDate() - 1);
