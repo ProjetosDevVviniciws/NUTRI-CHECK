@@ -94,6 +94,42 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    if (btnSalvarAgua) {
+        btnSalvarAgua.addEventListener("click", () => {
+            const novaQuantidade = Number(inputEditarAgua.value);
+            const dataSelecionada = window.dataSelecionada;
+
+            if (novaQuantidade < 0 || novaQuantidade > 12000) {
+                erroEditarAgua.textContent =
+                    "Informe um valor entre 0 e 12000 ml.";
+                erroEditarAgua.classList.remove("d-none");
+                return;
+            }
+
+            fetch("/agua/editar", {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    quantidade: novaQuantidade,
+                    data: dataSelecionada
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.erro) {
+                    alert(data.erro);
+                    return;
+                }
+
+                totalAgua.textContent = `${data.total} ml`;
+                modalEditarAgua.hide();
+            })
+            .catch(() => {
+                alert("Erro ao editar consumo de água.");
+            });
+        });
+    }
+
     if (btnAnterior && btnProximo && seletorData) {
         btnAnterior.addEventListener("click", () => {
             dataAtual.setDate(dataAtual.getDate() - 1);
