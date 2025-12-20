@@ -10,6 +10,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnProximo = document.getElementById("proximo-dia");
     const btnCalendario = document.getElementById("abrir-calendario");
 
+    const modalEditarAguaEl = document.getElementById("modalEditarAgua");
+    const modalEditarAgua = modalEditarAguaEl
+        ? new bootstrap.Modal(modalEditarAguaEl)
+        : null;
+
+    const inputEditarAgua = document.getElementById("inputEditarAgua");
+    const erroEditarAgua = document.getElementById("erro-editar-agua");
+    const btnSalvarAgua = document.getElementById("btnSalvarAgua");
+
+    const cardBodyAgua = document.querySelector(".agua-card-body");
+
     let dataAtual = new Date(seletorData.value || new Date());
 
     function atualizarDataDisplay() {
