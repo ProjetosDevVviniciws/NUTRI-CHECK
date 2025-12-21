@@ -131,6 +131,34 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    if (btnRemoverAgua && modalEditarAgua) {
+        btnRemoverAgua.addEventListener("click", () => {
+
+            if (!confirm("Deseja remover todo o consumo de água deste dia?")) return;
+
+            fetch("/agua/remover", {
+                method: "DELETE", 
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    data: window.dataSelecionada
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.erro) {
+                    alert(data.erro);
+                    return;
+                }
+
+                totalAgua.textContent = "0 ml";
+                modalEditarAgua.hide();
+            })
+            .catch(() => {
+                alert("Erro ao remover consumo de água.");
+            });
+        });
+    }
+
     if (btnAnterior && btnProximo && seletorData) {
         btnAnterior.addEventListener("click", () => {
             dataAtual.setDate(dataAtual.getDate() - 1);
