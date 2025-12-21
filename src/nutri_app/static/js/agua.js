@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const inputEditarAgua = document.getElementById("inputEditarAgua");
     const erroEditarAgua = document.getElementById("erro-editar-agua");
     const btnSalvarAgua = document.getElementById("btnSalvarAgua");
+    const btnRemoverAgua = document.getElementById("btnRemoverAgua");
 
     const cardBodyAgua = document.querySelector(".agua-card-body");
 
