@@ -11,3 +11,8 @@
 .rounded {
     border-radius: 10px;
 }
+
+.text-color {
+    color: #1a74e2;
+    font-size: 0.68rem;
+}
