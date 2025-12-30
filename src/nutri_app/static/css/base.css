@@ -14,8 +14,7 @@ body {
 }
 
 .logo-navbar {
-    background-image: url(/src/nutri_app/static/images/logo.png);
     height: 70px;
-    width: 240px;
+    width: 235px;
     object-fit: cover;
 }
