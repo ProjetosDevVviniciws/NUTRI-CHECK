@@ -103,3 +103,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     padding: 0.95rem 1rem;
     border-radius: 8px;
 }
+
+.invisible-placeholder {
+  width: 238px; 
+}
