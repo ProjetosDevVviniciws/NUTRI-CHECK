@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, flash
+from flask import Blueprint, render_template
 from src.nutri_app.forms.progressao_forms import ProgressaoForm
 from flask_login import login_required, current_user
 from sqlalchemy import text
@@ -22,8 +22,6 @@ def registrar_progressao_peso():
                 VALUES (:usuario_id, :peso, :data)
             """), {"usuario_id": current_user.id, "peso": peso, "data": data})
             
-            flash("Progresso registrado com sucesso!", category="success")
-            return redirect(url_for('progressao.registrar_progressao_peso'))
         
         resultados = conn.execute(text("""
             SELECT peso, data
@@ -36,6 +34,4 @@ def registrar_progressao_peso():
             pesos = [float(r.peso) for r in resultados]
             datas = [r.data.strftime('%d/%m') for r in resultados]
         else:
-            flash("Você ainda não registrou nenhum progresso para gerar o gráfico.", category="warning")
     
-    return render_template("progressao.html", form=forms, datas=datas, pesos=pesos)
