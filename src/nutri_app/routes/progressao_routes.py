@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request, jsonify
 from src.nutri_app.forms.progressao_forms import ProgressaoForm
 from flask_login import login_required, current_user
 from sqlalchemy import text
@@ -9,7 +9,7 @@ progressao_bp = Blueprint('progressao', __name__)
 @progressao_bp.route("/progressao", methods=['GET', 'POST'])
 @login_required
 def registrar_progressao_peso():
-    forms = ProgressaoForm()
+
     datas, pesos = [], []
     
     with engine.begin() as conn:
