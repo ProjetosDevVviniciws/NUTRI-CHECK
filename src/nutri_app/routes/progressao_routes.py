@@ -48,7 +48,7 @@ def registrar_progressao_peso():
                 datas = [r.data.strftime('%d/%m') for r in resultados]
                 
         return render_template(
-            "progressao.html",
+            "pages/progressao.html",
             datas=datas,
             pesos=pesos
         )
