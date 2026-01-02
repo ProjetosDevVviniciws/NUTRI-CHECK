@@ -11,7 +11,7 @@ perfil_bp = Blueprint('perfil', __name__)
 @perfil_bp.route("/perfil")
 @login_required
 def perfil_page():
-    return render_template("includes/perfil.html")
+    return render_template("pages/perfil.html")
 
 @perfil_bp.route("/perfil/dados")
 @login_required
