@@ -1,20 +1,14 @@
 <div class="modal fade" id="modalRegistrarProgresso" tabindex="-1" aria-labelledby="modalRegistrarProgressoLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form method="POST" action="{{ url_for('progressao.registrar_progressao_peso') }}">
         <div class="modal-header">
           <h5 class="modal-title" id="modalRegistrarProgresso">Registrar Peso</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
         </div>
         <div class="modal-body">
-          {{ form_peso.hidden_tag() }}
-          {{ form_peso.peso.label }} {{ form_peso.peso(class="form-control mb-2") }}
-          {{ form_peso.data.label }} {{ form_peso.data(class="form-control mb-2") }}
         </div>
         <div class="modal-footer">
-          {{ form_peso.submit(class="btn btn-secondary") }}
         </div>
-      </form>
     </div>
   </div>
 </div>
