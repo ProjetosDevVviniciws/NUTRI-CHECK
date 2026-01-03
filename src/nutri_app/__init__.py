@@ -3,8 +3,6 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 import os
 from dotenv import load_dotenv
- 
-from nutri_app.forms.progressao_forms import ProgressaoForm
 
 load_dotenv()
 bcrypt = Bcrypt()
@@ -37,11 +35,5 @@ def create_app():
     app.register_blueprint(alimentos_bp)
     app.register_blueprint(agua_bp)
     app.register_blueprint(progressao_bp)
-
-    @app.context_processor
-    def inject_forms():
-        return {
-            'form_peso': ProgressaoForm()
-        }
 
     return app
