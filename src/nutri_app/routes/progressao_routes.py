@@ -35,21 +35,21 @@ def registrar_progressao_peso():
                 
             return jsonify({"success": True, "message": "Progresso registrado com sucesso!"})
 
-        with engine.begin() as conn:    
-            resultados = conn.execute(text("""
-                SELECT peso, data
-                FROM progressao_peso
-                WHERE usuario_id = :id
-                ORDER BY data ASC
-            """), {"id": current_user.id}).fetchall()
+    with engine.begin() as conn:    
+        resultados = conn.execute(text("""
+            SELECT peso, data
+            FROM progressao_peso
+            WHERE usuario_id = :id
+            ORDER BY data ASC
+        """), {"id": current_user.id}).fetchall()
+        
+        if resultados:
+            pesos = [float(r.peso) for r in resultados]
+            datas = [r.data.strftime('%d/%m') for r in resultados]
             
-            if resultados:
-                pesos = [float(r.peso) for r in resultados]
-                datas = [r.data.strftime('%d/%m') for r in resultados]
-                
-        return render_template(
-            "pages/progressao.html",
-            datas=datas,
-            pesos=pesos
-        )
+    return render_template(
+        "pages/progressao.html",
+        datas=datas,
+        pesos=pesos
+    )
     
