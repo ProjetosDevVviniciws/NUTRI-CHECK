@@ -9,9 +9,13 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/pages/cadastro.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/utils.css') }}">
 </head>
 <body>
+    {% include 'includes/navbar.html' %}
     <main class="hero-bg">
+        <h1 class="text-center my-5 gradient-text">Bem Vindo ao NutriCheck</h1>
+        <p class="tagline-glow mb-5">Acompanhe sua alimentação, hidratação e evolução com praticidade</p> 
         <div class="container mt-4">
             <h2 class="mb-4 text-center">Evolução do Peso</h2>
 
