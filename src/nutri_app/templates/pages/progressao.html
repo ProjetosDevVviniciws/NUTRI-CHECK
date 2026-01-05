@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,12 +14,12 @@
 <body>
     {% include 'includes/navbar.html' %}
     <main class="hero-bg">
+        {% include 'includes/flash_messages.html' %}
         <h1 class="text-center my-5 gradient-text">Bem Vindo ao NutriCheck</h1>
         <p class="tagline-glow mb-5">Acompanhe sua alimentação, hidratação e evolução com praticidade</p> 
         <div class="container mt-4">
-            <h2 class="mb-4 text-center">Evolução do Peso</h2>
-
             <div class="card mb-4">
+                <h2 class="mb-4 text-center">Evolução do Peso</h2>
                 <div class="card-body">
                     <canvas id="pesoChart" height="100"></canvas>
                 </div>
