@@ -1,0 +1,20 @@
+<div class="card mb-4 border-0 shadow-sm">
+    <div class="card-body text-center">
+        <img 
+            src="{{ url_for('static', filename='images/graficos/progresso_peso.png') }}?v={{ timestamp }}"
+            class="img-fluid"
+            alt="Gráfico de progresso de peso">
+            
+        <div class="d-flex justify-content-around mt-4">
+            <div>
+                <small class="text-muted">Peso Inicial</small>
+                <p class="fw-bold mb-0">{{ peso_inicial }} kg</p>
+            </div>
+
+            <div>
+                <small class="text-muted">Peso Atual</small>
+                <p class="fw-bold mb-0">{{ peso_atual }} kg</p>
+            </div>
+        </div>
+    </div>
+</div>
