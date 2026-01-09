@@ -6,7 +6,7 @@ from datetime import datetime
 
 progressao_bp = Blueprint('progressao', __name__)
 
-@progressao_bp.route("/progressao", methods=['GET', 'POST'])
+@progressao_bp.route("/progressao/registrar", methods=['GET', 'POST'])
 @login_required
 def registrar_progressao_peso():
 
