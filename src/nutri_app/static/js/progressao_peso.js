@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        const response = await fetch("/progressao", {
+        const response = await fetch("/progressao/registrar", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
