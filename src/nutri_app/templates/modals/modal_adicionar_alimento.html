@@ -1,0 +1,55 @@
+<div class="modal fade" id="modalAdicionarAlimento" tabindex="-1" aria-labelledby="modalAdicionarAlimentoLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalAdicionarAlimentoLabel">Adicionar Alimento</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formAdicionarAlimento">
+          <div class="mb-3">
+            <label for="buscaAlimento" class="form-label fw-bold">Buscar Alimento</label>
+            <select id="buscaAlimento" placeholder="Digite o nome do alimento..."></select>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label-custom">Nome</label>
+              <input type="text" class="form-control" id="nome" name="nome" readonly>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label-custom">Porção (g)</label>
+              <input type="number" class="form-control" id="porcao" name="porcao" min="1" value="100">
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="row g-3">
+            <div class="col-md-3">
+              <label class="form-label-custom">Calorias</label>
+              <input type="number" class="form-control" id="calorias" name="calorias" readonly>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label-custom">Proteínas (g)</label>
+              <input type="number" class="form-control" id="proteinas" name="proteinas" readonly>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label-custom">Carboidratos (g)</label>
+              <input type="number" class="form-control" id="carboidratos" name="carboidratos" readonly>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label-custom">Gorduras (g)</label>
+              <input type="number" class="form-control" id="gorduras" name="gorduras" readonly>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="btnAdicionarAlimento">Adicionar</button>
+      </div>
+    </div>
+  </div>
+</div>
