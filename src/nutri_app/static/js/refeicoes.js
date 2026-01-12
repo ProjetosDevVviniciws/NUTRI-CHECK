@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     const tipoHidden = document.getElementById("tipo-refeicao-hidden");
-    const modalEditar = new bootstrap.Modal(document.getElementById("editarRefeicaoModal"));
+    const modalEditar = new bootstrap.Modal(document.getElementById("modalEditarRefeicao"));
     const dataSpan = document.getElementById("data-selecionada");
     const seletorData = document.getElementById("seletor-data");
     const btnAnterior = document.getElementById("dia-anterior");
