@@ -153,7 +153,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".adicionar-alimento-btn").forEach(btn => {
         btn.addEventListener("click", () => {
             tipoHidden.value = btn.getAttribute("data-tipo");
-            new bootstrap.Modal(document.getElementById("alimentoModal")).show();
+            new bootstrap.Modal(document.getElementById("modalAdicionarAlimento")).show();
         });
     });
 
