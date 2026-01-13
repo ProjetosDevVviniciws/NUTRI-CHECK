@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from flask_login import login_required, current_user
+from flask_login import login_required
 from sqlalchemy import text
 from src.nutri_app.database import engine
 import requests
