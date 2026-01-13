@@ -8,12 +8,12 @@
         <div class="d-flex justify-content-around mt-4">
             <div>
                 <small class="fw-semibold text-muted">Peso Inicial</small>
-                <p class="fw-bold mb-0 text-primary">{{ peso_inicial }} kg</p>
+                <p class="fw-bold mb-0 text-primary">{{ peso_inicial if peso_inicial else 0 }} kg</p>
             </div>
 
             <div>
                 <small class="fw-semibold text-muted">Peso Atual</small>
-                <p class="fw-bold mb-0 text-primary">{{ peso_atual }} kg</p>
+                <p class="fw-bold mb-0 text-primary">{{ peso_atual if peso_inicial else 0 }} kg</p>
             </div>
         </div>
     </div>
