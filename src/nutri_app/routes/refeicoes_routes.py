@@ -11,9 +11,9 @@ from src.nutri_app.utils.calorias_macros import (
 
 refeicoes_bp = Blueprint('refeicoes', __name__)
 
-@refeicoes_bp.route("/refeicoes/criar", methods=['POST'])
+@refeicoes_bp.route("/refeicoes/registrar", methods=['POST'])
 @login_required
-def criar_refeicao():
+def registrar_refeicao():
     data = request.json
     alimento_id = data.get('alimento_id')
     porcao = data.get('porcao')
