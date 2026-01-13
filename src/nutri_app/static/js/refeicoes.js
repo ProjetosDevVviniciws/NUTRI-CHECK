@@ -182,7 +182,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (data.erro) {
                 alert(data.erro);
             } else {
-                bootstrap.Modal.getInstance(document.getElementById("alimentoModal")).hide();
+                bootstrap.Modal.getInstance(document.getElementById("modalAdicionarAlimento")).hide();
                 carregarRefeicoes();
                 atualizarTotais(data.totais);
                 atualizarRestantes(data.restantes);
