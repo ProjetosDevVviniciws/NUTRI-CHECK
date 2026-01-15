@@ -57,6 +57,7 @@ def registrar_progressao_peso():
     
 @progressao_bp.route("/progressao/listar")
 @login_required
+@perfil_completo_required
 def listar_progressao_peso():
     with engine.begin() as conn:
         resultados = conn.execute(text("""
@@ -76,5 +77,40 @@ def listar_progressao_peso():
     ]
 
     return jsonify({"success": True, "progressoes": progressoes})
+
+@progressao_bp.route("/progressao/editar", methods=["PUT"])
+@login_required
+def editar_progressao_peso():
+    data_json = request.get_json()
+
+    peso = data_json.get("peso")
+    data = data_json.get("data")
+
+    if not peso or not data:
+        return jsonify({"success": False, "message": "Dados inválidos."}), 400
+
+    try:
+        peso = float(peso)
+        data = datetime.strptime(data, "%Y-%m-%d").date()
+    except ValueError:
+        return jsonify({"success": False, "message": "Formato inválido."}), 400
+
+    with engine.begin() as conn:
+        resultado = conn.execute(text("""
+            UPDATE progressao_peso
+            SET peso = :peso
+            WHERE usuario_id = :usuario_id
+              AND data = :data
+        """), {
+            "peso": peso,
+            "usuario_id": current_user.id,
+            "data": data
+        })
+
+        if resultado.rowcount == 0:
+            return jsonify({"success": False, "message": "Registro não encontrado."}), 404
+
+    return jsonify({"success": True, "message": "Progresso atualizado com sucesso!"})
+
 
     
