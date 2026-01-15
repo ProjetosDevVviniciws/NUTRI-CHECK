@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, jsonify
+from src.nutri_app.utils.decorators import perfil_completo_required
 from flask_login import login_required, current_user
 from sqlalchemy import text
 from src.nutri_app.database import engine
