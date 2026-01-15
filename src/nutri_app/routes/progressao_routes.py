@@ -112,5 +112,34 @@ def editar_progressao_peso():
 
     return jsonify({"success": True, "message": "Progresso atualizado com sucesso!"})
 
+@progressao_bp.route("/progressao/excluir", methods=["DELETE"])
+@login_required
+def excluir_progressao_peso():
+    data_json = request.get_json()
+    data = data_json.get("data")
+
+    if not data:
+        return jsonify({"success": False, "message": "Data não informada."}), 400
+
+    try:
+        data = datetime.strptime(data, "%Y-%m-%d").date()
+    except ValueError:
+        return jsonify({"success": False, "message": "Formato inválido."}), 400
+
+    with engine.begin() as conn:
+        resultado = conn.execute(text("""
+            DELETE FROM progressao_peso
+            WHERE usuario_id = :usuario_id
+              AND data = :data
+        """), {
+            "usuario_id": current_user.id,
+            "data": data
+        })
+
+        if resultado.rowcount == 0:
+            return jsonify({"success": False, "message": "Registro não encontrado."}), 404
+
+    return jsonify({"success": True, "message": "Progresso removido com sucesso!"})
+
 
     
