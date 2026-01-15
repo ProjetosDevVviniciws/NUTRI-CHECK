@@ -8,7 +8,7 @@ class CadastroForm(FlaskForm):
     
     def validate_usuario(self, check_user):
         with engine.connect() as coon:
-            user = coon.execute(text("SELECT * FROM usuarios WHERE usuario = :usuario"), {"usuario": check_user.data})
+            user = coon.execute(text("SELECT * FROM usuarios WHERE nome = :nome"), {"nome": check_user.data})
             if user.first():
                 raise ValidationError("Usuário já existe! Cadastre outro nome de usuário.")
             
@@ -24,13 +24,13 @@ class CadastroForm(FlaskForm):
             if senha.first():
                 raise ValidationError("Senha já existe! Cadastre outra senha.")
     
-    usuario = StringField(label='Usuario', validators=[Length(min=2, max=30), DataRequired()])
+    nome = StringField(label='Nome', validators=[Length(min=2, max=30), DataRequired()])
     email = StringField(label='Email', validators=[Email(), DataRequired()])
     senha1 = PasswordField(label='Senha', validators=[Length(min=6), DataRequired()])
     senha2 = PasswordField(label='Confirmação da Senha', validators=[EqualTo('senha1'), DataRequired()])
     submit = SubmitField(label='Cadastrar')
     
 class LoginForm(FlaskForm):
-    usuario = StringField(label='Usuário', validators=[DataRequired()])
+    nome = StringField(label='Nome', validators=[DataRequired()])
     senha = PasswordField(label='Senha', validators=[DataRequired()])
     submit = SubmitField(label='Login')
