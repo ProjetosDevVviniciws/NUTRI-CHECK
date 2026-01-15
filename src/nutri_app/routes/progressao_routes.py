@@ -55,3 +55,26 @@ def registrar_progressao_peso():
         pesos=pesos
     )
     
+@progressao_bp.route("/progressao/listar")
+@login_required
+def listar_progressao_peso():
+    with engine.begin() as conn:
+        resultados = conn.execute(text("""
+            SELECT peso, data
+            FROM progressao_peso
+            WHERE usuario_id = :usuario_id
+            ORDER BY data ASC
+        """), {"usuario_id": current_user.id}).fetchall()
+
+    progressoes = [
+        {
+            "peso": float(r.peso),
+            "data": r.data.strftime("%Y-%m-%d"),
+            "data_formatada": r.data.strftime("%d/%m/%Y")
+        }
+        for r in resultados
+    ]
+
+    return jsonify({"success": True, "progressoes": progressoes})
+
+    
