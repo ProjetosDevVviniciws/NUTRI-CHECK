@@ -24,20 +24,17 @@ def perfil_dados():
             WHERE id = :id
         """), {"id": current_user.id}).mappings().first()
     
-    if usuario:
-        return jsonify(dict(usuario)), 200
-    else:
-        return jsonify({
-            "nome": "",
-            "altura": "",
-            "peso": "",
-            "idade": "",
-            "sexo": "M",
-            "calorias_meta": "",
-            "proteinas_meta": "",
-            "carboidratos_meta": "",
-            "gorduras_meta": ""
-        }), 200
+    return jsonify({
+        "nome": usuario["nome"],
+        "altura": usuario["altura"] or "",
+        "peso": usuario["peso"] or "",
+        "idade": usuario["idade"] or "",
+        "sexo": usuario["sexo"] or "",
+        "calorias_meta": usuario["calorias_meta"],
+        "proteinas_meta": usuario["proteinas_meta"],
+        "carboidratos_meta": usuario["carboidratos_meta"],
+        "gorduras_meta": usuario["gorduras_meta"]
+    }), 200
 
 @perfil_bp.route("/perfil/atualizar", methods=["PUT"])
 @login_required
