@@ -11,13 +11,13 @@ auth_bp = Blueprint('auth', __name__)
 def cadastro():
     forms = CadastroForm()
     if forms.validate_on_submit():
-        usuario = forms.usuario.data
+        nome = forms.nome.data
         email = forms.email.data
         senha_hash = gerar_hash(forms.senha1.data)
         
         with engine.connect() as conn:
-            query = text("INSERT INTO usuarios (usuario, email, senha) VALUES (:usuario, :email, :senha)")
-            conn.execute(query, {"usuario": usuario, "email": email, "senha": senha_hash})
+            query = text("INSERT INTO usuarios (nome, email, senha) VALUES (:nome, :email, :senha)")
+            conn.execute(query, {"nome": nome, "email": email, "senha": senha_hash})
             conn.commit()   
             flash("Cadastro realizado com sucesso!", category="success")
             return redirect(url_for('login.login'))
