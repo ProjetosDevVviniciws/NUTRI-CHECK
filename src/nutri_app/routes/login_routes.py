@@ -12,19 +12,19 @@ login_bp = Blueprint('login', __name__)
 def login():
     forms = LoginForm()
     if forms.validate_on_submit():
-        usuario = forms.usuario.data
+        nome = forms.nome.data
         senha = forms.senha.data
         
         with engine.connect() as conn:
-            query = (text("SELECT * FROM usuarios WHERE usuario = :usuario"))
-            result = conn.execute(query, {"usuario": usuario}).fetchone()
+            query = (text("SELECT * FROM usuarios WHERE nome = :nome"))
+            result = conn.execute(query, {"nome": nome}).fetchone()
             
         if result:
             if verificar_senha(result.senha, senha):
                 user = UserLogin(result)
                 login_user(user)
-                flash(f"Sucesso! Bem-Vindo(a), {result.usuario}", category="success")
+                flash(f"Sucesso! Bem-Vindo(a), {result.nome}", category="success")
                 return redirect(url_for('home.home'))
             else:
-                flash("Usuário ou senha estão incorretos! Tente novamente.", category="danger")
+                flash("Nome ou senha estão incorretos! Tente novamente.", category="danger")
     return render_template("pages/login.html", form=forms)
