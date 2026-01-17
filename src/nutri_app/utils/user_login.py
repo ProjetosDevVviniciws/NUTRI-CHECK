@@ -6,7 +6,7 @@ from sqlalchemy import text
 class UserLogin(UserMixin):
     def __init__(self, usuario_row):
         self.id = usuario_row.id
-        self.usuario = usuario_row.usuario
+        self.nome = usuario_row.nome
         self.email = usuario_row.email
         self.senha = usuario_row.senha
         
