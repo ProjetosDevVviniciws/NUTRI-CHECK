@@ -15,8 +15,9 @@ def perfil_completo_required(f):
             """), {"id": current_user.id}).fetchone()
             
             if result is None or any(valor is None for valor in result):
-                flash("Complete seu perfil antes de acessar essa funcionalidade.", category="warning")
-                return redirect(url_for('perfil.perfil_usuario'))
+                flash("Seu perfil ainda não está completo. Preencha seus dados para continuar.",
+                      category="warning")
+                return redirect(url_for('perfil.perfil_page'))
             
         return f(*args, **kwargs)
     return decoreted_function
