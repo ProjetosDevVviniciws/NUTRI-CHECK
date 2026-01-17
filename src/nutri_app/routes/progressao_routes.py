@@ -80,6 +80,7 @@ def listar_progressao_peso():
 
 @progressao_bp.route("/progressao/editar", methods=["PUT"])
 @login_required
+@perfil_completo_required
 def editar_progressao_peso():
     data_json = request.get_json()
 
@@ -114,6 +115,7 @@ def editar_progressao_peso():
 
 @progressao_bp.route("/progressao/excluir", methods=["DELETE"])
 @login_required
+@perfil_completo_required
 def excluir_progressao_peso():
     data_json = request.get_json()
     data = data_json.get("data")
