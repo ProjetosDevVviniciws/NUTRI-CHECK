@@ -16,15 +16,15 @@
         {% include 'includes/flash_messages.html' %}
         <h1 class="text-center my-5 gradient-text">Bem Vindo ao NutriCheck</h1>
         <p class="tagline-glow mb-5">Acompanhe sua alimentação, hidratação e evolução com praticidade</p>
-        <div class="container center-form align-items-center">
+        <div class="container center-form mb-4 align-items-center">
             <div class="card p-4 shadow" style="max-width: 400px; width:100%; background-color:rgba(255, 255, 255, 0.90); border-radius:15px;">
                 <h2 class="text-center mb-4 text-dark">Login</h2>
                 <form method="POST">
                     {{ form.hidden_tag() }}
 
                     <div class="mb-3">
-                        {{ form.usuario.label(class="form-label-custom") }}
-                        {{ form.usuario(class="form-control", placeholder="Informe seu usuário") }}
+                        {{ form.nome.label(class="form-label-custom") }}
+                        {{ form.nome(class="form-control", placeholder="Informe seu nome") }}
                     </div>
 
                     <div class="mb-3">
