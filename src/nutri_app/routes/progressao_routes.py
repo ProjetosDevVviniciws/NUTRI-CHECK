@@ -37,7 +37,16 @@ def registrar_progressao_peso():
                 
             return jsonify({"success": True, "message": "Progresso registrado com sucesso!"})
 
-    with engine.begin() as conn:    
+    with engine.begin() as conn:   
+        
+        usuario = conn.execute(text("""
+            SELECT peso 
+            FROM usuarios
+            WHERE id = :id
+        """), {"id": current_user.id}).mappings().first()
+
+        peso_inicial = float(usuario["peso"])
+        
         resultados = conn.execute(text("""
             SELECT peso, data
             FROM progressao_peso
@@ -48,11 +57,16 @@ def registrar_progressao_peso():
         if resultados:
             pesos = [float(r.peso) for r in resultados]
             datas = [r.data.strftime('%d/%m') for r in resultados]
+            peso_atual = pesos[-1]
+        else:
+            peso_atual = peso_inicial
             
     return render_template(
         "pages/progressao.html",
         datas=datas,
-        pesos=pesos
+        pesos=pesos,
+        peso_inicial=peso_inicial,
+        peso_atual=peso_atual
     )
     
 @progressao_bp.route("/progressao/listar")
