@@ -1,8 +1,8 @@
-def gerar_grafico_progressao(peso_inicial, peso_atual):
+def gerar_grafico_progressao(peso_inicial, datas, pesos):
     import matplotlib.pyplot as plt
     
-    valores = [peso_inicial, peso_atual]
-    labels = ['Inicial', 'Atual']
+    labels = ['Inicial'] + datas
+    valores = [peso_inicial] + pesos if pesos else [peso_inicial]
 
     plt.figure(figsize=(5, 3))
     plt.plot(labels, valores, marker='o')
