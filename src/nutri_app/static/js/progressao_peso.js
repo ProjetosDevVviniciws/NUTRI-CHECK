@@ -1,6 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("form-progressao");
-
+    const modalRegistrar = new bootstrap.Modal(document.getElementById("modalRegistrarProgresso"));
+    const inputData = document.getElementById("input-data");
+    const hoje = new Date();
+    
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
