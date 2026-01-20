@@ -1,9 +1,19 @@
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("form-progressao");
     const modalRegistrar = new bootstrap.Modal(document.getElementById("modalRegistrarProgresso"));
+    const inputPeso = document.getElementById("input-peso");
     const inputData = document.getElementById("input-data");
-    const hoje = new Date();
-    
+    const btnRegistrar = document.getElementById("btnRegistrarProgresso");
+    const erro = document.getElementById("erro-progressao");
+
+    const hoje = new Date().toISOString().split("T")[0];
+
+    modalRegistrar.addEventListener("shown.bs.modal", () => {
+        if (!inputData.value) {
+            inputData.value = hoje;
+        }
+    })
+
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
