@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, jsonify
+from src.nutri_app.utils.grafico_progressao import gerar_grafico_progressao
 from src.nutri_app.utils.decorators import perfil_completo_required
 from flask_login import login_required, current_user
 from sqlalchemy import text
@@ -40,12 +41,13 @@ def registrar_progressao_peso():
     with engine.begin() as conn:   
         
         usuario = conn.execute(text("""
-            SELECT peso 
+            SELECT peso, ultima_atualizacao 
             FROM usuarios
             WHERE id = :id
         """), {"id": current_user.id}).mappings().first()
 
         peso_inicial = float(usuario["peso"])
+        data_incial = usuario["ultima_atualizacao"]
         
         resultados = conn.execute(text("""
             SELECT peso, data
@@ -60,7 +62,9 @@ def registrar_progressao_peso():
             peso_atual = pesos[-1]
         else:
             peso_atual = peso_inicial
-            
+    
+    gerar_grafico_progressao(datas, pesos)
+    
     return render_template(
         "pages/progressao.html",
         datas=datas,
