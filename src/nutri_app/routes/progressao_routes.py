@@ -64,10 +64,9 @@ def registrar_progressao_peso():
                 datas.append(r.data.strftime('%d/%m'))
                 pesos.append(float(r.peso))
             peso_atual = pesos[-1]
+            gerar_grafico_progressao(datas, pesos)
         else:
             peso_atual = peso_inicial
-    
-    gerar_grafico_progressao(datas, pesos)
     
     return render_template(
         "pages/progressao.html",
