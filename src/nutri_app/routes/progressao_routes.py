@@ -47,7 +47,10 @@ def registrar_progressao_peso():
         """), {"id": current_user.id}).mappings().first()
 
         peso_inicial = float(usuario["peso"])
-        data_incial = usuario["ultima_atualizacao"]
+        data_inicial = usuario["ultima_atualizacao"]
+        
+        datas = [data_inicial.strftime("%d/%m")]
+        pesos = [peso_inicial]
         
         resultados = conn.execute(text("""
             SELECT peso, data
@@ -57,8 +60,9 @@ def registrar_progressao_peso():
         """), {"id": current_user.id}).fetchall()
         
         if resultados:
-            pesos = [float(r.peso) for r in resultados]
-            datas = [r.data.strftime('%d/%m') for r in resultados]
+            for r in resultados: 
+                datas.append(r.data.strftime('%d/%m'))
+                pesos.append(float(r.peso))
             peso_atual = pesos[-1]
         else:
             peso_atual = peso_inicial
