@@ -60,9 +60,10 @@ def registrar_progressao_peso():
         """), {"id": current_user.id}).fetchall()
         
         if resultados:
-            for r in resultados: 
-                datas.append(r.data.strftime('%d/%m'))
-                pesos.append(float(r.peso))
+            for r in resultados:
+                if r.data != data_inicial:     
+                    datas.append(r.data.strftime('%d/%m'))
+                    pesos.append(float(r.peso))
             peso_atual = pesos[-1]
             gerar_grafico_progressao(datas, pesos)
         else:
