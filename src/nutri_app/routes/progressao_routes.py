@@ -4,7 +4,7 @@ from src.nutri_app.utils.decorators import perfil_completo_required
 from flask_login import login_required, current_user
 from sqlalchemy import text
 from src.nutri_app.database import engine
-from datetime import datetime
+from datetime import datetime, date
 
 progressao_bp = Blueprint('progressao', __name__)
 
@@ -47,7 +47,7 @@ def registrar_progressao_peso():
         """), {"id": current_user.id}).mappings().first()
 
         peso_inicial = float(usuario["peso"])
-        data_inicial = usuario["ultima_atualizacao"]
+        data_inicial = usuario["ultima_atualizacao"] or date.today()
         
         datas = [data_inicial.strftime("%d/%m")]
         pesos = [peso_inicial]
