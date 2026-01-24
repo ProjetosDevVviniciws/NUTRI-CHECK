@@ -5,8 +5,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const inputData = document.getElementById("input-data");
     const btnRegistrar = document.getElementById("btnRegistrarProgresso");
     const erro = document.getElementById("erro-progressao");
-
     const hoje = new Date().toISOString().split("T")[0];
+
+    let dataAtual = new Date(seletorData?.value || hoje);
+
+    const atualizarDataDisplay = () => {
+        if (dataSpan) {
+            dataSpan.textContent = dataAtual.toLocaleDateString("pt-BR");
+        }
+        if (seletorData) {
+            seletorData.value = dataAtual.toISOString().split("T")[0];
+        }
+
+        window.dataSelecionada = dataAtual.toISOString().split("T")[0];
+    };
 
     modalRegistrar.addEventListener("shown.bs.modal", () => {
         if (!inputData.value) {
