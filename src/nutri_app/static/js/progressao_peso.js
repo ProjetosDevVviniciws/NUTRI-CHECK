@@ -17,8 +17,8 @@ document.addEventListener("DOMContentLoaded", () => {
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
-        const peso = document.getElementById("peso").value;
-        const data = document.getElementById("data").value;
+        const peso = inputPeso.value;
+        const data = inputData.value;
 
         if (!peso || peso <= 0) {
             alert("Informe um peso válido.");
