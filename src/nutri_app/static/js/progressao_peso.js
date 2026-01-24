@@ -5,6 +5,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const inputData = document.getElementById("input-data");
     const erro = document.getElementById("erro-progressao");
 
+    flatpickr("#input-data", {
+        locale: "pt",
+        dateFormat: "Y-m-d",   
+        altInput: true,
+        altFormat: "d/m/Y",    
+        defaultDate: "today",
+        allowInput: true
+    });
+    
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
