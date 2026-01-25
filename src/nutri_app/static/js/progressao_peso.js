@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
         allowInput: true
     });
     
-    form.addEventListener("submit", async (e) => {
+    modalRegistrar.addEventListener("submit", async (e) => {
         e.preventDefault();
 
         const peso = inputPeso.value;
