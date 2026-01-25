@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("form-progressao");
     const modalRegistrar = new bootstrap.Modal(document.getElementById("modalRegistrarProgresso"));
     const inputPeso = document.getElementById("input-peso");
     const inputData = document.getElementById("input-data");
