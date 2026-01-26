@@ -20,8 +20,9 @@ document.addEventListener("DOMContentLoaded", () => {
         erro.textContent = "";
     });
     
-    modalRegistrar.addEventListener("submit", async (e) => {
-        e.preventDefault();
+    btnRegistrar.addEventListener("click", async (e) => {
+        erro.classList.add("d-none");
+        erro.textContent = "";
 
         const peso = inputPeso.value;
         const data = inputData.value;
