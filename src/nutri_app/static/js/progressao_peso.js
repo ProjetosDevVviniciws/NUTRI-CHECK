@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const modalElement = document.getElementById("modalRegistrarProgresso");
+    const modalRegistrar = new bootstrap.Modal(modalElement);
     const inputPeso = document.getElementById("input-peso");
     const inputData = document.getElementById("input-data");
     const erro = document.getElementById("erro-progressao");
