@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const modalRegistrar = new bootstrap.Modal(modalElement);
     const inputPeso = document.getElementById("input-peso");
     const inputData = document.getElementById("input-data");
+    const btnRegistrar = document.getElementById("btnRegistrarProgresso");
     const erro = document.getElementById("erro-progressao");
 
     flatpickr("#input-data", {
