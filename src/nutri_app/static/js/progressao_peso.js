@@ -20,12 +20,14 @@ document.addEventListener("DOMContentLoaded", () => {
         const data = inputData.value;
 
         if (!peso || peso <= 0) {
-            alert("Informe um peso válido.");
+            erro.textContent = "Informe um peso válido.";
+            erro.classList.remove("d-none");
             return;
         }
 
         if (!data) {
-            alert("Informe a data.");
+            erro.textContent = "Informe a data.";
+            erro.classList.remove("d-none");
             return;
         }
 
