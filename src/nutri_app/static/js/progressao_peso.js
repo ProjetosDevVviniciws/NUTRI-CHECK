@@ -14,6 +14,11 @@ document.addEventListener("DOMContentLoaded", () => {
         allowInput: true
     });
     
+    modalElement.addEventListener("shown.bs.modal", () => {
+        erro.classList.add("d-none");
+        erro.textContent = "";
+    });
+    
     modalRegistrar.addEventListener("submit", async (e) => {
         e.preventDefault();
 
