@@ -1,11 +1,9 @@
 from flask import Blueprint, render_template, request, jsonify
-from src.nutri_app.utils.grafico_progressao import gerar_grafico_progressao
 from src.nutri_app.utils.decorators import perfil_completo_required
 from flask_login import login_required, current_user
 from sqlalchemy import text
 from src.nutri_app.database import engine
 from datetime import datetime, date
-from time import time
 
 progressao_bp = Blueprint('progressao', __name__)
 
@@ -66,7 +64,6 @@ def registrar_progressao_peso():
                     datas.append(r.data.strftime('%d/%m'))
                     pesos.append(float(r.peso))
             peso_atual = pesos[-1]
-            gerar_grafico_progressao(datas, pesos)
         else:
             peso_atual = peso_inicial
     
@@ -75,8 +72,7 @@ def registrar_progressao_peso():
         datas=datas,
         pesos=pesos,
         peso_inicial=peso_inicial,
-        peso_atual=peso_atual,
-        timestamp=int(time())
+        peso_atual=peso_atual
     )
     
 @progressao_bp.route("/progressao/listar")
