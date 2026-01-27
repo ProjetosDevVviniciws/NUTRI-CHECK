@@ -5,6 +5,7 @@ from flask_login import login_required, current_user
 from sqlalchemy import text
 from src.nutri_app.database import engine
 from datetime import datetime, date
+from time import time
 
 progressao_bp = Blueprint('progressao', __name__)
 
@@ -74,7 +75,8 @@ def registrar_progressao_peso():
         datas=datas,
         pesos=pesos,
         peso_inicial=peso_inicial,
-        peso_atual=peso_atual
+        peso_atual=peso_atual,
+        timestamp=int(time())
     )
     
 @progressao_bp.route("/progressao/listar")
