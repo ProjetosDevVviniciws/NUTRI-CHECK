@@ -22,5 +22,7 @@ def gerar_grafico_progressao(datas, pesos):
         'graficos'
     )  
     
+    os.makedirs(caminho, exist_ok=True)
+    
     plt.savefig(os.path.join(caminho, 'progresso_peso.png'))
     plt.close()
