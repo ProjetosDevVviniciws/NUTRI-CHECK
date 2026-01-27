@@ -1,11 +1,6 @@
 <div class="card mb-4 border-0 shadow-sm">
     <div class="card-body text-center">
-        {% if pesos %}
-            <img 
-                src="{{ url_for('static', filename='images/graficos/progresso_peso.png') }}?v={{ timestamp }}"
-                class="img-fluid"
-                alt="Gráfico de progresso de peso">
-                
+        {% if pesos %} 
             <div class="d-flex justify-content-around mt-4">
                 <div>
                     <small class="fw-semibold text-muted">Peso Inicial</small>
