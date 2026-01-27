@@ -10,11 +10,17 @@ def gerar_grafico_progressao(datas, pesos):
     
     plt.figure(figsize=(6, 3))
     plt.plot(datas, pesos, marker='o')
-    plt.title('Progresso de Peso')
     plt.ylabel('Kg')
-    
+    plt.xlabel('Data')
     plt.grid(True)
-
     plt.tight_layout()
-    plt.savefig('static/images/graficos/progresso_peso.png')
+    
+    caminho = os.path.join(
+        current_app.root_path,
+        'static',
+        'images',
+        'graficos'
+    )  
+    
+    plt.savefig(os.path.join(caminho, 'progresso_peso.png'))
     plt.close()
