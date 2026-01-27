@@ -1,6 +1,6 @@
 <div class="card mb-4 border-0 shadow-sm">
     <div class="card-body text-center">
-        {% if peso %}
+        {% if pesos %}
             <img 
                 src="{{ url_for('static', filename='images/graficos/progresso_peso.png') }}?v={{ timestamp }}"
                 class="img-fluid"
@@ -14,7 +14,7 @@
 
                 <div>
                     <small class="fw-semibold text-muted">Peso Atual</small>
-                    <p class="fw-bold mb-0 text-primary">{{ peso_atual if peso_inicial else 0 }} kg</p>
+                    <p class="fw-bold mb-0 text-primary">{{ peso_atual if peso_atual else 0 }} kg</p>
                 </div>
             </div>
         {% else %}
