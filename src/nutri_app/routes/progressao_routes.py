@@ -48,6 +48,11 @@ def registrar_progressao_peso():
         peso_inicial = float(usuario["peso"])
         data_inicial = usuario["ultima_atualizacao"] or date.today()
         
+        registros = [{
+            "data": data_inicial,
+            "peso": peso_inicial
+        }]
+        
         datas = [data_inicial.strftime("%d/%m")]
         pesos = [peso_inicial]
         
