@@ -57,4 +57,45 @@ document.addEventListener("DOMContentLoaded", () => {
             alert(result.message);
         }
     });
+
+    if (window.graficoPesoData) {
+        const ctx = document.getElementById("graficoPeso");
+
+        new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: window.graficoPesoData.labels,
+                datasets: [{
+                    label: "Peso (kg)",
+                    data: window.graficoPesoData.values,
+                    borderWidth: 2,
+                    tension: 0.3,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        title: {
+                            display: true,
+                            text: "Kg"
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: "Data"
+                        }
+                    }
+                }
+            }
+        });
+    }
 });
