@@ -1,6 +1,13 @@
 <div class="card mb-4 border-0 shadow-sm">
     <div class="card-body text-center">
         {% if pesos %} 
+            <canvas id="graficoPeso" height="120"></canvas>
+            <script>
+                window.graficoPesoData = {
+                    labels: {{ datas | tojson }},
+                    values: {{ pesos | tojson }}
+                };
+            </script>
             <div class="d-flex justify-content-around mt-4">
                 <div>
                     <small class="fw-semibold text-muted">Peso Inicial</small>
