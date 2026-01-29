@@ -66,8 +66,16 @@ def registrar_progressao_peso():
         if resultados:
             for r in resultados:
                 if r.data != data_inicial:     
-                    datas.append(r.data.strftime('%d/%m'))
-                    pesos.append(float(r.peso))
+                    registros.append({
+                        "data": r.data,
+                        "peso": float(r.peso)
+                    })
+            
+            registros.sort(key=lambda x: x["data"])
+            
+            datas = [r["data"].strftime("%d/%m") for r in registros]
+            pesos = [r["peso"] for r in registros]
+            
             peso_atual = pesos[-1]
         else:
             peso_atual = peso_inicial
