@@ -51,6 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (result.success) {
             alert(result.message);
+            modalRegistrar.hide()
             window.location.reload(); 
         } else {
             alert(result.message);
