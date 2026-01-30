@@ -124,13 +124,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 "list-group-item",
                 "d-flex",
                 "justify-content-between",
-                "align-items-center"
+                "align-items-center",
+                "registro-peso"
             );
+
+            li.dataset.data = registro.data; 
+            li.dataset.peso = registro.peso;
 
             li.innerHTML = `
                 <span>${registro.data_formatada}</span>
                 <strong>${registro.peso.toFixed(1)} kg</strong>
             `;
+
+            li.addEventListener("click", () => abrirModalEditar(li));
 
             listaRegistros.appendChild(li);
         });
