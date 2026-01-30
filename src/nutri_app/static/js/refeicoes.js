@@ -167,7 +167,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        fetch("/refeicoes/criar", {
+        fetch("/refeicoes/registrar", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
