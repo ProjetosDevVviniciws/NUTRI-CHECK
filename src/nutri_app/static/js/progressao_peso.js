@@ -153,5 +153,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let dataRegistroSelecionado = null;
 
+    function abrirModalEditar(elemento) {
+        erroEditar.classList.add("d-none");
+        erroEditar.textContent = "";
 
+        const peso = elemento.dataset.peso;
+        const data = elemento.dataset.data;
+
+        dataRegistroSelecionado = data;
+
+        inputEditarPeso.value = peso;
+        inputEditarData.value = data;
+
+        modalEditar.show();
+    }
 });
