@@ -98,4 +98,44 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+
+    const listaRegistros = document.getElementById("lista-registros-peso");
+
+    async function carregarRegistrosPeso() {
+        if (!listaRegistros) return;
+
+        const response = await fetch("/progressao/listar");
+        const result = await response.json();
+
+        listaRegistros.innerHTML = "";
+
+        if (!result.success || result.progressoes.length === 0) {
+            listaRegistros.innerHTML = `
+                <li class="list-group-item text-muted text-center">
+                    Nenhum registro ainda
+                </li>
+            `;
+            return;
+        }
+
+        result.progressoes.forEach(registro => {
+            const li = document.createElement("li");
+            li.classList.add(
+                "list-group-item",
+                "d-flex",
+                "justify-content-between",
+                "align-items-center"
+            );
+
+            li.innerHTML = `
+                <span>${registro.data_formatada}</span>
+                <strong>${registro.peso.toFixed(1)} kg</strong>
+            `;
+
+            listaRegistros.appendChild(li);
+        });
+    }
+
+    carregarRegistrosPeso();
+
 });
