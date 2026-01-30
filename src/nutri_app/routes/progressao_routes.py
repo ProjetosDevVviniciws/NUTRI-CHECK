@@ -53,7 +53,7 @@ def registrar_progressao_peso():
             "peso": peso_inicial
         }]
         
-        datas = [data_inicial.strftime("%d/%m")]
+        datas = [data_inicial.strftime("%d/%m/%y")]
         pesos = [peso_inicial]
         
         resultados = conn.execute(text("""
@@ -73,7 +73,7 @@ def registrar_progressao_peso():
             
             registros.sort(key=lambda x: x["data"])
             
-            datas = [r["data"].strftime("%d/%m") for r in registros]
+            datas = [r["data"].strftime("%d/%m/%y") for r in registros]
             pesos = [r["peso"] for r in registros]
             
             peso_atual = pesos[-1]
