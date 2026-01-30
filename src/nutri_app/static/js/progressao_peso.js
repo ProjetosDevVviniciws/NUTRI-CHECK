@@ -144,4 +144,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     carregarRegistrosPeso();
 
+    const modalEditarEl = document.getElementById("modalEditarProgresso");
+    const modalEditar = new bootstrap.Modal(modalEditarEl);
+
+    const inputEditarPeso = modalEditarEl.querySelector("#input-peso");
+    const inputEditarData = modalEditarEl.querySelector("#input-data");
+    const erroEditar = modalEditarEl.querySelector("#erro-progressao");
+
+    let dataRegistroSelecionado = null;
+
+
 });
