@@ -199,4 +199,25 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    document.getElementById("btnRemoverProgresso").addEventListener("click", async () => {
+        if (!confirm("Deseja realmente remover este registro?")) return;
+
+        const response = await fetch("/progressao/excluir", {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ data: dataRegistroSelecionado })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            alert(result.message);
+            modalEditar.hide();
+            window.location.reload();
+        } else {
+            erroEditar.textContent = result.message;
+            erroEditar.classList.remove("d-none");
+        }
+    });
+
 });
