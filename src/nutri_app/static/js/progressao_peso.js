@@ -167,4 +167,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
         modalEditar.show();
     }
+
+    document.getElementById("btnSalvarProgresso").addEventListener("click", async () => {
+        erroEditar.classList.add("d-none");
+        erroEditar.textContent = "";
+
+        const peso = inputEditarPeso.value;
+        const data = inputEditarData.value;
+
+        if (!peso || peso <= 0) {
+            erroEditar.textContent = "Informe um peso válido.";
+            erroEditar.classList.remove("d-none");
+            return;
+        }
+
+        const response = await fetch("/progressao/editar", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ peso, data })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            alert(result.message);
+            modalEditar.hide();
+            window.location.reload();
+        } else {
+            erroEditar.textContent = result.message;
+            erroEditar.classList.remove("d-none");
+        }
+    });
+
 });
