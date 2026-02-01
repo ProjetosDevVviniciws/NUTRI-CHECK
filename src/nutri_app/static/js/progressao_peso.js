@@ -54,7 +54,8 @@ document.addEventListener("DOMContentLoaded", () => {
             modalRegistrar.hide()
             window.location.reload(); 
         } else {
-            alert(result.message);
+            erro.textContent = result.message;
+            erro.classList.remove("d-none");
         }
     });
 
