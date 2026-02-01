@@ -30,6 +30,23 @@ def registrar_progressao_peso():
             return jsonify({"success": False, "message": "Formato inválido."}), 400
         
         with engine.begin() as conn: 
+            
+            existente = conn.execute(text("""
+                SELECT 1
+                FROM progressao_peso
+                WHERE usuario_id = :usuario_id
+                  AND data = :data
+            """), {
+                "usuario_id": current_user.id,
+                "data": data
+            }).fetchone()
+
+            if existente:
+                return jsonify({
+                    "success": False,
+                    "message": "Já existe um registro de peso para esta data."
+                }), 400
+            
             conn.execute(text("""
                 INSERT INTO progressao_peso (usuario_id, peso, data)
                 VALUES (:usuario_id, :peso, :data)
