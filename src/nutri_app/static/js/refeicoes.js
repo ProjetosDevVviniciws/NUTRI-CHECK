@@ -8,6 +8,21 @@ document.addEventListener("DOMContentLoaded", function () {
     const btnProximo = document.getElementById("proximo-dia");
     const hoje = new Date();
     
+    const fp = flatpickr(seletorData, {
+        locale: "pt",
+        dateFormat: "Y-m-d",     
+        altInput: false,          
+        defaultDate: hoje,
+        allowInput: true,
+        onChange: function (selectedDates) {
+            if (selectedDates.length) {
+                dataAtual = selectedDates[0];
+                atualizarDataDisplay();
+                carregarRefeicoes();
+            }
+        }
+    });
+
     let dataAtual = new Date(seletorData?.value || hoje);
     let alimentoSelecionado = null;
 
