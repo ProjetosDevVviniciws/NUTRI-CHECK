@@ -30,11 +30,10 @@ document.addEventListener("DOMContentLoaded", function () {
         if (dataSpan) {
             dataSpan.textContent = dataAtual.toLocaleDateString("pt-BR");
         }
-        if (seletorData) {
-            seletorData.value = dataAtual.toISOString().split("T")[0];
-        }
 
         window.dataSelecionada = dataAtual.toISOString().split("T")[0];
+
+        fp.setDate(dataAtual, false);
     };
 
     function atualizarTotais(totais) {
