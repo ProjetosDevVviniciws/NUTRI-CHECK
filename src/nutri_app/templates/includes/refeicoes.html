@@ -9,7 +9,7 @@
         <i class="fa-solid fa-calendar-day"></i>
         <span id="data-selecionada" class="ms-2 fw-bold">{{ data_atual.strftime('%d/%m/%Y') if data_atual else '' }}</span>
       </button>
-      <input type="date" id="seletor-data" class="form-control position-absolute top-0 start-0 opacity-0" style="width:100%; height:100%; cursor:pointer; z-index:10; pointer-events: all;">
+      <input type="text" id="seletor-data" class="form-control position-absolute top-0 start-0 opacity-0" style="width:100%; height:100%; cursor:pointer; z-index:10; pointer-events: all;">
     </div>
 
     <button id="proximo-dia" class="btn btn-outline-secondary ms-3" title="Próximo dia">
