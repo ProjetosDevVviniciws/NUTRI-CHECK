@@ -12,9 +12,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const fp = flatpickr(seletorData, {
         locale: "pt",
         dateFormat: "Y-m-d",     
-        altInput: false,          
+        altInput: false, 
+        clickOpens: false,         
         defaultDate: hoje,
         allowInput: true,
+
         onChange: function (selectedDates) {
             if (selectedDates.length) {
                 dataAtual = selectedDates[0];
