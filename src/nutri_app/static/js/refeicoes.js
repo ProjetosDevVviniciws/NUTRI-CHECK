@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const seletorData = document.getElementById("seletor-data");
     const btnAnterior = document.getElementById("dia-anterior");
     const btnProximo = document.getElementById("proximo-dia");
+    const btnCalendario = document.getElementById("abrir-calendario");
     const hoje = new Date();
     
     const fp = flatpickr(seletorData, {
