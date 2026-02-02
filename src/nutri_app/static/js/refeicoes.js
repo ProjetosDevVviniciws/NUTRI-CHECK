@@ -224,6 +224,10 @@ document.addEventListener("DOMContentLoaded", function () {
             carregarRefeicoes();
         });
 
+        btnCalendario?.addEventListener("click", () => {
+            fp.open();
+        });
+
     }
 
     atualizarDataDisplay();
