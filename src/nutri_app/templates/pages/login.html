@@ -27,9 +27,10 @@
                         {{ form.nome(class="form-control", placeholder="Informe seu nome") }}
                     </div>
 
-                    <div class="mb-3 input-group">
+                    <div class="mb-3">
                         {{ form.senha.label(class="form-label-custom") }}
-                        {{ form.senha(
+                        <div class="input-group">
+                            {{ form.senha(
                             class="form-control", 
                             placeholder="Informe sua senha",
                             id="senha-input"
@@ -37,6 +38,7 @@
                         <button class="btn btn-outline-secondary" type="button" id="toggle-senha">
                             <i class="fa-solid fa-eye" id="icone-senha"></i>
                         </button>
+                        </div>   
                     </div>
 
                     <div class="mb-3 text-center">
