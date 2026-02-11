@@ -107,3 +107,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .invisible-placeholder {
   width: 238px; 
 }
+
+.navbar-toggler {
+    padding: clamp(3px, 1vw, 8px);
+}
+
+.navbar-toggler-icon {
+    width: clamp(18px, 3vw, 24px);
+    height: clamp(18px, 3vw, 24px);
+}
