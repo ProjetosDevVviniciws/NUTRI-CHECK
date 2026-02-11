@@ -130,3 +130,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .navbar-custom .nav-label {
     font-size: var(--nav-text-size);
 }
+
+.login-card {
+    width: clamp(280px, 90vw, 400px);
+    padding: clamp(1rem, 3vw, 2rem);
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.90);
+}
+
