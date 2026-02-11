@@ -116,3 +116,17 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     width: clamp(18px, 3vw, 24px);
     height: clamp(18px, 3vw, 24px);
 }
+
+.navbar-custom {
+    --nav-icon-size: clamp(18px, 3vw, 22px);
+    --nav-text-size: clamp(0.7rem, 1.8vw, 0.85rem);
+}
+
+.navbar-custom .lucide-icon {
+    width: var(--nav-icon-size);
+    height: var(--nav-icon-size);
+}
+
+.navbar-custom .nav-label {
+    font-size: var(--nav-text-size);
+}
