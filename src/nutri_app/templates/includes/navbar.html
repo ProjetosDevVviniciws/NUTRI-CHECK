@@ -6,52 +6,53 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
+    {% if current_user.is_authenticated %}
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav
+                  text-center
+                  mx-auto
+                  position-static
+                  position-lg-absolute
+                  start-lg-50
+                  translate-middle-lg-x">
 
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-      <ul class="navbar-nav
-                text-center
-                mx-auto
-                position-static
-                position-lg-absolute
-                start-lg-50
-                translate-middle-lg-x">
-
-        <li class="nav-item max-auto mx-2">
-          <a class="nav-link d-flex flex-column align-items-center" href="{{ url_for('home.home') }}">
-            <i class="lucide-icon fs-5" data-lucide="user"></i>
-            <div class="small nav-label">Diário</div>
-          </a>
-        </li>
-
-        <li class="nav-item max-auto mx-2">
-          <a class="nav-link d-flex flex-column align-items-center" href="{{ url_for('progressao.registrar_progressao_peso') }}">
-            <i class="lucide-icon fs-5" data-lucide="activity"></i>
-            <div class="small nav-label">Progresso</div>
-          </a>
-        </li>
-      </ul>
-
-      <ul class="navbar-nav text-center">
-        {% if current_user.is_authenticated %}
-          <li class="nav-item mx-2 align-items-center">
-            <a class="nav-link d-flex flex-column align-items-center" href="{{ url_for('perfil.perfil_page') }}">
+          <li class="nav-item max-auto mx-2">
+            <a class="nav-link d-flex flex-column align-items-center" href="{{ url_for('home.home') }}">
               <i class="lucide-icon fs-5" data-lucide="user"></i>
-              <span class="navbar-text fw-semibold text-color navbar-login">
-                Olá, {{ current_user.nome }}
-              </span>  
+              <div class="small nav-label">Diário</div>
             </a>
           </li>
-          <li class="nav-item mx-2">
-            <a class="nav-link d-flex flex-column align-items-center" href="{{ url_for('auth.logout') }}">
-              <i class="lucide-icon f-5" data-lucide="log-out"></i>
-              <div class="small nav-label">Sair</div>
+
+          <li class="nav-item max-auto mx-2">
+            <a class="nav-link d-flex flex-column align-items-center" href="{{ url_for('progressao.registrar_progressao_peso') }}">
+              <i class="lucide-icon fs-5" data-lucide="activity"></i>
+              <div class="small nav-label">Progresso</div>
             </a>
           </li>
-        {% else %}
-          <li class="nav-item invisible-placeholder"></li>
-        {% endif %}
-      </ul>
-    </div>
+        </ul>
+
+        <ul class="navbar-nav text-center">
+          {% if current_user.is_authenticated %}
+            <li class="nav-item mx-2 align-items-center">
+              <a class="nav-link d-flex flex-column align-items-center" href="{{ url_for('perfil.perfil_page') }}">
+                <i class="lucide-icon fs-5" data-lucide="user"></i>
+                <span class="navbar-text fw-semibold text-color navbar-login">
+                  Olá, {{ current_user.nome }}
+                </span>  
+              </a>
+            </li>
+            <li class="nav-item mx-2">
+              <a class="nav-link d-flex flex-column align-items-center" href="{{ url_for('auth.logout') }}">
+                <i class="lucide-icon f-5" data-lucide="log-out"></i>
+                <div class="small nav-label">Sair</div>
+              </a>
+            </li>
+          {% else %}
+            <li class="nav-item invisible-placeholder"></li>
+          {% endif %}
+        </ul>
+      </div>
+    {% endif %}
   </div>
 </nav>
 
