@@ -34,3 +34,7 @@
     color: #1a74e2;
     font-size: 0.68rem;
 }
+
+.footer-fluid {
+    font-size: clamp(0.65rem, 2.5vw, 0.95rem);
+}
