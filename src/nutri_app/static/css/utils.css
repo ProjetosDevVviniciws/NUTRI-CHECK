@@ -1,5 +1,23 @@
 /* Classes utilitárias */
 
+.hero-bg {
+    background-image: url("/static/images/fundo.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    padding: clamp(60px, 10vh, 120px) 0;
+}
+
+.gradient-text {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    background: linear-gradient(90deg, #00c6ff, #0072ff);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
 .text-center {
     text-align: center;
 }
