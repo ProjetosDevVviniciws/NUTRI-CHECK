@@ -3,10 +3,10 @@
     <a class="navbar-brand">
       <img src="{{ url_for('static', filename='images/logo.png') }}" alt="NutriCheck Logo" class="logo-navbar">
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
     {% if current_user.is_authenticated %}
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav
                   text-center
