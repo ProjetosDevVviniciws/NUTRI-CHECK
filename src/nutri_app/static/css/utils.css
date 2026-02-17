@@ -38,3 +38,28 @@
 .footer-fluid {
     font-size: clamp(0.65rem, 2.5vw, 0.95rem);
 }
+
+.progress-card {
+    width: clamp(280px, 95%, 800px);
+    margin: 0 auto;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.90);
+}
+
+.progress-card .card-header {
+    padding: clamp(0.6rem, 2vw, 1.2rem);
+}
+
+.progress-card .card-header span {
+    font-size: clamp(0.9rem, 2.2vw, 1.1rem);
+}
+
+.progress-card .btn {
+    font-size: clamp(0.7rem, 1.8vw, 0.9rem);
+    padding: clamp(0.3rem, 1vw, 0.5rem) clamp(0.6rem, 2vw, 1rem);
+}
+
+.progress-card .list-group-item {
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    padding: clamp(0.6rem, 2vw, 1rem);
+}
