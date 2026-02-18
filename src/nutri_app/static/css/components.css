@@ -280,3 +280,35 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     font-size: clamp(0.8rem, 2vw, 1rem);
     padding: clamp(0.6rem, 2vw, 1rem);
 }
+
+.progress-chart-card {
+    width: clamp(280px, 95%, 900px);
+    margin: 0 auto;
+    border-radius: 14px;
+    background-color: rgba(255, 255, 255, 0.90);
+}
+
+.progress-chart-card .card-body {
+    padding: clamp(1rem, 3vw, 2.5rem);
+}
+
+.progress-chart-card canvas {
+    width: 100%;
+    height: clamp(220px, 30vh, 320px);
+}
+
+.progress-chart-card small {
+    font-size: clamp(0.7rem, 1.8vw, 0.9rem);
+}
+
+.progress-chart-card p {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+}
+
+.progress-chart-card .text-muted p {
+    font-size: clamp(0.9rem, 2.2vw, 1.1rem);
+}
+
+.progress-chart-card .text-muted small {
+    font-size: clamp(0.75rem, 1.8vw, 0.9rem);
+}
