@@ -263,6 +263,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     background-color: rgba(255, 255, 255, 0.90);
 }
 
+.progress-card h3 {
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    font-weight: 600;
+}
+
 .progress-card .card-header {
     padding: clamp(0.6rem, 2vw, 1.2rem);
 }
