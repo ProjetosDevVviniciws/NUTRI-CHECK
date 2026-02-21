@@ -25,25 +25,25 @@
                 <div class="card-body text-center">
                     <h3 class="fw-bold mb-5">Resumo Diário</h3>
                     <div class="row mb-5">
-                        <h4 class="fw-bold col-3 mb-5">Metas</h4>
-                        <div class="fw-semibold col-2"><h5 class="fw-medium">Calorias</h5><p id="meta-calorias" class="text-primary">{{ metas_dia.calorias_meta }} kcal</p></div>
-                        <div class="fw-semibold col-2"><h5 class="fw-medium">Proteínas</h5><p id="meta-proteinas" class="text-primary">{{ metas_dia.proteinas_meta }} g</p></div>
-                        <div class="fw-semibold col-2"><h5 class="fw-medium">Carboidratos</h5><p id="meta-carboidratos" class="text-primary">{{ metas_dia.carboidratos_meta }} g</p></div>
-                        <div class="fw-semibold col-2"><h5 class="fw-medium">Gorduras</h5><p id="meta-gorduras" class="text-primary">{{ metas_dia.gorduras_meta }} g</p></div>
+                        <h4 class="fw-bold col-md-3 mb-3 mb-md-5">Metas</h4>
+                        <div class="fw-semibold col-3 col-md-2"><h5 class="fw-medium">Calorias</h5><p id="meta-calorias" class="text-primary">{{ metas_dia.calorias_meta }} kcal</p></div>
+                        <div class="fw-semibold col-3 col-md-2"><h5 class="fw-medium">Proteínas</h5><p id="meta-proteinas" class="text-primary">{{ metas_dia.proteinas_meta }} g</p></div>
+                        <div class="fw-semibold col-3 col-md-2"><h5 class="fw-medium">Carboidratos</h5><p id="meta-carboidratos" class="text-primary">{{ metas_dia.carboidratos_meta }} g</p></div>
+                        <div class="fw-semibold col-3 col-md-2"><h5 class="fw-medium">Gorduras</h5><p id="meta-gorduras" class="text-primary">{{ metas_dia.gorduras_meta }} g</p></div>
                     </div>
                     <div class="row mb-5">
-                        <h4 class="fw-bold col-3 mb-5">Totais</h4>
-                        <div class="fw-semibold col-2"><p id="totais-calorias" class="text-primary">{{ totais_dia.calorias_consumidas }} kcal</p></div>
-                        <div class="fw-semibold col-2"><p id="totais-proteinas" class="text-primary">{{ totais_dia.proteinas_consumidas }} g</p></div>
-                        <div class="fw-semibold col-2"><p id="totais-carboidratos" class="text-primary">{{ totais_dia.carboidratos_consumidos }} g</p></div>
-                        <div class="fw-semibold col-2"><p id="totais-gorduras" class="text-primary">{{ totais_dia.gorduras_consumidas }} g</p></div>
+                        <h4 class="fw-bold col-md-3 mb-3 mb-md-5">Totais</h4>
+                        <div class="fw-semibold col-3 col-md-2"><p id="totais-calorias" class="text-primary">{{ totais_dia.calorias_consumidas }} kcal</p></div>
+                        <div class="fw-semibold col-3 col-md-2"><p id="totais-proteinas" class="text-primary">{{ totais_dia.proteinas_consumidas }} g</p></div>
+                        <div class="fw-semibold col-3 col-md-2"><p id="totais-carboidratos" class="text-primary">{{ totais_dia.carboidratos_consumidos }} g</p></div>
+                        <div class="fw-semibold col-3 col-md-2"><p id="totais-gorduras" class="text-primary">{{ totais_dia.gorduras_consumidas }} g</p></div>
                     </div>
-                    <div class="row">
-                        <h4 class="fw-bold col-3 mb-5">Restantes</h4>
-                        <div class="fw-semibold col-2"><p id="restantes-calorias" class="text-primary">{{ restantes_dia.calorias_restantes }} kcal</p></div>
-                        <div class="fw-semibold col-2"><p id="restantes-proteinas" class="text-primary">{{ restantes_dia.proteinas_restantes }} g</p></div>
-                        <div class="fw-semibold col-2"><p id="restantes-carboidratos" class="text-primary">{{ restantes_dia.carboidratos_restantes }} g</p></div>
-                        <div class="fw-semibold col-2"><p id="restantes-gorduras" class="text-primary">{{ restantes_dia.gorduras_restantes }} g</p></div>
+                    <div class="row mb-5">
+                        <h4 class="fw-bold col-md-3 mb-3 mb-md-5">Restantes</h4>
+                        <div class="fw-semibold col-3 col-md-2"><p id="restantes-calorias" class="text-primary">{{ restantes_dia.calorias_restantes }} kcal</p></div>
+                        <div class="fw-semibold col-3 col-md-2"><p id="restantes-proteinas" class="text-primary">{{ restantes_dia.proteinas_restantes }} g</p></div>
+                        <div class="fw-semibold col-3 col-md-2"><p id="restantes-carboidratos" class="text-primary">{{ restantes_dia.carboidratos_restantes }} g</p></div>
+                        <div class="fw-semibold col-3 col-md-2"><p id="restantes-gorduras" class="text-primary">{{ restantes_dia.gorduras_restantes }} g</p></div>
                     </div>
                     {% include 'includes/refeicoes.html' %}
                 </div>
