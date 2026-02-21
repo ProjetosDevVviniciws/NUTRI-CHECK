@@ -1,0 +1,20 @@
+.card-body {
+    font-size: clamp(0.75rem, 1.2vw, 1rem);
+}
+
+.card-body h3 {
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    font-weight: 600;
+}
+
+.card-body h4 {
+    font-size: clamp(1rem, 1.8vw, 1.4rem);
+}
+
+.card-body h5 {
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+}
+
+.card-body p {
+    font-size: clamp(0.8rem, 1.2vw, 1rem);
+}
