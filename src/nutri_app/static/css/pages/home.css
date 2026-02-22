@@ -18,3 +18,19 @@
 .card-body p {
     font-size: clamp(0.8rem, 1.2vw, 1rem);
 }
+
+@media (max-width: 575.98px) {
+
+    .card-body h4 {
+        font-size: 14px;
+    }
+
+    .card-body h5 {
+        font-size: 9px;
+    }
+
+    .card-body p {
+        font-size: 9px;
+    }
+
+}
