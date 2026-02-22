@@ -22,15 +22,15 @@
 @media (max-width: 575.98px) {
 
     .card-body h4 {
-        font-size: 14px;
+        font-size: 15px;
     }
 
     .card-body h5 {
-        font-size: 9px;
+        font-size: 12px;
     }
 
     .card-body p {
-        font-size: 9px;
+        font-size: 11px;
     }
 
 }
