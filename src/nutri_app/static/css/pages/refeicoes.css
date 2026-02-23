@@ -1,0 +1,26 @@
+.refeicoes {
+    font-size: clamp(0.85rem, 1.2vw, 1rem);
+}
+
+.refeicoes h3 {
+    font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+    font-weight: 600;
+}
+
+.refeicoes .card-header span {
+    font-size: clamp(0.95rem, 1.5vw, 1.2rem);
+}
+
+.refeicoes .btn {
+    font-size: clamp(0.7rem, 1vw, 0.85rem);
+    padding: clamp(0.3rem, 0.8vw, 0.5rem)
+             clamp(0.6rem, 1vw, 1rem);
+}
+
+.refeicoes .agua-card-body p {
+    font-size: clamp(0.85rem, 1.2vw, 1rem);
+}
+
+.refeicoes .agua-card-body h4 {
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+}
