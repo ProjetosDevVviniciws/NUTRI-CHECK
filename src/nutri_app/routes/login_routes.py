@@ -23,7 +23,7 @@ def login():
             if verificar_senha(result.senha, senha):
                 user = UserLogin(result)
                 login_user(user)
-                flash(f"Sucesso! Bem-Vindo(a), {result.nome}", category="success")
+                flash(f"Sucesso! Bem-Vindo(a), {result.nome}", category="info")
                 return redirect(url_for('home.home'))
             else:
                 flash("Nome ou senha estão incorretos! Tente novamente.", category="danger")
