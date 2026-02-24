@@ -19,7 +19,7 @@ def cadastro():
             query = text("INSERT INTO usuarios (nome, email, senha) VALUES (:nome, :email, :senha)")
             conn.execute(query, {"nome": nome, "email": email, "senha": senha_hash})
             conn.commit()   
-            flash("Cadastro realizado com sucesso!", category="success")
+            flash("Cadastro realizado com sucesso!", category="info")
             return redirect(url_for('login.login'))
     if forms.errors != {}:
         for err in forms.errors.values():
