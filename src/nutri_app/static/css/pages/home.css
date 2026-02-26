@@ -20,17 +20,22 @@
     font-size: clamp(0.8rem, 1.2vw, 1rem);
 }
 
-@media (max-width: 575.98px) {
+@media 
+    (min-width: 240px) and 
+    (max-width: 320px) and
+    (min-height: 300px) and
+    (max-height: 450px) and
+    (-webkit-device-pixel-ratio: 1) {
 
     .card-body h3 {
-        font-size: 20px;
+        font-size: 18px;
     }
 
     .card-body h4 {
-        font-size: 15px;
+        font-size: 14px;
     }
 
     .card-body h5 {
-        font-size: 12px;
+        font-size: 11px;
     }
 }
