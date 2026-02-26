@@ -9,7 +9,7 @@
 }
 
 .card-body h4 {
-    font-size: clamp(1rem, 1.8vw, 1.4rem);
+    font-size: clamp(1.1rem, 1.8vw, 1.4rem);
 }
 
 .card-body h5 {
@@ -26,6 +26,49 @@
     (min-height: 300px) and
     (max-height: 450px) and
     (-webkit-device-pixel-ratio: 1) {
+    
+    .navbar-toggler {
+        padding: 3px;
+    }
+
+    .navbar-toggler-icon {
+        width: 18px;
+        height: 18px;
+    }
+
+    .navbar-custom {
+        --nav-icon-size: 16px;
+        --nav-text-size: 8px;
+    }
+
+    .navbar-custom .lucide-icon {
+        width: var(--nav-icon-size);
+        height: var(--nav-icon-size);
+    }
+
+    .navbar-custom .nav-label {
+        font-size: var(--nav-text-size);
+    }
+
+    .logo-navbar {
+        width: 120px;
+        height: 20px;
+        object-fit: cover;
+    }
+
+    .tagline-glow {
+        color: #fff;
+        font-size: 12px;
+        font-weight: 500;
+        text-align: center;
+        padding: 12px 20px;
+        width: fit-content;
+        margin: 0 auto;
+        margin-top: -20px;
+        margin-bottom: -20px;
+        text-shadow: 0 0 6px rgba(255,255,255,0.4);
+        letter-spacing: .5px;
+    }
 
     .card-body h3 {
         font-size: 18px;
@@ -38,5 +81,9 @@
 
     .card-body h5 {
         font-size: 11px;
+    }
+
+    .card-body p {
+        font-size: 9px;
     }
 }
