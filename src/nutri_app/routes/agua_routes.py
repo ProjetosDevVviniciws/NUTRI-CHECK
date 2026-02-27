@@ -93,16 +93,16 @@ def editar_agua():
     data = request.get_json()
 
     if not data or "quantidade" not in data or "data" not in data:
-        return jsonify({"erro": "Dados incompletos."}), 400
+        return jsonify({"erro": "Dados incompletos"}), 400
 
     try:
         nova_quantidade = int(data["quantidade"])
         data_registro = datetime.strptime(data["data"], "%Y-%m-%d").date()
     except ValueError:
-        return jsonify({"erro": "Dados inválidos."}), 400
+        return jsonify({"erro": "Dados inválidos"}), 400
 
     if nova_quantidade < 0 or nova_quantidade > 12000:
-        return jsonify({"erro": "Quantidade deve estar entre 0 e 12000ml."}), 400
+        return jsonify({"erro": "Quantidade deve estar entre 0 e 12000ml"}), 400
 
     with engine.begin() as conn:
         resultado = conn.execute(text("""
@@ -116,10 +116,10 @@ def editar_agua():
         })
 
         if resultado.rowcount == 0:
-            return jsonify({"erro": "Registro de água não encontrado."}), 404
+            return jsonify({"erro": "Registro de água não encontrado"}), 404
 
     return jsonify({
-        "mensagem": "Quantidade de água atualizada com sucesso.",
+        "mensagem": "Quantidade de água atualizada com sucesso",
         "total": nova_quantidade
     })
     
@@ -130,12 +130,12 @@ def remover_agua():
     data = request.get_json()
 
     if not data or "data" not in data:
-        return jsonify({"erro": "Dados incompletos."}), 400
+        return jsonify({"erro": "Dados incompletos"}), 400
 
     try:
         data_registro = datetime.strptime(data["data"], "%Y-%m-%d").date()
     except ValueError:
-        return jsonify({"erro": "Dados inválidos."}), 400
+        return jsonify({"erro": "Dados inválidos"}), 400
 
     with engine.begin() as conn:
         resultado = conn.execute(text("""
@@ -147,10 +147,10 @@ def remover_agua():
         })
 
         if resultado.rowcount == 0:
-            return jsonify({"erro": "Registro de água não encontrado."}), 404
+            return jsonify({"erro": "Registro de água não encontrado"}), 404
 
     return jsonify({
-        "mensagem": "Consumo de água do dia removido com sucesso.",
+        "mensagem": "Consumo de água do dia removido com sucesso",
         "total": 0
     })
 
