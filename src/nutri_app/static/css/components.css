@@ -100,12 +100,29 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .flash-container .alert {
-    display: grid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     grid-template-columns: 1fr auto;
     align-items: start;
     padding: clamp(0.55rem, 1vw, 1.4rem);
     border-radius: clamp(4px, 1vw, 12px);
     position: relative;
+}
+
+.flash-container .alert-message {
+    text-align: center;
+    width: 100%;
+    line-height: 1.2;
+    font-size: clamp(0.6rem, 0.7vw + 0.5rem, 1rem);
+}
+
+.flash-container .btn-close {
+    position: absolute;
+    top: 50%;
+    right: clamp(8px, 1vw, 14px);
+    transform: translateY(-50%);
+    font-size: clamp(8px, 0.6vw, 15px);
 }
 
 .invisible-placeholder {
