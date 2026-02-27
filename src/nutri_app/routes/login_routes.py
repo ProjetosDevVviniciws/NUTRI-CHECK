@@ -26,5 +26,5 @@ def login():
                 flash(f"Sucesso! Bem-Vindo(a), {result.nome}", category="info")
                 return redirect(url_for('home.home'))
             else:
-                flash("Nome ou senha estão incorretos! Tente novamente.", category="danger")
+                flash("Nome ou senha estão incorretos! Tente novamente", category="danger")
     return render_template("pages/login.html", form=forms)
