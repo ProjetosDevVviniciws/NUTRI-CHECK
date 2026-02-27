@@ -44,7 +44,7 @@ def registrar_progressao_peso():
             if existente:
                 return jsonify({
                     "success": False,
-                    "message": "Já existe um registro de peso para esta data."
+                    "message": "Já existe um registro de peso para esta data"
                 }), 400
             
             conn.execute(text("""
@@ -138,13 +138,13 @@ def editar_progressao_peso():
     data = data_json.get("data")
 
     if not peso or not data:
-        return jsonify({"success": False, "message": "Dados inválidos."}), 400
+        return jsonify({"success": False, "message": "Dados inválidos"}), 400
 
     try:
         peso = float(peso)
         data = datetime.strptime(data, "%Y-%m-%d").date()
     except ValueError:
-        return jsonify({"success": False, "message": "Formato inválido."}), 400
+        return jsonify({"success": False, "message": "Formato inválido"}), 400
 
     with engine.begin() as conn:
         resultado = conn.execute(text("""
@@ -159,7 +159,7 @@ def editar_progressao_peso():
         })
 
         if resultado.rowcount == 0:
-            return jsonify({"success": False, "message": "Registro não encontrado."}), 404
+            return jsonify({"success": False, "message": "Registro não encontrado"}), 404
 
     return jsonify({"success": True, "message": "Progresso atualizado com sucesso!"})
 
@@ -171,12 +171,12 @@ def excluir_progressao_peso():
     data = data_json.get("data")
 
     if not data:
-        return jsonify({"success": False, "message": "Data não informada."}), 400
+        return jsonify({"success": False, "message": "Data não informada"}), 400
 
     try:
         data = datetime.strptime(data, "%Y-%m-%d").date()
     except ValueError:
-        return jsonify({"success": False, "message": "Formato inválido."}), 400
+        return jsonify({"success": False, "message": "Formato inválido"}), 400
 
     with engine.begin() as conn:
         resultado = conn.execute(text("""
@@ -189,7 +189,7 @@ def excluir_progressao_peso():
         })
 
         if resultado.rowcount == 0:
-            return jsonify({"success": False, "message": "Registro não encontrado."}), 404
+            return jsonify({"success": False, "message": "Registro não encontrado"}), 404
 
     return jsonify({"success": True, "message": "Progresso removido com sucesso!"})
 
