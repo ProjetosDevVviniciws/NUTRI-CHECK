@@ -93,15 +93,19 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .flash-container {
-    max-width: 650px;
-    margin: 0 auto;
-    text-align: center;
-    font-size: 1.1rem;
+    width: 100%;
+    max-width: clamp(220px, 94vw, 650px);
+    margin: clamp(4px, 1.5vw, 24px) auto;
+    font-size: clamp(0.65rem, 0.75vw + 0.55rem, 1.1rem);
 }
 
 .flash-container .alert {
-    padding: 0.95rem 1rem;
-    border-radius: 8px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    padding: clamp(0.55rem, 1vw, 1.4rem);
+    border-radius: clamp(4px, 1vw, 12px);
+    position: relative;
 }
 
 .invisible-placeholder {
