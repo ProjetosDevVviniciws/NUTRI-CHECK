@@ -1,0 +1,129 @@
+@media 
+    (min-width: 240px) and 
+    (max-width: 320px) and
+    (min-height: 300px) and
+    (max-height: 450px) and
+    (-webkit-device-pixel-ratio: 1) {
+    
+    .navbar-toggler {
+        padding: 3px;
+    }
+
+    .navbar-toggler-icon {
+        width: 18px;
+        height: 18px;
+    }
+
+    .navbar-custom {
+        --nav-icon-size: 16px;
+        --nav-text-size: 8px;
+    }
+
+    .navbar-custom .lucide-icon {
+        width: var(--nav-icon-size);
+        height: var(--nav-icon-size);
+    }
+
+    .navbar-custom .nav-label {
+        font-size: var(--nav-text-size);
+    }
+
+    .logo-navbar {
+        width: 120px;
+        height: 20px;
+        object-fit: cover;
+    }
+
+    .flash-container .alert-message {
+        text-align: center;
+        width: 100%;
+        line-height: 1.15;
+        font-size: 8.5px; 
+        padding: 0 18px;   
+    }
+
+    .flash-container .btn-close {
+        position: absolute;
+        top: 50%;
+        right: 8px;
+        transform: translateY(-50%);
+        font-size: 6px;   
+    }
+
+    .tagline-glow {
+        color: #fff;
+        font-size: 12px;
+        font-weight: 500;
+        text-align: center;
+        padding: 12px 20px;
+        width: fit-content;
+        margin: 0 auto;
+        margin-top: -20px;
+        margin-bottom: -20px;
+        text-shadow: 0 0 6px rgba(255,255,255,0.4);
+        letter-spacing: .5px;
+    }
+
+    .progress-card {
+        width: 250px;
+        margin: 0 auto;
+        border-radius: 10px;
+        background-color: rgba(255, 255, 255, 0.90);
+    }
+
+    .progress-card h3 {
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .progress-card .card-header {
+        padding: 8px 10px;
+    }
+
+    .progress-card .card-header span {
+        font-size: 12px;
+    }
+
+    .progress-card .btn {
+        font-size: 11px;
+        padding: 4px 8px;
+    }
+
+    .progress-card .list-group-item {
+        font-size: 12px;
+        padding: 8px 10px;
+    }
+
+    .progress-chart-card {
+        width: 210px;
+        margin: 0 auto;
+        border-radius: 10px;
+        background-color: rgba(255, 255, 255, 0.90);
+    }
+
+    .progress-chart-card .card-body {
+        padding: 12px;
+    }
+
+    .progress-chart-card canvas {
+        width: 100%;
+        height: 160px;
+    }
+
+    .progress-chart-card small {
+        font-size: 10px;
+    }
+
+    .progress-chart-card p {
+        font-size: 13px;
+    }
+
+    .progress-chart-card .text-muted p {
+        font-size: 12px;
+    }
+
+    .progress-chart-card .text-muted small {
+        font-size: 10px;
+    }
+
+}
