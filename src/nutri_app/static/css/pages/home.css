@@ -56,6 +56,22 @@
         object-fit: cover;
     }
 
+    .flash-container .alert-message {
+        text-align: center;
+        width: 100%;
+        line-height: 1.15;
+        font-size: 8.5px; 
+        padding: 0 18px;   
+    }
+
+    .flash-container .btn-close {
+        position: absolute;
+        top: 50%;
+        right: 8px;
+        transform: translateY(-50%);
+        font-size: 6px;   
+    }
+
     .tagline-glow {
         color: #fff;
         font-size: 12px;
