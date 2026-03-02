@@ -12,7 +12,12 @@ document.addEventListener("DOMContentLoaded", () => {
         altInput: true,
         altFormat: "d/m/Y",    
         defaultDate: "today",
-        allowInput: true
+        allowInput: false,
+        static: true,
+        position: "auto center",
+        clickOpens: true,
+        disableMobile: true,
+        appendTo: document.querySelector("#modalRegistrarProgresso .modal-body")
     });
     
     modalElement.addEventListener("shown.bs.modal", () => {
