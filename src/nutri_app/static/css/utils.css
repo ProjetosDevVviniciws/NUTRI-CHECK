@@ -110,8 +110,17 @@
     border-radius: clamp(8px, 2vw, 16px);
 }
 
+.modal-ep .modal-header {
+    padding-bottom: clamp(8px, 2vw, 16px);
+}
+
 .modal-ep .modal-title {
     font-size: clamp(1rem, 2.5vw, 1.25rem);
+}
+
+.modal-ep .form-label-custom {
+    font-size: clamp(0.85rem, 2.3vw, 1rem);
+    margin-bottom: clamp(4px, 1.5vw, 8px);
 }
 
 .modal-ep .form-control {
@@ -122,6 +131,15 @@
 .modal-ep .btn {
     font-size: clamp(0.85rem, 2.5vw, 1rem);
     padding: clamp(6px, 2vw, 10px) clamp(12px, 3vw, 18px);
+}
+
+.modal-ep #erro-progressao {
+    font-size: clamp(0.75rem, 2.2vw, 0.9rem);
+}
+
+.modal-ep .modal-footer {
+    padding-top: clamp(8px, 2vw, 16px);
+    gap: clamp(6px, 2vw, 12px);
 }
 
 
