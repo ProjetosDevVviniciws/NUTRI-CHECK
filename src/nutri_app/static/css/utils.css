@@ -53,4 +53,28 @@
     box-sizing: border-box;
 }
 
+.modal-rp .modal-dialog {
+    width: clamp(280px, 92vw, 500px);
+    margin: auto;
+}
+
+.modal-rp .modal-content {
+    padding: clamp(12px, 3vw, 24px);
+    border-radius: clamp(8px, 2vw, 16px);
+}
+
+.modal-rp .modal-title {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+}
+
+.modal-rp .form-control {
+    font-size: clamp(0.85rem, 2.5vw, 1rem);
+    padding: clamp(8px, 2vw, 12px);
+}
+
+.modal-rp .btn {
+    font-size: clamp(0.85rem, 2.5vw, 1rem);
+    padding: clamp(6px, 2vw, 10px) clamp(12px, 3vw, 18px);
+}
+
 
