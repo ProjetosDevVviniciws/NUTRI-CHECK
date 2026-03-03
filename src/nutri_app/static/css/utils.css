@@ -39,16 +39,16 @@
     font-size: clamp(0.65rem, 2.5vw, 0.95rem);
 }
 
-.modal-flatpickr .flatpickr-wrapper {
+.flatpickr .flatpickr-wrapper {
     width: 100%;
     display: block;
 }
 
-.modal-flatpickr .flatpickr-wrapper .form-control {
+.flatpickr .flatpickr-wrapper .form-control {
     width: 100%;
 }
 
-.modal-flatpickr .flatpickr-calendar {
+.flatpickr .flatpickr-calendar {
     max-width: 100%;
     box-sizing: border-box;
 }
