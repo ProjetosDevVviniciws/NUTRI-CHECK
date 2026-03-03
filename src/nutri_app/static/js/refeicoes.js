@@ -16,6 +16,9 @@ document.addEventListener("DOMContentLoaded", function () {
         clickOpens: false,         
         defaultDate: hoje,
         allowInput: true,
+        position: "auto center",
+        clickOpens: true,
+        disableMobile: true,
 
         onChange: function (selectedDates) {
             if (selectedDates.length) {
