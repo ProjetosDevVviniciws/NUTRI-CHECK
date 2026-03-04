@@ -17,9 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
         defaultDate: hoje,
         allowInput: true,
         position: "auto center",
-        clickOpens: true,
         disableMobile: true,
-
         onChange: function (selectedDates) {
             if (selectedDates.length) {
                 dataAtual = selectedDates[0];
