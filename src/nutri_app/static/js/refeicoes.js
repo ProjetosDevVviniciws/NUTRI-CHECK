@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
         allowInput: true,
         position: "auto center",
         disableMobile: true,
+        showMonths: 1,
         onChange: function (selectedDates) {
             if (selectedDates.length) {
                 dataAtual = selectedDates[0];
