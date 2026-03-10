@@ -13,11 +13,9 @@ document.addEventListener("DOMContentLoaded", () => {
         altFormat: "d/m/Y",    
         defaultDate: "today",
         allowInput: false,
-        static: true,
         position: "auto center",
         clickOpens: true,
         disableMobile: true,
-        appendTo: document.querySelector("#modalRegistrarProgresso .modal-body")
     });
     
     modalElement.addEventListener("shown.bs.modal", () => {
