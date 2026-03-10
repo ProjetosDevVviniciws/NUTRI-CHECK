@@ -151,4 +151,90 @@
         line-height: 18px;
         font-size: 9px;
     }
+
+    .modal-rp .modal-dialog {
+        width: 160px;
+        margin: auto;
+    }
+
+    .modal-rp .modal-content {
+        padding: 6px;
+        border-radius: 6px;
+    }
+
+    .modal-rp .modal-header {
+        padding-bottom: 4px;
+    }
+
+    .modal-rp .modal-title {
+        font-size: 10px;
+    }
+
+    .modal-rp .form-label-custom {
+        font-size: 8px;
+        margin-bottom: 2px;
+    }
+
+    .modal-rp .form-control {
+        font-size: 8px;
+        padding: 3px 4px;
+        height: 20px;
+    }
+
+    .modal-rp .btn {
+        font-size: 8px;
+        padding: 3px 5px;
+    }
+
+    .modal-rp #erro-progressao {
+        font-size: 7px;
+    }
+
+    .modal-rp .modal-footer {
+        padding-top: 4px;
+        gap: 3px;
+    }
+
+    .modal-ep .modal-dialog {
+        width: 160px;
+        margin: auto;
+    }
+
+    .modal-ep .modal-content {
+        padding: 6px;
+        border-radius: 6px;
+    }
+
+    .modal-ep .modal-header {
+        padding-bottom: 4px;
+    }
+
+    .modal-ep .modal-title {
+        font-size: 10px;
+    }
+
+    .modal-ep .form-label-custom {
+        font-size: 8px;
+        margin-bottom: 2px;
+    }
+
+    .modal-ep .form-control {
+        font-size: 8px;
+        padding: 3px 4px;
+        height: 20px;
+    }
+
+    .modal-ep .btn {
+        font-size: 8px;
+        padding: 3px 5px;
+    }
+
+    .modal-ep #erro-progressao {
+        font-size: 7px;
+    }
+
+    .modal-ep .modal-footer {
+        padding-top: 4px;
+        gap: 3px;
+    }
 }
