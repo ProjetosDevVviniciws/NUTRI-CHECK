@@ -105,7 +105,7 @@
 }
 
 .modal-ep .modal-dialog {
-    width: clamp(280px, 92vw, 500px);
+    width: clamp(230px, 92vw, 500px);
     margin: auto;
 }
 
@@ -120,6 +120,14 @@
 
 .modal-ep .modal-title {
     font-size: clamp(1rem, 2.5vw, 1.25rem);
+}
+
+.modal-ep .modal-body {
+    padding: clamp(8px, 2vw, 16px);
+}
+
+.modal-ep .modal-body .form-control {
+    margin-bottom: clamp(6px, 1.8vw, 12px);
 }
 
 .modal-ep .form-label-custom {
