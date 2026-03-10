@@ -51,10 +51,11 @@
 .flatpickr .flatpickr-calendar {
     max-width: 100%;
     box-sizing: border-box;
+    font-size: clamp(0.75rem, 2.2vw, 1rem);
 }
 
 .modal-rp .modal-dialog {
-    width: clamp(280px, 92vw, 500px);
+    width: clamp(230px, 92vw, 500px);
     margin: auto;
 }
 
@@ -69,6 +70,14 @@
 
 .modal-rp .modal-title {
     font-size: clamp(1rem, 2.5vw, 1.25rem);
+}
+
+.modal-rp .modal-body {
+    padding: clamp(8px, 2vw, 16px);
+}
+
+.modal-rp .modal-body .form-control {
+    margin-bottom: clamp(6px, 1.8vw, 12px);
 }
 
 .modal-rp .form-label-custom {
