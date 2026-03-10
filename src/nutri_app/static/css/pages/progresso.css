@@ -126,4 +126,29 @@
         font-size: 10px;
     }
 
+    .flatpickr .flatpickr-calendar {
+        width: 100px;
+        max-width: 150px;
+        font-size: 8px;
+        padding: 4px;
+    }
+
+    .flatpickr-months {
+        height: 22px;
+    }
+
+    .flatpickr-current-month {
+        font-size: 8px;
+    }
+
+    .flatpickr-weekdays {
+        font-size: 9px;
+    }
+
+    .flatpickr-day {
+        width: 18px;
+        height: 18px;
+        line-height: 18px;
+        font-size: 9px;
+    }
 }
