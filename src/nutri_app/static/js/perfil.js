@@ -6,14 +6,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const iconeSenha = document.getElementById("icone-senha");
 
   if (!toggleSenha || !senhaInput || !iconeSenha) return;
+    toggleSenha.addEventListener("click", () => {
+        const isPassword = senhaInput.type === "password";
 
-  toggleSenha.addEventListener("click", () => {
-      const isPassword = senhaInput.type === "password";
-
-      senhaInput.type = isPassword ? "text" : "password";
-      iconeSenha.classList.toggle("fa-eye");
-      iconeSenha.classList.toggle("fa-eye-slash");
-  });
+        senhaInput.type = isPassword ? "text" : "password";
+        iconeSenha.classList.toggle("fa-eye");
+        iconeSenha.classList.toggle("fa-eye-slash");
+    });
 
   fetch("/perfil/dados")
     .then(res => res.json())
@@ -34,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
       peso: document.getElementById("peso").value,
       idade: document.getElementById("idade").value,
       sexo: document.getElementById("sexo").value,
-      senha: document.getElementById("senha").value
+      senha: document.getElementById("senha-input").value
     };
 
     fetch("/perfil/atualizar", {
