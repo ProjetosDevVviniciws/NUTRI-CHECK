@@ -29,8 +29,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const payload = {
       nome: document.getElementById("nome").value,
-      altura: document.getElementById("altura").value,
-      peso: document.getElementById("peso").value,
+      altura: document.getElementById("altura").value.replace(",", "."),
+      peso: document.getElementById("peso").value.replace(",", "."),
       idade: document.getElementById("idade").value,
       sexo: document.getElementById("sexo").value,
       senha: document.getElementById("senha-input").value
