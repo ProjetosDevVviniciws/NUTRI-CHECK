@@ -81,22 +81,17 @@ def registrar_progressao_peso():
         """), {"id": current_user.id}).fetchall()
         
         if resultados:
-            for r in resultados:
-                if r.data != data_inicial:     
-                    registros.append({
-                        "data": r.data,
-                        "peso": float(r.peso)
-                    })
-            
-            registros.sort(key=lambda x: x["data"])
-            
-            datas = [r["data"].strftime("%d/%m/%y") for r in registros]
-            pesos = [r["peso"] for r in registros]
-            
+            datas = [r.data.strftime("%d/%m/%y") for r in resultados]
+            pesos = [float(r.peso) for r in resultados]
+
+            peso_inicial = pesos[0]
             peso_atual = pesos[-1]
         else:
-            peso_atual = peso_inicial
-    
+            datas = []
+            pesos = []
+            peso_inicial = None
+            peso_atual = None
+            
     return render_template(
         "pages/progressao.html",
         datas=datas,
