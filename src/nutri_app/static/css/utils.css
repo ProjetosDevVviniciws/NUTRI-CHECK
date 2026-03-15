@@ -204,4 +204,54 @@
     gap: clamp(6px, 2vw, 12px);
 }
 
+.modal-ea .modal-dialog {
+    width: clamp(230px, 92vw, 500px);
+    margin: auto;
+}
+
+.modal-ea .modal-content {
+    padding: clamp(12px, 3vw, 24px);
+    border-radius: clamp(8px, 2vw, 16px);
+}
+
+.modal-ea  .modal-header {
+    padding-bottom: clamp(8px, 2vw, 16px);
+}
+
+.modal-ea  .modal-title {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+}
+
+.modal-ea  .modal-body {
+    padding: clamp(8px, 2vw, 16px);
+}
+
+.modal-ea  .modal-body .form-control {
+    margin-bottom: clamp(6px, 1.8vw, 12px);
+}
+
+.modal-ea  .form-label-custom {
+    font-size: clamp(0.85rem, 2.3vw, 1rem);
+    margin-bottom: clamp(4px, 1.5vw, 8px);
+}
+
+.modal-ea  .form-control {
+    font-size: clamp(0.85rem, 2.5vw, 1rem);
+    padding: clamp(8px, 2vw, 12px);
+}
+
+.modal-ea  .btn {
+    font-size: clamp(0.85rem, 2.5vw, 1rem);
+    padding: clamp(6px, 2vw, 10px) clamp(12px, 3vw, 18px);
+}
+
+.modal-ea  #erro-agua {
+    font-size: clamp(0.75rem, 2.2vw, 0.9rem);
+}
+
+.modal-ea .modal-footer {
+    padding-top: clamp(8px, 2vw, 16px);
+    gap: clamp(6px, 2vw, 12px);
+}
+
 
