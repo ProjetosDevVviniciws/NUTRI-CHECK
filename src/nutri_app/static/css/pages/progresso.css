@@ -195,45 +195,45 @@
         gap: 3px;
     }
 
-    .modal-ep .modal-dialog {
+    .modal-edit-progress .modal-dialog {
         width: 160px;
         margin: auto;
     }
 
-    .modal-ep .modal-content {
+    .modal-edit-progress .modal-content {
         padding: 6px;
         border-radius: 6px;
     }
 
-    .modal-ep .modal-header {
+    .modal-edit-progress .modal-header {
         padding-bottom: 4px;
     }
 
-    .modal-ep .modal-title {
+    .modal-edit-progress .modal-title {
         font-size: 10px;
     }
 
-    .modal-ep .form-label-custom {
+    .modal-edit-progress .form-label-custom {
         font-size: 8px;
         margin-bottom: 2px;
     }
 
-    .modal-ep .form-control {
+    .modal-edit-progress .form-control {
         font-size: 8px;
         padding: 3px 4px;
         height: 20px;
     }
 
-    .modal-ep .btn {
+    .modal-edit-progress .btn {
         font-size: 8px;
         padding: 3px 5px;
     }
 
-    .modal-ep #erro-progressao {
+    .modal-edit-progress #erro-progressao {
         font-size: 7px;
     }
 
-    .modal-ep .modal-footer {
+    .modal-edit-progress .modal-footer {
         padding-top: 4px;
         gap: 3px;
     }
