@@ -152,45 +152,45 @@
         font-size: 9px;
     }
 
-    .modal-rp .modal-dialog {
+    .modal-reg-progress .modal-dialog {
         width: 160px;
         margin: auto;
     }
 
-    .modal-rp .modal-content {
+    .modal-reg-progress .modal-content {
         padding: 6px;
         border-radius: 6px;
     }
 
-    .modal-rp .modal-header {
+    .modal-reg-progress .modal-header {
         padding-bottom: 4px;
     }
 
-    .modal-rp .modal-title {
+    .modal-reg-progress .modal-title {
         font-size: 10px;
     }
 
-    .modal-rp .form-label-custom {
+    .modal-reg-progress .form-label-custom {
         font-size: 8px;
         margin-bottom: 2px;
     }
 
-    .modal-rp .form-control {
+    .modal-reg-progress .form-control {
         font-size: 8px;
         padding: 3px 4px;
         height: 20px;
     }
 
-    .modal-rp .btn {
+    .modal-reg-progress .btn {
         font-size: 8px;
         padding: 3px 5px;
     }
 
-    .modal-rp #erro-progressao {
+    .modal-reg-progress #erro-progressao {
         font-size: 7px;
     }
 
-    .modal-rp .modal-footer {
+    .modal-reg-progress .modal-footer {
         padding-top: 4px;
         gap: 3px;
     }
