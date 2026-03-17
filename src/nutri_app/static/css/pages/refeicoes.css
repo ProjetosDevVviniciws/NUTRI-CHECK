@@ -25,6 +25,57 @@
     font-size: clamp(1.2rem, 2.5vw, 1.8rem);
 }
 
+.modal-adicionar-ref .modal-dialog {
+    width: clamp(230px, 92vw, 500px);
+    margin: auto;
+}
+
+.modal-adicionar-ref .modal-content {
+    padding: clamp(12px, 3vw, 24px);
+    border-radius: clamp(8px, 2vw, 16px);
+}
+
+.modal-adicionar-ref .modal-header {
+    padding-bottom: clamp(8px, 2vw, 16px);
+}
+
+.modal-adicionar-ref .modal-title {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+}
+
+.modal-adicionar-ref .modal-body {
+    padding: clamp(8px, 2vw, 16px);
+}
+
+.modal-adicionar-ref .modal-body .form-control {
+    margin-bottom: clamp(6px, 1.8vw, 12px);
+}
+
+.modal-adicionar-ref .form-label {
+    font-size: clamp(0.85rem, 2.3vw, 1rem);
+    margin-bottom: clamp(4px, 1.5vw, 8px);
+}
+
+.modal-adicionar-ref .form-label-custom {
+    font-size: clamp(0.85rem, 2.3vw, 1rem);
+    margin-bottom: clamp(4px, 1.5vw, 8px);
+}
+
+.modal-adicionar-ref .form-control {
+    font-size: clamp(0.85rem, 2.5vw, 1rem);
+    padding: clamp(8px, 2vw, 12px);
+}
+
+.modal-adicionar-ref .btn {
+    font-size: clamp(0.85rem, 2.5vw, 1rem);
+    padding: clamp(6px, 2vw, 10px) clamp(12px, 3vw, 18px);
+}
+
+.modal-adicionar-ref .modal-footer {
+    padding-top: clamp(8px, 2vw, 16px);
+    gap: clamp(6px, 2vw, 12px);
+}
+
 @media 
     (min-width: 240px) and 
     (max-width: 320px) and
