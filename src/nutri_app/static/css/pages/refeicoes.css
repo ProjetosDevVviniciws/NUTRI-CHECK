@@ -51,11 +51,6 @@
     margin-bottom: clamp(6px, 1.8vw, 12px);
 }
 
-.modal-adicionar-ref .form-label {
-    font-size: clamp(0.85rem, 2.3vw, 1rem);
-    margin-bottom: clamp(4px, 1.5vw, 8px);
-}
-
 .modal-adicionar-ref .form-label-custom {
     font-size: clamp(0.85rem, 2.3vw, 1rem);
     margin-bottom: clamp(4px, 1.5vw, 8px);
