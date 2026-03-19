@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
             dataSpan.textContent = dataAtual.toLocaleDateString("pt-BR");
         }
 
-        window.dataSelecionada = dataAtual.toISOString().split("T")[0];
+        window.dataSelecionada = formatarDataLocal(dataAtual);
 
         fp.setDate(dataAtual, false);
     };
