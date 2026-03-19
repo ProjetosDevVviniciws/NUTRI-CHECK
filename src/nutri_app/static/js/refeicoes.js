@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function carregarRefeicoes() {
-        const dataFormatada = dataAtual.toISOString().split("T")[0];
+        const dataFormatada = formatarDataLocal(dataAtual);
         
         fetch(`/refeicoes/listar?data=${dataFormatada}`)
             .then(res => res.json())
