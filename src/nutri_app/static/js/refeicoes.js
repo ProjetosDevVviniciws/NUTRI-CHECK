@@ -185,7 +185,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("btnAdicionarAlimento").addEventListener("click", () => {
         const porcao = document.getElementById("porcao").value;
         const tipo_refeicao = tipoHidden.value;
-        const dataSelecionada = window.dataSelecionada || new Date().toISOString().split("T")[0];
+        const dataSelecionada = window.dataSelecionada || formatarDataLocal(new Date());
 
         if (!alimentoSelecionado) {
             alert("Selecione um alimento antes de adicionar.");
