@@ -41,6 +41,13 @@ document.addEventListener("DOMContentLoaded", function () {
         fp.setDate(dataAtual, false);
     };
 
+    function formatarDataLocal(date) {
+        const ano = date.getFullYear();
+        const mes = String(date.getMonth() + 1).padStart(2, "0");
+        const dia = String(date.getDate()).padStart(2, "0");
+        return `${ano}-${mes}-${dia}`;
+    }
+
     function atualizarTotais(totais) {
         if (!totais) return;
         document.querySelector("#totais-calorias").textContent = `${totais.calorias_consumidas} kcal`;
