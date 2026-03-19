@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const btnProximo = document.getElementById("proximo-dia");
     const btnCalendario = document.getElementById("abrir-calendario");
     const hoje = new Date();
+    hoje.setHours(0, 0, 0, 0);
     
     const fp = flatpickr(seletorData, {
         locale: "pt",
@@ -28,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    let dataAtual = new Date(seletorData?.value || hoje);
+    let dataAtual = new Date(hoje);
     let alimentoSelecionado = null;
 
     const atualizarDataDisplay = () => {
