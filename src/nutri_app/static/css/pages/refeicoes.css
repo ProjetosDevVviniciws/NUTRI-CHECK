@@ -47,10 +47,6 @@
     padding: clamp(8px, 2vw, 16px);
 }
 
-.modal-adicionar-ref .modal-body .form-control {
-    margin-bottom: clamp(6px, 1.8vw, 12px);
-}
-
 .modal-adicionar-ref .form-label-custom {
     font-size: clamp(0.85rem, 2.3vw, 1rem);
     margin-bottom: clamp(4px, 1.5vw, 8px);
@@ -91,10 +87,6 @@
 
 .modal-edit-ref .modal-body {
     padding: clamp(8px, 2vw, 16px);
-}
-
-.modal-edit-ref .modal-body .form-control {
-    margin-bottom: clamp(6px, 1.8vw, 12px);
 }
 
 .modal-edit-ref .form-label-custom {
