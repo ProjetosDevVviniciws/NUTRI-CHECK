@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
         altInput: false, 
         clickOpens: false,         
         defaultDate: hoje,
-        allowInput: true,
+        allowInput: false,
         position: "auto center",
         disableMobile: true,
         showMonths: 1,
