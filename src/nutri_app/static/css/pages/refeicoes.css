@@ -146,6 +146,10 @@
         font-size: 14px;
     }
 
+    .refeicoes .alimentos-list .list-group-item {
+        font-size: 8px;
+    }
+
     .modal-adicionar-ref .modal-dialog {
         width: 160px;
         margin: auto;
