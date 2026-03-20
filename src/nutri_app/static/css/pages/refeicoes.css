@@ -25,6 +25,10 @@
     font-size: clamp(1.2rem, 2.5vw, 1.8rem);
 }
 
+.refeicoes .alimentos-list .list-group-item {
+    font-size: clamp(0.85rem, 1.2vw, 1rem);
+}
+
 .modal-adicionar-ref .modal-dialog {
     width: clamp(230px, 92vw, 500px);
     margin: auto;
@@ -180,6 +184,48 @@
     }
 
     .modal-adicionar-ref .modal-footer {
+        padding-top: 4px;
+        gap: 3px;
+    }
+
+    .modal-edit-ref .modal-dialog {
+        width: 160px;
+        margin: auto;
+    }
+
+    .modal-edit-ref .modal-content {
+        padding: 6px;
+        border-radius: 6px;
+    }
+
+    .modal-edit-ref .modal-header {
+        padding-bottom: 4px;
+    }
+
+    .modal-edit-ref .modal-title {
+        font-size: 10px;
+    }
+
+    .modal-edit-ref .modal-body {
+        padding: 4px;
+    }
+
+    .modal-edit-ref .form-label-custom {
+        font-size: 8px;
+        margin-bottom: 2px;
+    }
+
+    .modal-edit-ref .form-control {
+        font-size: 8px;
+        padding: 3px 4px;
+    }
+
+    .modal-edit-ref .btn {
+        font-size: 8px;
+        padding: 3px 5px;
+    }
+
+    .modal-edit-ref .modal-footer {
         padding-top: 4px;
         gap: 3px;
     }
