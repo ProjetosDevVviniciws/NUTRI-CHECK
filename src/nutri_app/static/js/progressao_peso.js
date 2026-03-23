@@ -28,6 +28,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 (instance.altInput || instance._input).focus();
             }, 0);
         },
+
+        onYearChange: function(selectedDates, dateStr, instance) {
+            setTimeout(() => {
+                (instance.altInput || instance._input).focus();
+            }, 0);
+        },
     });
     
     modalElement.addEventListener("shown.bs.modal", () => {
