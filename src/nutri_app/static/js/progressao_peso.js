@@ -16,6 +16,12 @@ document.addEventListener("DOMContentLoaded", () => {
         position: "auto center",
         clickOpens: true,
         disableMobile: true,
+
+        onOpen: function(selectedDates, dateStr, instance) {
+            setTimeout(() => {
+                (instance.altInput || instance._input).focus();
+            }, 0);
+        },
     });
     
     modalElement.addEventListener("shown.bs.modal", () => {
