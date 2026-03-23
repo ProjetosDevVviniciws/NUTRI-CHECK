@@ -34,6 +34,24 @@ document.addEventListener("DOMContentLoaded", () => {
                 (instance.altInput || instance._input).focus();
             }, 0);
         },
+
+        onReady: function(selectedDates, dateStr, instance) {
+            const calendar = instance.calendarContainer;
+
+            calendar.addEventListener("click", (e) => {
+                const isControl =
+                    e.target.closest(".flatpickr-monthDropdown-months") ||
+                    e.target.closest(".numInputWrapper") ||
+                    e.target.closest(".flatpickr-prev-month") ||
+                    e.target.closest(".flatpickr-next-month");
+
+                if (isControl) return;
+
+                setTimeout(() => {
+                    (instance.altInput || instance._input).focus();
+                }, 0);
+            });
+        }
     });
     
     modalElement.addEventListener("shown.bs.modal", () => {
