@@ -195,6 +195,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let dataRegistroSelecionado = null;
 
+    modalEditarEl.addEventListener("shown.bs.modal", () => {
+        erroEditar.classList.add("d-none");
+        erroEditar.textContent = "";
+    });
+
     function abrirModalEditar(elemento) {
         erroEditar.classList.add("d-none");
         erroEditar.textContent = "";
