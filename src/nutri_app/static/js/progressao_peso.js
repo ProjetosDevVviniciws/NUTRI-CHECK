@@ -187,7 +187,9 @@ document.addEventListener("DOMContentLoaded", () => {
     carregarRegistrosPeso();
 
     const modalEditarEl = document.getElementById("modalEditarProgresso");
-    const modalEditar = new bootstrap.Modal(modalEditarEl);
+    const modalEditar = new bootstrap.Modal(modalEditarEl, {
+        focus: false
+    });
 
     const inputEditarPeso = modalEditarEl.querySelector("#input-peso");
     const inputEditarData = modalEditarEl.querySelector("#input-data");
