@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     render: {
       option: function (item, escape) {
-        return `<div>${escape(item.nome || "")} <small>(${escape(item.origem)})</small></div>`;
+        return `<div>${escape(item.nome || "")}</div>`;
       }
     },
     onChange: function (value) {
