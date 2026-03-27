@@ -15,7 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
         altFormat: "d/m/Y",    
         defaultDate: "today",
         allowInput: false,
-        position: "auto center",
+        position: "below",
+        static: true,
         clickOpens: true,
         disableMobile: true,
 
