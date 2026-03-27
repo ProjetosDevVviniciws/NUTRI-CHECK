@@ -34,3 +34,11 @@ class LoginForm(FlaskForm):
     nome = StringField(label='Nome', validators=[DataRequired()])
     senha = PasswordField(label='Senha', validators=[DataRequired()])
     submit = SubmitField(label='Login')
+    
+class EsqueciSenhaForm(FlaskForm):
+    email = StringField(label='Email', validators=[Email(), DataRequired()])
+    submit = SubmitField(label='Enviar Token')
+    
+class ResetarSenhaForm(FlaskForm):
+    senha = PasswordField(label='Nova Senha', validators=[Length(min=6), DataRequired()])
+    submit = SubmitField(label='Atualizar Senha')
