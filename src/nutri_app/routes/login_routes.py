@@ -55,3 +55,31 @@ def esqueci_senha():
         return redirect(url_for("login.login"))
 
     return render_template("pages/esqueci_senha.html", form=form)
+
+@login_bp.route("/resetar-senha/<token>", methods=["GET", "POST"])
+def resetar_senha(token):
+    form = ResetarSenhaForm()
+    email = validar_token(token)
+
+    if not email:
+        flash("Token inválido ou expirado.", "danger")
+        return redirect(url_for("login.login"))
+
+    if form.validate_on_submit():
+        nova_senha = form.senha.data
+        senha_hash = gerar_hash(nova_senha)
+
+        with engine.begin() as conn:
+            conn.execute(text("""
+                UPDATE usuarios
+                SET senha = :senha
+                WHERE email = :email
+            """), {
+                "senha": senha_hash,
+                "email": email
+            })
+
+        flash("Senha atualizada com sucesso!", "info")
+        return redirect(url_for("login.login"))
+
+    return render_template("pages/resetar_senha.html", form=form)
