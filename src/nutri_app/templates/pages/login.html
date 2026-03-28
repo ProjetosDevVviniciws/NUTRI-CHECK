@@ -41,7 +41,11 @@
                             </button>
                         </div>   
                     </div>
-
+                    <div class="text-center mb-3">
+                        <a href="{{ url_for('login.esqueci_senha') }}" class="text-decoration-none small">
+                            Esqueci a senha
+                        </a>
+                    </div>
                     <div class="mb-3 text-center">
                         <small class="text-muted-custom">Você já possuí um cadastro?</small><br>
                         <a class="btn btn-ouline-custom mt-2" href="{{ url_for('auth.cadastro') }}">Cadastre-se</a>
