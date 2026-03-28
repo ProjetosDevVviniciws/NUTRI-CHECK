@@ -3,6 +3,11 @@ from src.nutri_app.database import engine
 from src.nutri_app.utils.hash import verificar_senha
 from src.nutri_app.utils.user_login import UserLogin
 from src.nutri_app.forms.auth_forms import LoginForm
+from src.nutri_app.forms.auth_forms import EsqueciSenhaForm
+from src.nutri_app.forms.auth_forms import ResetarSenhaForm
+from src.nutri_app.utils.token import gerar_token, validar_token
+from src.nutri_app.utils.email_service import enviar_email_reset
+from src.nutri_app.utils.hash import gerar_hash
 from sqlalchemy import text
 from flask_login import login_user
 
