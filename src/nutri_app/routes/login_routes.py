@@ -33,3 +33,25 @@ def login():
             else:
                 flash("Nome ou senha estão incorretos! Tente novamente", category="danger")
     return render_template("pages/login.html", form=forms)
+
+@login_bp.route("/esqueci-senha", methods=["GET", "POST"])
+def esqueci_senha():
+    form = EsqueciSenhaForm()
+    if form.validate_on_submit():
+        email = form.email.data
+
+        with engine.connect() as conn:
+            user = conn.execute(text("""
+                SELECT * FROM usuarios WHERE email = :email
+            """), {"email": email}).mappings().first()
+
+        if user:
+            token = gerar_token(email)
+            link = url_for("login.resetar_senha", token=token, _external=True)
+
+            enviar_email_reset(email, link)
+
+        flash("Se o email existir, um link de recuperação foi enviado.", "info")
+        return redirect(url_for("login.login"))
+
+    return render_template("pages/esqueci_senha.html", form=form)
