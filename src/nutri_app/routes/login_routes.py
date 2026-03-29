@@ -48,7 +48,7 @@ def esqueci_senha():
             token = gerar_token(email)
             link = url_for("login.resetar_senha", token=token, _external=True)
 
-            enviar_email_reset(email, link)
+            enviar_email_reset(user["email"], link, user["nome"])
 
         flash("Se o email existir, um link de recuperação foi enviado.", "info")
         return redirect(url_for("login.login"))
