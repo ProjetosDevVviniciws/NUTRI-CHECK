@@ -19,6 +19,8 @@ def create_app():
     app.config['MAIL_USERNAME'] = os.getenv("MAIL_USERNAME")
     app.config['MAIL_PASSWORD'] = os.getenv("MAIL_PASSWORD")    
     app.config['MAIL_DEFAULT_SENDER'] = os.getenv("MAIL_DEFAULT_SENDER")
+    app.config['EMAIL_USE_CID'] = os.getenv("EMAIL_USE_CID", "false") == "true"
+    app.config['APP_BASE_URL'] = os.getenv("APP_BASE_URL")
 
     mail.init_app(app)
     bcrypt.init_app(app)
