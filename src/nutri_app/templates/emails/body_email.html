@@ -1,0 +1,50 @@
+<div style="font-family: Arial, sans-serif; background-color: #f4f6f8; padding: 20px; text-align: center;">
+    <div style="max-width: 480px; margin: auto; background: #ffffff; padding: 30px; border-radius: 10px;">
+        
+        <a style="text-align: center; margin-bottom: 20px;">
+            <img 
+                src="{{ logo_src }}" 
+                alt="NutriCheck Logo"
+                width="160"
+                style="display: block; margin: 0 auto;"
+            >
+        </a>
+
+        <h2 style="text-align: center; color: #111; margin-bottom: 20px;">
+            Redefinição de senha
+        </h2>
+
+        <p style="color: #1f2937; font-size: 15px;">
+            <b>Olá, {{ nome }}!</b>
+        </p>
+
+        <hr style="margin: 20px 0;">
+
+        <p style="color: #1f2937; font-size: 15px;">
+            Recebemos uma solicitação para redefinir a senha da sua conta.<br>
+            Clique no botão abaixo para continuar:
+        </p>
+
+        <div style="margin: 30px 0;">
+            <a href="{{link}}" 
+                style="background-color: #0d6efd; color: #ffffff; padding: 12px 20px; text-decoration: none; border-radius: 5px; font-weight: 600; display: inline-block;">
+                Redefinir senha
+            </a>
+        </div>
+
+        <p style="color: #666; font-size: 15px;">
+            Este link é válido por 30 minutos.
+            Se você não solicitou essa ação, pode ignorar este email com segurança.
+        </p>
+
+        <hr style="margin: 20px 0;">
+
+        <p style="font-size: 14px;">
+            Por favor, pedimos que você não responda esse
+            e-mail, pois se trata de uma mensagem automática.
+        </p>
+    </div>
+    <p style="color: #999; font-size: 12px; margin-top: 20px;">
+        © NutriCheck — Todos os direitos reservados
+    </p>
+</div> 
