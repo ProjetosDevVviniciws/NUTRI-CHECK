@@ -39,6 +39,6 @@ class EsqueciSenhaForm(FlaskForm):
     email = StringField(label='Email', validators=[Email(), DataRequired()])
     submit = SubmitField(label='Enviar Token')
     
-class ResetarSenhaForm(FlaskForm):
+class RedefinirSenhaForm(FlaskForm):
     senha = PasswordField(label='Nova Senha', validators=[Length(min=6), DataRequired()])
     submit = SubmitField(label='Atualizar Senha')
