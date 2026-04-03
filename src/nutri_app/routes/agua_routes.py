@@ -7,7 +7,7 @@ from datetime import date, datetime
 
 agua_bp = Blueprint('agua', __name__)
 
-@agua_bp.route("/agua/registrar", methods=['POST'])
+@agua_bp.route("/agua-registrar", methods=['POST'])
 @login_required
 @perfil_completo_required
 def registrar_agua():
@@ -64,7 +64,7 @@ def registrar_agua():
     "data": data_registro.strftime("%d/%m/%Y")
     })
     
-@agua_bp.route("/agua/total")
+@agua_bp.route("/agua-total")
 @login_required
 def total_agua_por_data():
     data_str = request.args.get("data")
@@ -86,7 +86,7 @@ def total_agua_por_data():
 
     return jsonify({"total": total or 0})
 
-@agua_bp.route("/agua/editar", methods=["PUT"])
+@agua_bp.route("/agua-editar", methods=["PUT"])
 @login_required
 @perfil_completo_required
 def editar_agua():
@@ -123,7 +123,7 @@ def editar_agua():
         "total": nova_quantidade
     })
     
-@agua_bp.route("/agua/remover", methods=["DELETE"])
+@agua_bp.route("/agua-remover", methods=["DELETE"])
 @login_required
 @perfil_completo_required
 def remover_agua():
