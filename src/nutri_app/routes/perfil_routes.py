@@ -13,7 +13,7 @@ perfil_bp = Blueprint('perfil', __name__)
 def perfil_page():
     return render_template("pages/perfil.html")
 
-@perfil_bp.route("/perfil/dados")
+@perfil_bp.route("/perfil-dados")
 @login_required
 def perfil_dados():
     with engine.connect() as conn:
@@ -36,7 +36,7 @@ def perfil_dados():
         "gorduras_meta": usuario["gorduras_meta"]
     }), 200
 
-@perfil_bp.route("/perfil/atualizar", methods=["PUT"])
+@perfil_bp.route("/perfil-atualizar", methods=["PUT"])
 @login_required
 def perfil_atualizar():
     data = request.json
