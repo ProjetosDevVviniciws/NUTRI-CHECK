@@ -3,7 +3,7 @@ from src.nutri_app.database import engine
 from src.nutri_app.utils.hash import verificar_senha
 from src.nutri_app.utils.user_login import UserLogin
 from src.nutri_app.forms.auth_forms import LoginForm
-from src.nutri_app.forms.auth_forms import EsqueciSenhaForm, ResetarSenhaForm
+from src.nutri_app.forms.auth_forms import EsqueciSenhaForm, RedefinirSenhaForm
 from src.nutri_app.utils.token import gerar_token, validar_token
 from src.nutri_app.utils.email_service import enviar_email_reset
 from src.nutri_app.utils.hash import gerar_hash
@@ -55,9 +55,9 @@ def esqueci_senha():
 
     return render_template("pages/esqueci_senha.html", form=form)
 
-@login_bp.route("/resetar-senha/<token>", methods=["GET", "POST"])
-def resetar_senha(token):
-    form = ResetarSenhaForm()
+@login_bp.route("/redefinir-senha/<token>", methods=["GET", "POST"])
+def redefinir_senha(token):
+    form = RedefinirSenhaForm()
     email = validar_token(token)
 
     if not email:
@@ -81,4 +81,4 @@ def resetar_senha(token):
         flash("Senha atualizada com sucesso!", "info")
         return redirect(url_for("login.login"))
 
-    return render_template("pages/resetar_senha.html", form=form)
+    return render_template("pages/redefinir_senha.html", form=form)
