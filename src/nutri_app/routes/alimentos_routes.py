@@ -52,7 +52,7 @@ def buscar_api_e_salvar(nome):
         "gorduras": gorduras
     }
 
-@alimentos_bp.route("/buscar_alimentos")
+@alimentos_bp.route("/buscar-alimentos")
 @login_required
 def buscar_alimentos():
     termo = request.args.get('q', '').strip()
