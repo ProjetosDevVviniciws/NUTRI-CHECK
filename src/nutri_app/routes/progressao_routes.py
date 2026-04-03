@@ -7,7 +7,7 @@ from datetime import datetime, date
 
 progressao_bp = Blueprint('progressao', __name__)
 
-@progressao_bp.route("/progressao/registrar", methods=['GET', 'POST'])
+@progressao_bp.route("/progressao-registrar", methods=['GET', 'POST'])
 @login_required
 @perfil_completo_required
 def registrar_progressao_peso():
@@ -95,7 +95,7 @@ def registrar_progressao_peso():
         peso_atual=peso_atual
     )
     
-@progressao_bp.route("/progressao/listar")
+@progressao_bp.route("/progressao-listar")
 @login_required
 @perfil_completo_required
 def listar_progressao_peso():
@@ -118,7 +118,7 @@ def listar_progressao_peso():
 
     return jsonify({"success": True, "progressoes": progressoes})
 
-@progressao_bp.route("/progressao/editar", methods=["PUT"])
+@progressao_bp.route("/progressao-editar", methods=["PUT"])
 @login_required
 @perfil_completo_required
 def editar_progressao_peso():
@@ -153,7 +153,7 @@ def editar_progressao_peso():
 
     return jsonify({"success": True, "message": "Progresso atualizado com sucesso!"})
 
-@progressao_bp.route("/progressao/excluir", methods=["DELETE"])
+@progressao_bp.route("/progressao-excluir", methods=["DELETE"])
 @login_required
 @perfil_completo_required
 def excluir_progressao_peso():
