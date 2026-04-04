@@ -1,7 +1,15 @@
 from flask_mail import Message
 from src.nutri_app import mail
-from flask import render_template, current_app
+from flask import render_template, current_app, flash
 import os
+import threading
+
+def enviar_email_async(app, msg):
+    with app.app_context():
+        try:
+            mail.send(msg)
+        except Exception as e:
+            flash(f"Erro ao enviar email: {e}", category="danger")
 
 def enviar_email_reset(email, link, nome):
     msg = Message(
@@ -29,4 +37,9 @@ def enviar_email_reset(email, link, nome):
         logo_src=logo_src
     )
 
-    mail.send(msg)
+    thread = threading.Thread(
+        target=enviar_email_async,
+        args=(current_app._get_current_object(), msg)
+    )
+    
+    thread.start()
