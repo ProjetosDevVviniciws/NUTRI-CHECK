@@ -1,6 +1,6 @@
 from flask_mail import Message
 from src.nutri_app import mail
-from flask import render_template, current_app, flash
+from flask import render_template, current_app
 import os
 import threading
 
@@ -9,7 +9,7 @@ def enviar_email_async(app, msg):
         try:
             mail.send(msg)
         except Exception as e:
-            flash(f"Erro ao enviar email: {e}", category="danger")
+            print("ERRO AO ENVIAR EMAIL:", str(e))
 
 def enviar_email_reset(email, link, nome):
     msg = Message(
