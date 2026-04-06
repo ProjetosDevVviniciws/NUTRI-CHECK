@@ -1,0 +1,43 @@
+.redefinir-senha-card {
+    width: clamp(280px, 90vw, 400px);
+    padding: clamp(1rem, 3vw, 2rem);
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.90);
+}
+
+.redefinir-senha-card h2 {
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    font-weight: 600;
+}
+
+.redefinir-senha-card .form-label-custom {
+    font-size: clamp(0.8rem, 1.8vw, 0.95rem);
+    font-weight: 500;
+}
+
+.redefinir-senha-card .form-control {
+    font-size: clamp(0.85rem, 2vw, 1rem);
+    padding: clamp(0.5rem, 1.5vw, 0.75rem);
+}
+
+.redefinir-senha-card #toggle-senha {
+    padding: clamp(0.4rem, 1vw, 0.6rem);
+}
+
+.redefinir-senha-card #toggle-senha i {
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+}
+
+.redefinir-senha-card small {
+    font-size: clamp(0.7rem, 1.6vw, 0.85rem);
+}
+
+.redefinir-senha-card .btn-ouline-custom {
+    font-size: clamp(0.75rem, 1.8vw, 0.9rem);
+    padding: clamp(0.35rem, 1vw, 0.6rem) clamp(0.8rem, 2vw, 1.2rem);
+}
+
+.redefinir-senha-card .btn-primary {
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    padding: clamp(0.6rem, 1.5vw, 0.85rem);
+}
