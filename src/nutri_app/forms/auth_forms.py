@@ -35,7 +35,7 @@ class LoginForm(FlaskForm):
     senha = PasswordField(label='Senha', validators=[DataRequired()])
     submit = SubmitField(label='Login')
     
-class EsqueciSenhaForm(FlaskForm):
+class RecuperarSenhaForm(FlaskForm):
     email = StringField(label='Email', validators=[Email(), DataRequired()])
     submit = SubmitField(label='Enviar Token')
     
