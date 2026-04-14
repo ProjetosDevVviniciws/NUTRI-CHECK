@@ -28,6 +28,10 @@
     font-size: clamp(0.9rem, 2vw, 1.1rem);
 }
 
+.login-card .esqueci-senha {
+    font-size: clamp(0.75rem, 1.8vw, 0.9rem);
+}
+
 .login-card small {
     font-size: clamp(0.7rem, 1.6vw, 0.85rem);
 }
@@ -106,6 +110,10 @@
 
     .login-card #toggle-senha i {
         font-size: 13px;
+    }
+
+    .login-card .esqueci-senha {
+        font-size: 12px;
     }
 
     .login-card small {
