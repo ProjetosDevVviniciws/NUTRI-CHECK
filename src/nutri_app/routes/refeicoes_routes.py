@@ -11,7 +11,7 @@ from src.nutri_app.utils.calorias_macros import (
 
 refeicoes_bp = Blueprint('refeicoes', __name__)
 
-@refeicoes_bp.route("/refeicoes/registrar", methods=['POST'])
+@refeicoes_bp.route("/refeicoes-registrar", methods=['POST'])
 @login_required
 def registrar_refeicao():
     data = request.json
@@ -107,7 +107,7 @@ def registrar_refeicao():
         
     return jsonify({'mensagem': 'Refeição registrada com sucesso', 'totais': totais, 'restantes': restantes})
 
-@refeicoes_bp.route("/refeicoes/listar")
+@refeicoes_bp.route("/refeicoes-listar")
 @login_required
 def listar_refeicoes():
     data_refeicao = request.args.get("data")
@@ -161,7 +161,7 @@ def listar_refeicoes():
         "restantes": restantes
     })
 
-@refeicoes_bp.route("/refeicoes/editar/<int:id>", methods=['PUT'])
+@refeicoes_bp.route("/refeicoes-editar/<int:id>", methods=['PUT'])
 @login_required
 def editar_refeicao(id):
     data = request.json
@@ -258,7 +258,7 @@ def editar_refeicao(id):
         
     return jsonify({'mensagem': 'Refeição atualizada com sucesso', 'totais': totais, 'restantes': restantes})
 
-@refeicoes_bp.route("/refeicoes/excluir/<int:id>", methods=['DELETE'])
+@refeicoes_bp.route("/refeicoes-excluir/<int:id>", methods=['DELETE'])
 @login_required
 def excluir_refeicao(id):
     with engine.begin() as conn: 
