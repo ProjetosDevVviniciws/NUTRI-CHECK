@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function carregarTotalAgua() {
         const data = dataAtual.toISOString().split("T")[0];
         
-        fetch(`/agua/total?data=${data}`)
+        fetch(`/agua-total?data=${data}`)
             .then(res => res.json())
             .then(data => {
                 totalAgua.textContent = `${data.total} ml`;
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         erro.classList.add("d-none");
 
-        fetch("/agua/registrar", {
+        fetch("/agua-registrar", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ quantidade: valor, data: dataSelecionada })
@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            fetch("/agua/editar", {
+            fetch("/agua-editar", {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -135,7 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (!confirm("Deseja remover todo o consumo de água deste dia?")) return;
 
-            fetch("/agua/remover", {
+            fetch("/agua-remover", {
                 method: "DELETE", 
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
