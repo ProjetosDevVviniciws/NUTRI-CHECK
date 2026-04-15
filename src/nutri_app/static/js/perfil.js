@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
         iconeSenha.classList.toggle("fa-eye-slash");
     });
 
-  fetch("/perfil/dados")
+  fetch("/perfil-dados")
     .then(res => res.json())
     .then(data => {
       document.getElementById("nome").value = data.nome || "";
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
       senha: document.getElementById("senha-input").value
     };
 
-    fetch("/perfil/atualizar", {
+    fetch("/perfil-atualizar", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
