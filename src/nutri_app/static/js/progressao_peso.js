@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        const response = await fetch("/progressao/registrar", {
+        const response = await fetch("/progressao-registrar", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
     async function carregarRegistrosPeso() {
         if (!listaRegistros) return;
 
-        const response = await fetch("/progressao/listar");
+        const response = await fetch("/progressao-listar");
         const result = await response.json();
 
         listaRegistros.innerHTML = "";
@@ -231,7 +231,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        const response = await fetch("/progressao/editar", {
+        const response = await fetch("/progressao-editar", {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ peso, data })
@@ -252,7 +252,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("btnRemoverProgresso").addEventListener("click", async () => {
         if (!confirm("Deseja realmente remover este registro?")) return;
 
-        const response = await fetch("/progressao/excluir", {
+        const response = await fetch("/progressao-excluir", {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ data: dataRegistroSelecionado })
