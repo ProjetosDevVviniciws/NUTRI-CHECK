@@ -49,13 +49,12 @@ document.addEventListener("DOMContentLoaded", () => {
     searchField: "nome",
     load: function (query, callback) {
       if (!query.length) return callback();
-      fetch(`/buscar_alimentos?q=${encodeURIComponent(query)}`)
+      fetch(`/buscar-alimentos?q=${encodeURIComponent(query)}`)
         .then(res => res.json())
         .then(json => {
           callback(json.map(item => ({
             id: item.id,
             nome: item.nome,
-            origem: item.origem,
             calorias: item.calorias,
             proteinas: item.proteinas,
             carboidratos: item.carboidratos,
