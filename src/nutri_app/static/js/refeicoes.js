@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function carregarRefeicoes() {
         const dataFormatada = formatarDataLocal(dataAtual);
         
-        fetch(`/refeicoes/listar?data=${dataFormatada}`)
+        fetch(`/refeicoes-listar?data=${dataFormatada}`)
             .then(res => res.json())
             .then(dados => {
                 const refeicoes = dados.refeicoes || {};
@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const porcao = document.getElementById("porcaoEditar").value;
         const tipo_refeicao = document.querySelector(`.refeicao-card .refeicao-item[data-id="${id}"]`)?.dataset.tipo;
 
-        fetch(`/refeicoes/editar/${id}`, {
+        fetch(`/refeicoes-editar/${id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -159,7 +159,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (!confirm("Tem certeza que deseja remover esta refeição?")) return;
 
-        fetch(`/refeicoes/excluir/${id}`, {
+        fetch(`/refeicoes-excluir/${id}`, {
             method: "DELETE"
         })
         .then(res => res.json())
@@ -193,7 +193,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        fetch("/refeicoes/registrar", {
+        fetch("/refeicoes-registrar", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
