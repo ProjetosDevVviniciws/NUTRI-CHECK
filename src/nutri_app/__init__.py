@@ -27,7 +27,9 @@ def create_app():
     from .routes.alimentos_routes import alimentos_bp
     from .routes.agua_routes import agua_bp
     from .routes.progressao_routes import progressao_bp
-
+    from .utils.static_utils import static_versioned   
+    
+    app.jinja_env.globals['static_versioned'] = static_versioned
     app.register_blueprint(login_bp)
     app.register_blueprint(auth_bp)
     app.register_blueprint(home_bp)
