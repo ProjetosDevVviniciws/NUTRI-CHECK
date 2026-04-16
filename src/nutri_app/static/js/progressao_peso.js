@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
         defaultDate: "today",
         allowInput: false,
         position: "below",
-        static: true,
+        static: false,
         clickOpens: true,
         disableMobile: true,
 
