@@ -12,4 +12,14 @@ document.addEventListener("DOMContentLoaded", () => {
         iconeSenha.classList.toggle("fa-eye");
         iconeSenha.classList.toggle("fa-eye-slash");
     });
+
+    const form = document.querySelector("form");
+    const loading = document.getElementById("loading-screen");
+
+    if (form && loading) {
+        form.addEventListener("submit", () => {
+            loading.classList.add("active");
+        });
+    }
+    
 });
