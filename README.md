@@ -1,16 +1,14 @@
 <div align="center">
-<img src="src/nutri_app/static/images/logo.png" alt="NutriCheck" width="100">
+<img src="src/nutri_app/static/images/logo_readme.png" alt="NutriCheck" width="100">
 
 <h1>NutriCheck</h1>
 
 <p>
-    Um sistema web responsivo voltado ao registro alimentar, que permite ao usuário acompanhar sua alimentação diária, ingestão de água e evolução de peso por meio de gráficos e indicadores nutricionais.
+    Sistema web responsivo voltado ao registro alimentar, que permite ao usuário acompanhar sua alimentação diária, ingestão de água e evolução de peso por meio de gráficos e indicadores nutricionais.
 </p>
 </div>
 
 <br>
-
----
 
 ## ⚙️ Funcionalidades
 
@@ -22,8 +20,6 @@
 - Integração com API de alimentos (busca por nome)  
 - Recuperação de senha via e-mail *(limitada a ambiente de teste, devido à ausência de domínio próprio configurado)* 
 - Edição de perfil do usuário  
-
----
 
 ## 🧱 Tecnologias utilizadas
 
@@ -39,8 +35,6 @@
 
 ### 🔹 Banco de dados
 - **MySQL** → armazenamento de usuários, refeições e registros  
-
----
 
 ## 🔧 Bibliotecas e ferramentas
 
@@ -68,13 +62,9 @@
 - **Render** → deploy da aplicação  
 - **Clever Cloud** → hospedagem do banco de dados MySQL  
 
----
-
 ## 🔌 Integrações externas
 
 - **OpenFoodFacts API** → busca de alimentos e dados nutricionais  
-
----
 
 ## 🧠 Como cada tecnologia foi aplicada (resumo)
 
@@ -88,8 +78,6 @@
 - **Flatpickr** → melhoria na entrada de datas  
 - **Bootstrap** → padronização visual e responsividade  
 
----
-
 ## 📊 Diferenciais do projeto
 
 - Interface totalmente responsiva  
@@ -101,8 +89,6 @@
 - Estrutura modular organizada (boas práticas com Flask)  
 - Uso de variáveis de ambiente para segurança  
 - Deploy em ambiente real (Render + banco externo)  
-
----
 
 ## 📁 Estrutura do projeto
 
@@ -157,13 +143,9 @@ NutriCheck/
 └── run.py                       # Ponto de entrada da aplicação
 ```
 
----
-
 ## 🌐 Acessar a aplicação em produção
 
 👉 https://nutri-check-nw20.onrender.com
-
----
 
 ## 💻 Como rodar a aplicação localmente
 
@@ -193,8 +175,6 @@ poetry shell
 # rodar aplicação
 python run.py
 ```
-
----
 
 ## 🚀 Considerações finais
 
