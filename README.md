@@ -1,8 +1,8 @@
 <div align="center">
 
-<br>
-
 <img src="src/nutri_app/static/images/logo_readme.png" alt="NutriCheck" width="200">
+
+---
 
 <br>
 
