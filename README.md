@@ -4,8 +4,6 @@
 
 ---
 
-<br>
-
 <p>
     Sistema web responsivo voltado ao registro alimentar, permitindo ao usuário acompanhar refeições, ingestão de água e evolução de peso por meio de gráficos e indicadores nutricionais.
 </p>
