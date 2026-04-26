@@ -1,6 +1,10 @@
 <div align="center">
 
-<img src="src/nutri_app/static/images/logo_readme.png" alt="NutriCheck" width="200" style="margin: 20px 0;">
+<br>
+
+<img src="src/nutri_app/static/images/logo_readme.png" alt="NutriCheck" width="200">
+
+<br>
 
 <p>
     Sistema web responsivo voltado ao registro alimentar, permitindo ao usuário acompanhar refeições, ingestão de água e evolução de peso por meio de gráficos e indicadores nutricionais.
@@ -17,7 +21,7 @@
 - Registro de ingestão de água  
 - Acompanhamento de progresso de peso com gráfico  
 - Integração com API de alimentos (busca por nome)  
-- Recuperação de senha via e-mail *(limitada a ambiente de teste, devido à ausência de domínio próprio configurado)* 
+- Recuperação de senha via e-mail **(limitada a ambiente de teste, devido à ausência de domínio próprio configurado)** 
 - Edição de perfil do usuário  
 
 ## 🧱 Tecnologias utilizadas
@@ -47,7 +51,7 @@
 - **PyMySQL** → conexão com banco MySQL  
 - **email-validator** → validação de e-mails  
 - **requests** → consumo de API externa  
-- **Resend** → envio de e-mails transacionais *(limitado a ambiente de testes, pois não há domínio próprio configurado)*    
+- **Resend** → envio de e-mails transacionais **(limitado a ambiente de testes, pois não há domínio próprio configurado)**    
 
 ### Frontend / UX
 - **Chart.js** → geração do gráfico de evolução de peso  
