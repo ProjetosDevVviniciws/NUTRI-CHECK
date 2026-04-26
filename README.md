@@ -1,10 +1,8 @@
 <div align="center">
-<img src="src/nutri_app/static/images/logo_readme.png" alt="NutriCheck" width="100">
-
-<h1>NutriCheck</h1>
+<img src="src/nutri_app/static/images/logo_readme.png" alt="NutriCheck" width="200">
 
 <p>
-    Sistema web responsivo voltado ao registro alimentar, que permite ao usuário acompanhar sua alimentação diária, ingestão de água e evolução de peso por meio de gráficos e indicadores nutricionais.
+    Sistema web responsivo voltado ao registro alimentar, permitindo ao usuário acompanhar refeições, ingestão de água e evolução de peso por meio de gráficos e indicadores nutricionais.
 </p>
 </div>
 
