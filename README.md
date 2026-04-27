@@ -84,7 +84,7 @@
 - Interface totalmente responsiva  
 - Integração com API externa de alimentos  
 - Cálculo automático de calorias e macronutrientes  
-- Envio de e-mail para recuperação de senha (limitado a ambiente de testes, pois não há domínio próprio configurado)  
+- Envio de e-mail para recuperação de senha **(limitado a ambiente de testes, pois não há domínio próprio configurado)**  
 - Atualização de dados sem reload (AJAX)  
 - Visualização gráfica de evolução de peso  
 - Estrutura modular organizada (boas práticas com Flask)  
